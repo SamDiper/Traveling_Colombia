@@ -350,3 +350,23 @@
 
 
 </div>
+
+@section Scripts{
+
+<script>
+   function showForm(type) {
+            const forms = document.querySelectorAll(".formulario");
+            forms.forEach(f => f.classList.add("hidden"));
+            document.getElementById(`form-${type}`).classList.remove("hidden");
+
+            // resaltar botón activo
+            document.querySelectorAll(".tab-btn").forEach(btn => {
+                btn.classList.remove("bg-[#0f172a]", "text-white");
+            });
+            document.getElementById(`btn-${type}`).classList.add("bg-[#0f172a]", "text-white");
+        }
+
+        // activar por defecto "hoteles"
+        showForm("hoteles");
+</script>
+}
