@@ -10,5 +10,12 @@
   "scripts": {
     "watch": "npx @tailwindcss/cli -i wwwroot/css/site.css -o wwwroot/css/output.css --watch",
     "start": "concurrently \"npm run watch\" \"dotnet run\""
-  }
+  },
+  "name": "travelingcolombia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
