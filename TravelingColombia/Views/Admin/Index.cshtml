@@ -1,0 +1,429 @@
+<div class="min-h-screen bg-gradient-to-b from-sky-400 to-blue-800 flex flex-col items-center p-6 space-y-6">
+   <!-- Botones superiores -->
+    <div class="flex w-full justify-evenly bg-white rounded-xl shadow-lg p-4">
+        <button id="btn-viajes" onclick="mostrarSeccion('viajes')" class=" text-black font-semibold px-6 py-2 rounded-full">Viajes</button>
+        <button id="btn-planes"onclick="mostrarSeccion('planes')" class=" text-black font-semibold px-6 py-2 rounded-full">Planes</button>
+        <button id="btn-reservas"onclick="mostrarSeccion('reservas')" class=" text-black font-semibold px-6 py-2 rounded-full">Reservas</button>
+        <button id="btn-pagos"onclick="mostrarSeccion('pagos')" class=" text-black font-semibold px-6 py-2 rounded-full">Pagos</button>
+    </div>
+
+    <!-- Contenedor de viajes -->
+    <div id="viajes" class="bg-white w-full max-w-[1500px] rounded-2xl p-8">
+        <h2 class="text-2xl font-bold text-center mb-6">Informes de Viajes</h2>
+        <div class="bg-blue-600 p-10 rounded-xl">
+            <!-- Formulario -->
+            <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
+                <!-- Campos del formulario -->
+                <template id="formulario-campos">
+                    <div class="flex flex-col flex-1 min-w-[200px]">
+                        <label class="mb-1 font-semibold text-gray-700">Campo</label>
+                        <input type="text" placeholder="Ingrese..." class="p-2 rounded-lg border border-gray-300" />
+                    </div>
+                </template>
+                
+                <!-- Campos personalizados -->
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Nombre</label>
+                    <input type="text" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Destino</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Destino</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Tipo</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Tipo</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Clase</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Clase</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Fecha Mínima</label>
+                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Fecha Máxima</label>
+                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Precio Mínimo</label>
+                    <input type="number" placeholder="Ingrese precio mínimo" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Precio Máximo</label>
+                    <input type="number" placeholder="Ingrese precio máximo" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+
+                <!-- Botón buscar -->
+                <div class="flex justify-center w-full mt-4">
+                    <button type="submit" class="bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                        Buscar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabla de viajes -->
+            <div class="bg-white w-full h-[300px] p-6 mt-6 overflow-x-auto rounded-xl">
+                <table class="min-w-full border-collapse table-auto">
+                    <thead>
+                        <tr class="bg-gray-400 text-black">
+                            <th class="px-4 py-2 border">Usuario</th>
+                            <th class="px-4 py-2 border">Destino</th>
+                            <th class="px-4 py-2 border">Fecha Viaje</th>
+                            <th class="px-4 py-2 border">H. Salida</th>
+                            <th class="px-4 py-2 border">H. Llegada</th>
+                            <th class="px-4 py-2 border">Precio</th>
+                            <th class="px-4 py-2 border">Aerolínea</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Botones exportar -->
+            <div class="flex justify-between mt-6">
+                <button class="bg-white border-2 rounded-full px-6 py-2 font-bold hover:bg-gray-100">Exportar Excel</button>
+                <button class="bg-white border-2 rounded-full px-6 py-2 font-bold hover:bg-gray-100">Descargar PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secciones adicionales -->
+    <div id="planes" class="bg-white w-full max-w-[1500px] rounded-2xl p-8 hidden">
+        <h2 class="text-2xl font-bold text-center mb-6">Informes de Planes</h2>
+        <div class="bg-blue-600 p-10 rounded-xl">
+            <!-- Formulario -->
+            <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
+                <!-- Campos del formulario -->
+                <template id="formulario-campos">
+                    <div class="flex flex-col flex-1 min-w-[200px]">
+                        <label class="mb-1 font-semibold text-gray-700">Campo</label>
+                        <input type="text" placeholder="Ingrese..." class="p-2 rounded-lg border border-gray-300" />
+                    </div>
+                </template>
+                
+                <!-- Campos personalizados -->
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Nombre</label>
+                    <input type="text" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Destino</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Destino</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Tipo</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Tipo</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Clase</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Clase</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Fecha Mínima</label>
+                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Fecha Máxima</label>
+                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Precio Mínimo</label>
+                    <input type="number" placeholder="Ingrese precio mínimo" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Precio Máximo</label>
+                    <input type="number" placeholder="Ingrese precio máximo" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+
+                <!-- Botón buscar -->
+                <div class="flex justify-center w-full mt-4">
+                    <button type="submit" class="bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                        Buscar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabla de viajes -->
+            <div class="bg-white w-full h-[300px] p-6 mt-6 overflow-x-auto rounded-xl">
+                <table class="min-w-full border-collapse table-auto">
+                    <thead>
+                        <tr class="bg-gray-400 text-black">
+                            <th class="px-4 py-2 border">Usuario</th>
+                            <th class="px-4 py-2 border">Destino</th>
+                            <th class="px-4 py-2 border">Fecha Viaje</th>
+                            <th class="px-4 py-2 border">H. Salida</th>
+                            <th class="px-4 py-2 border">H. Llegada</th>
+                            <th class="px-4 py-2 border">Precio</th>
+                            <th class="px-4 py-2 border">Aerolínea</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Botones exportar -->
+            <div class="flex justify-between mt-6">
+                <button class="bg-white border-2 rounded-full px-6 py-2 font-bold hover:bg-gray-100">Exportar Excel</button>
+                <button class="bg-white border-2 rounded-full px-6 py-2 font-bold hover:bg-gray-100">Descargar PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="reservas" class="bg-white w-full max-w-[1500px] rounded-2xl p-8 hidden">
+        <h2 class="text-2xl font-bold text-center mb-6">Informes de Reservas</h2>
+        <div class="bg-blue-600 p-10 rounded-xl">
+            <!-- Formulario -->
+            <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
+                <!-- Campos del formulario -->
+                <template id="formulario-campos">
+                    <div class="flex flex-col flex-1 min-w-[200px]">
+                        <label class="mb-1 font-semibold text-gray-700">Campo</label>
+                        <input type="text" placeholder="Ingrese..." class="p-2 rounded-lg border border-gray-300" />
+                    </div>
+                </template>
+                
+                <!-- Campos personalizados -->
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Nombre</label>
+                    <input type="text" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Destino</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Destino</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Tipo</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Tipo</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Clase</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Clase</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Fecha Mínima</label>
+                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Fecha Máxima</label>
+                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Precio Mínimo</label>
+                    <input type="number" placeholder="Ingrese precio mínimo" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Precio Máximo</label>
+                    <input type="number" placeholder="Ingrese precio máximo" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+
+                <!-- Botón buscar -->
+                <div class="flex justify-center w-full mt-4">
+                    <button type="submit" class="bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                        Buscar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabla de viajes -->
+            <div class="bg-white w-full h-[300px] p-6 mt-6 overflow-x-auto rounded-xl">
+                <table class="min-w-full border-collapse table-auto">
+                    <thead>
+                        <tr class="bg-gray-400 text-black">
+                            <th class="px-4 py-2 border">Usuario</th>
+                            <th class="px-4 py-2 border">Destino</th>
+                            <th class="px-4 py-2 border">Fecha Viaje</th>
+                            <th class="px-4 py-2 border">H. Salida</th>
+                            <th class="px-4 py-2 border">H. Llegada</th>
+                            <th class="px-4 py-2 border">Precio</th>
+                            <th class="px-4 py-2 border">Aerolínea</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Botones exportar -->
+            <div class="flex justify-between mt-6">
+                <button class="bg-white border-2 rounded-full px-6 py-2 font-bold hover:bg-gray-100">Exportar Excel</button>
+                <button class="bg-white border-2 rounded-full px-6 py-2 font-bold hover:bg-gray-100">Descargar PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pagos" class="bg-white w-full max-w-[1500px] rounded-2xl p-8 hidden">
+        <h2 class="text-2xl font-bold text-center mb-6">Informes de Pagos</h2>
+        <div class="bg-blue-600 p-10 rounded-xl">
+            <!-- Formulario -->
+            <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
+                <!-- Campos del formulario -->
+                <template id="formulario-campos">
+                    <div class="flex flex-col flex-1 min-w-[200px]">
+                        <label class="mb-1 font-semibold text-gray-700">Campo</label>
+                        <input type="text" placeholder="Ingrese..." class="p-2 rounded-lg border border-gray-300" />
+                    </div>
+                </template>
+                
+                <!-- Campos personalizados -->
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Nombre</label>
+                    <input type="text" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Destino</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Destino</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Tipo</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Tipo</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Clase</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Clase</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Fecha Mínima</label>
+                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Fecha Máxima</label>
+                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Precio Mínimo</label>
+                    <input type="number" placeholder="Ingrese precio mínimo" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Precio Máximo</label>
+                    <input type="number" placeholder="Ingrese precio máximo" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+
+                <!-- Botón buscar -->
+                <div class="flex justify-center w-full mt-4">
+                    <button type="submit" class="bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                        Buscar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabla de viajes -->
+            <div class="bg-white w-full h-[300px] p-6 mt-6 overflow-x-auto rounded-xl">
+                <table class="min-w-full border-collapse table-auto">
+                    <thead>
+                        <tr class="bg-gray-400 text-black">
+                            <th class="px-4 py-2 border">Usuario</th>
+                            <th class="px-4 py-2 border">Destino</th>
+                            <th class="px-4 py-2 border">Fecha Viaje</th>
+                            <th class="px-4 py-2 border">H. Salida</th>
+                            <th class="px-4 py-2 border">H. Llegada</th>
+                            <th class="px-4 py-2 border">Precio</th>
+                            <th class="px-4 py-2 border">Aerolínea</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                            <td class="px-4 py-2 border"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Botones exportar -->
+            <div class="flex justify-between mt-6">
+                <button class="bg-white border-2 rounded-full px-6 py-2 font-bold hover:bg-gray-100">Exportar Excel</button>
+                <button class="bg-white border-2 rounded-full px-6 py-2 font-bold hover:bg-gray-100 ">Descargar PDF</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function mostrarSeccion(id) {
+        document.getElementById('viajes').classList.add('hidden');
+        document.getElementById('planes').classList.add('hidden');
+        document.getElementById('reservas').classList.add('hidden');
+        document.getElementById('pagos').classList.add('hidden');
+        document.getElementById('btn-viajes').classList.add('bg-white');
+        document.getElementById('btn-planes').classList.add('bg-white');
+        document.getElementById('btn-reservas').classList.add('bg-white');
+        document.getElementById('btn-pagos').classList.add('bg-white');
+        
+        
+        
+        document.getElementById(`btn-${id}`).classList.replace('bg-white' ,'bg-cyan-300');
+        document.getElementById(id).classList.remove('hidden');
+    }
+</script>
