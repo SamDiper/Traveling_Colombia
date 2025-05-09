@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace TravelingColombia.Controllers
 {
-    [Route("[controller]")]
+    [Route("Admin")]
     public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;
@@ -18,11 +18,17 @@ namespace TravelingColombia.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [Route("Gestiones")]
+        public IActionResult Gestiones()
         {
             return View();
         }
 
-       
+        [Route("Informes")]
+        public IActionResult Informes()
+        {
+            return View();
+        }
+
     }
 }
