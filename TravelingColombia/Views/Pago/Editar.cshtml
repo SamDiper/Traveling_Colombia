@@ -1,0 +1,75 @@
+  <div id="Crear" class="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg hidden">
+        <h2 class="text-2xl font-bold mb-6 text-center text-[#4ade80]">Registrar Pago</h2>
+
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Nombre -->
+            <div>
+                <label for="nombre" class="block text-gray-700 font-semibold mb-1">Nombre</label>
+                <input type="text" id="nombre" name="Nombre" placeholder="Nombre del pagador"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                    required />
+            </div>
+
+            <!-- Cédula -->
+            <div>
+                <label for="cedula" class="block text-gray-700 font-semibold mb-1">Cédula</label>
+                <input type="text" id="cedula" name="Cedula" placeholder="Número de cédula"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                    required />
+            </div>
+
+            <!-- Banco -->
+            <div>
+                <label for="id_banco" class="block text-gray-700 font-semibold mb-1">Banco</label>
+                <select id="id_banco" name="Id_Banco"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                    required>
+                    <option value="">Seleccione un banco</option>
+                    <option value="1">Bancolombia</option>
+                    <option value="2">Davivienda</option>
+                    <option value="3">BBVA</option>
+                    <!-- Agrega más bancos según tu base de datos -->
+                </select>
+            </div>
+
+            <!-- Cuenta -->
+            <div>
+                <label for="cuenta" class="block text-gray-700 font-semibold mb-1">Número de Cuenta</label>
+                <input type="text" id="cuenta" name="cuenta" placeholder="Ej: 1234567890"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                    required />
+            </div>
+
+            <!-- Monto -->
+            <div>
+                <label for="monto" class="block text-gray-700 font-semibold mb-1">Monto</label>
+                <input type="number" id="monto" name="Monto" placeholder="Ej: 150000"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                    required />
+            </div>
+
+            <!-- Método de pago -->
+            <div>
+                <label for="id_metodo" class="block text-gray-700 font-semibold mb-1">Método de Pago</label>
+                <select id="id_metodo" name="Id_Metodo"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                    required>
+                    <option value="">Seleccione método</option>
+                    <option value="1">Transferencia</option>
+                    <option value="2">Tarjeta</option>
+                    <option value="3">Efectivo</option>
+                    <!-- Agrega más métodos según tu base de datos -->
+                </select>
+            </div>
+
+            <!-- Botón de envío -->
+            <div class="md:col-span-2 flex justify-center">
+                <button type="submit"
+                    class="bg-[#4ade80] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#22c55e] transition duration-300">
+                    Registrar Pago
+                </button>
+            </div>
+
+        </form>
+    </div>
