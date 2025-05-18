@@ -8,10 +8,10 @@ using Microsoft.Extensions.Logging;
 
 namespace TravelingColombia.Controllers
 {
-    
+
     public class ClienteController : Controller
     {
-       
+
 
         public IActionResult Index()
         {
@@ -28,12 +28,12 @@ namespace TravelingColombia.Controllers
             return View();
         }
 
-        
+
         public IActionResult Perfil()
         {
             return View();
         }
 
-       
+
     }
 }
