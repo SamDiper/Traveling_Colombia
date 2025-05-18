@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace TravelingColombia.Controllers
 {
-    [Route("[controller]")]
     public class ClienteController : Controller
     {
         private readonly ILogger<ClienteController> _logger;
@@ -19,6 +18,16 @@ namespace TravelingColombia.Controllers
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        public IActionResult Pagos()
         {
             return View();
         }
