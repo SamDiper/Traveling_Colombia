@@ -1,0 +1,100 @@
+<!-- contenedor formulario viajes-->
+    <div id="Crear" class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg hidden">
+        <h2 class="text-2xl font-bold mb-6 text-center text-[#3085BC]">Registrar Plan Turístico</h2>
+
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Id_Destino_Ida -->
+            <div>
+                <label for="destino_ida" class="block text-gray-700 font-semibold mb-1">Destino Ida</label>
+                <input type="number" id="destino_ida" name="Id_Destino_Ida" placeholder="Ej: 101"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                    required />
+            </div>
+
+            <!-- Id_Destino_Llegada -->
+            <div>
+                <label for="destino_llegada" class="block text-gray-700 font-semibold mb-1">Destino Llegada</label>
+                <input type="number" id="destino_llegada" name="Id_Destino_Llegada" placeholder="Ej: 105"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                    required />
+            </div>
+
+            <!-- Nombre_Plan -->
+            <div>
+                <label for="nombre_plan" class="block text-gray-700 font-semibold mb-1">Nombre del Plan</label>
+                <input type="text" id="nombre_plan" name="Nombre_Plan" placeholder="Plan Caribe 2025"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                    required />
+            </div>
+
+            <!-- Id_tipo_plan -->
+            <div>
+                <label for="tipo_plan" class="block text-gray-700 font-semibold mb-1">Tipo de Plan</label>
+                <select id="tipo_plan" name="Id_tipo_plan"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                    required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="1">Familiar</option>
+                    <option value="2">Romántico</option>
+                    <option value="3">Aventura</option>
+                </select>
+            </div>
+
+            <!-- Descripción -->
+            <div class="md:col-span-2">
+                <label for="descripcion" class="block text-gray-700 font-semibold mb-1">Descripción</label>
+                <textarea id="descripcion" name="Descripcion" rows="4" placeholder="Escriba una descripción del plan"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                    required></textarea>
+            </div>
+
+            <!-- Cantidad_Personas -->
+            <div>
+                <label for="cantidad" class="block text-gray-700 font-semibold mb-1">Cantidad de Personas</label>
+                <input type="number" id="cantidad" name="Cantidad_Personas" placeholder="Ej: 4"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                    required />
+            </div>
+
+            <!-- Imagen -->
+            <div>
+                <label for="imagen" class="block text-gray-700 font-semibold mb-1">Imagen</label>
+                <input type="file" id="imagen" name="imagen"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]" />
+            </div>
+
+            <!-- Precio_Plan -->
+            <div>
+                <label for="precio" class="block text-gray-700 font-semibold mb-1">Precio del Plan</label>
+                <input type="number" id="precio" name="Precio_Plan" step="0.01" placeholder="Ej: 1500000"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                    required />
+            </div>
+
+            <!-- Id_Hotel -->
+            <div>
+                <label for="hotel" class="block text-gray-700 font-semibold mb-1">Hotel</label>
+                <input type="number" id="hotel" name="Id_Hotel" placeholder="Ej: 2"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                    required />
+            </div>
+
+            <!-- Id_Aerolinea -->
+            <div>
+                <label for="aerolinea" class="block text-gray-700 font-semibold mb-1">Aerolínea</label>
+                <input type="number" id="aerolinea" name="Id_Aerolinea" placeholder="Ej: 5"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                    required />
+            </div>
+
+            <!-- Botón de Enviar -->
+            <div class="md:col-span-2 flex justify-center">
+                <button type="submit"
+                    class="bg-[#3085BC] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#25699a] transition duration-300">
+                    Registrar Plan
+                </button>
+            </div>
+
+        </form>
+    </div>

@@ -51,13 +51,15 @@
                     <div>
                         <button onclick="toggleAccordion('teamsMenu')"
                             class="flex w-full items-center justify-between rounded px-4 py-2 hover:bg-[#1e293b]">
-                            <span>Destinos</span>
+                            <span>Gestion</span>
                             <span>▾</span>
                         </button>
                         <div id="teamsMenu" class="mt-1 ml-6 hidden space-y-1 text-gray-400">
-                            <div class="cursor-pointer hover:text-white">Viajes</div>
-                            <div class="cursor-pointer hover:text-white">Hoteles</div>
-                            <div class="cursor-pointer hover:text-white">Reservas</div>
+                            <div class="cursor-pointer hover:text-white">Usuarios</div>
+                            <div><a asp-action="Index" asp-controller="Viaje" class="cursor-pointer hover:text-white">Viajes</a></div>
+                            <div><a asp-action="Index" asp-controller="Plan" class="cursor-pointer hover:text-white">Planes</a></div>
+                            <div><a asp-action="Index" asp-controller="Pago" class="cursor-pointer hover:text-white">Pagos</a></div>
+                            <div><a asp-action="Index" asp-controller="Reserva" class="cursor-pointer hover:text-white">Reservas</a></div>
                         </div>
                     </div>
                     <div  class="cursor-pointer rounded px-4 py-2 text-gray-300 hover:bg-[#1e293b] hover:text-white">
@@ -69,9 +71,14 @@
                         <span>▾</span>
                     </button>
                     <div id="accountMenu" class="mt-1 ml-6 hidden space-y-1 text-gray-400">
-                        <div class="cursor-pointer hover:text-white">Informes</div>
+                        <a asp-action="Informes" asp-controller="Admin" class="cursor-pointer hover:text-white">Informes</a>
                         <div class="cursor-pointer hover:text-white">Estadísticas</div>
                     </div>
+                    <div  class="cursor-pointer rounded px-4 py-2 text-gray-300 hover:bg-[#1e293b] hover:text-white">
+                        <a asp-action="Perfil" asp-controller="Cliente">Perfil</a>
+                    </div>
+                    
+                    
                 </nav>
 
                 <!-- Parte inferior: Perfil + Botón cerrar -->
