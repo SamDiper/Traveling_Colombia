@@ -8,25 +8,22 @@ using Microsoft.Extensions.Logging;
 
 namespace TravelingColombia.Controllers
 {
-    [Route("[controller]")]
+   
     public class ClienteController : Controller
     {
-        private readonly ILogger<ClienteController> _logger;
-
-        public ClienteController(ILogger<ClienteController> logger)
-        {
-            _logger = logger;
-        }
+       
 
         public IActionResult Index()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        
+        public IActionResult Perfil()
         {
-            return View("Error!");
+            return View();
         }
+
+       
     }
 }

@@ -1,0 +1,88 @@
+<div class="min-h-screen flex flex-col items-center p-6">
+
+    <div
+        class="w-full flex justify-between items-center py-8 px-14 bg-gradient-to-b to-white from-[#3085BC] border border-[#3085BC] rounded-2xl flex-nowrap">
+        <div>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#6a8ea7]">Perfil</h1>
+
+        </div>
+        <div class="bg-white rounded-full"><img class=" w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24  bg-center"
+                src="~/imagenes/logviajescolombia.png" alt=""></div>
+        <div><button class=" bg-white hover:bg-[#6a8ea7] cursor-pointer text-sm sm:text-base md:text-lg 
+               w-24 sm:w-28 md:w-32 lg:w-40 
+               h-10 sm:h-12 md:h-14 rounded-full p-2 flex justify-center items-center">Atras</button></div>
+    </div>
+
+    <div class="w-full  rounded-2xl mt-4 h-[650px] flex">
+        <div class=" w-[25%] flex h-full items-center">
+            <div class="border border-[#3085BC] flex flex-col p-10 justify-between items-center bg-gradient-to-b from-[#3085BC] to-white h-[87%] mb-10 rounded-2xl">
+                <div class="avatar ">
+                    <div class=" rounded-2xl my-4 mt-10 ">
+                        <img class="w-16 h-16 sm:w-20 sm:h-20 md:w-64 md:h-64"
+                            src="https://img.freepik.com/fotos-premium/generativo-hombre-negocios-feliz-camisa-brazos-cruzados_1090847-6837.jpg" />
+                    </div>
+                </div>
+                <div>
+                    <input type="file" class="file-input" />
+
+                </div>
+            </div>
+        </div>
+        <div class=" w-[75%] flex flex-col justify-evenly h-full p-4">
+
+
+            <form class="border shadow rounded-2xl bg-gradient-to-b from-white to-[#3085BC]  border-[#3085BC] p-6 text-white">
+                <h2 class="font-bold text-lg text-black mb-4 border-b border-black pb-1">Información Personal:</h2>
+
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <label class="w-24 text-black"> Nombre:</label>
+                        <input type="text" name="nombre" class="flex-1 p-2 outline-none  hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-24 text-black">Apellido:</label>
+                        <input type="text" name="apellido" class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-24 text-black">Celular:</label>
+                        <input type="text" name="celular" class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-24 text-black">Email:</label>
+                        <input type="email" name="email" class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
+                    </div>
+                </div>
+            </form>
+
+            <!-- Segundo formulario -->
+            <form method="post" action="/ruta/accion2"
+                class="border border-[#3085BC] shadow rounded-2xl bg-gradient-to-b from-white to-[#3085BC] p-6 text-white">
+                <h2 class="font-bold text-lg text-black mb-4 border-b border-black pb-1">Información Personal</h2>
+
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <label class="w-24 text-black">Edad:</label>
+                        <input type="number" name="edad" class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-24 text-black">Rol:</label>
+                        <input type="text" name="rol" class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-24 text-black">Facturas:</label>
+                        <input type="text" name="facturas" class="flex-1 p-2 hover:ring-2 outline-none hover:ring-white focus:bg-white rounded text-black" />
+                    </div>
+                </div>
+            </form>
+
+            <!-- Botón final -->
+            <div class="flex justify-center">
+                <form method="post" action="/ruta/actualizar">
+                    <button type="submit" class="bg-[#6a8ea7] hover:bg-[#6a8ea7bb] cursor-pointer text-white font-bold py-2 px-6 rounded">
+                        Actualizar
+                        </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
