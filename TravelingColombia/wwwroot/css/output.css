@@ -3890,8 +3890,14 @@
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
   }
+  .px-10 {
+    padding-inline: calc(var(--spacing) * 10);
+  }
   .px-14 {
     padding-inline: calc(var(--spacing) * 14);
+  }
+  .px-16 {
+    padding-inline: calc(var(--spacing) * 16);
   }
   .py-0 {
     padding-block: calc(var(--spacing) * 0);
@@ -4326,24 +4332,6 @@
     --tw-ease: var(--ease-out);
     transition-timing-function: var(--ease-out);
   }
-  .btn-outline {
-    &:not( .btn-active, :hover, :active:focus, :focus-visible, :disabled, [disabled], .btn-disabled, :checked ) {
-      --btn-shadow: "";
-      --btn-bg: #0000;
-      --btn-fg: var(--btn-color);
-      --btn-border: var(--btn-color);
-      --btn-noise: none;
-    }
-    @media (hover: none) {
-      &:hover:not( .btn-active, :active, :focus-visible, :disabled, [disabled], .btn-disabled, :checked ) {
-        --btn-shadow: "";
-        --btn-bg: #0000;
-        --btn-fg: var(--btn-color);
-        --btn-border: var(--btn-color);
-        --btn-noise: none;
-      }
-    }
-  }
   .btn-lg {
     --fontsize: 1.125rem;
     --btn-p: 1.25rem;
@@ -4353,10 +4341,6 @@
     --fontsize: 0.75rem;
     --btn-p: 0.75rem;
     --size: calc(var(--size-field, 0.25rem) * 8);
-  }
-  .btn-error {
-    --btn-color: var(--color-error);
-    --btn-fg: var(--color-error-content);
   }
   .btn-info {
     --btn-color: var(--color-info);
