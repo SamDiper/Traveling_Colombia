@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagos - Traveling Colombia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-blue-800 to-blue-500 min-h-screen font-sans text-white">
+
+    <!-- Encabezado -->
+    <header class="flex justify-between items-center px-6 py-4 bg-blue-900 shadow-md">
+        <h1 class="text-3xl font-bold text-white">Pagos</h1>
+        <button class="bg-gray-100 text-black px-4 py-2 rounded-full font-semibold hover:bg-gray-300">Atrás</button>
+    </header>
+
+    <!-- Imagen y resumen -->
+    <div class="relative w-full h-[250px] overflow-hidden">
+        <img src="https://imagenes.eltiempo.com/files/image_1200_535/uploads/2023/06/08/64821418dcfd5.jpeg" alt="Avión"
+            class="absolute inset-0 w-full h-full object-cover opacity-60" />
+        <div class="relative bg-blue-300 bg-opacity-80 p-4 rounded-md max-w-[600px] mx-auto mt-4 text-black">
+            <h2 class="text-xl font-semibold mb-2">Resumen de compra</h2>
+            <p>Viaje: <strong>San Andrés Islas</strong></p>
+            <p>Fecha: <strong>22/04/2025</strong></p>
+            <p>Código de pedido: <strong>166484</strong></p>
+            <p class="mt-2 text-lg font-bold">Valor a pagar: <span class="text-green-700">10.000$</span></p>
+        </div>
+    </div>
+
+    <!-- Formulario de pago -->
+    <form class="max-w-4xl mx-auto mt-8 bg-gradient-to-br from-blue-700 to-blue-600 p-8 rounded-lg shadow-lg">
+        <!-- Métodos de pago -->
+        <div class="mb-6 text-center">
+            <label class="font-medium mr-4">Método de pago:</label>
+            <label class="inline-flex items-center mr-4">
+                <input type="radio" name="metodo" class="form-radio text-blue-500" />
+                <span class="ml-2">Efectivo</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="metodo" class="form-radio text-blue-500" />
+                <span class="ml-2">Trarjeta Credito</span>
+            </label>
+            <label class="inline-flex items-center"></label>
+                <input type="radio" name="metodo" class="form-radio text-blue-500" />
+                <span class="ml-2">Trarjeta Debito</span>
+            </label>
+            <label class="inline-flex items-center"></label>
+                <input type="radio" name="metodo" class="form-radio text-blue-500" />
+                <span class="ml-2">Transferencia</span>
+            </label>
+        </div>
+
+        <!-- Campos de pago -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-black">
+            <div>
+                <label>Valor a pagar:</label>
+                <input type="text" class="w-full p-2 rounded bg-white border-2 border-black-500" />
+            </div>
+            <div>
+                <label>Teléfono:</label>
+                <input type="text" class="w-full p-2 rounded bg-white border-2 border-black-500" />
+            </div>
+            <div>
+                <label>Número de cuenta:</label>
+                <input type="text" class="w-full p-2 rounded bg-white border-2 border-black-500" />
+            </div>
+            <div>
+                <label>Dirección:</label>
+                <input type="text" class="w-full p-2 rounded bg-white border-2 border-black-500" />
+            </div>
+            <div>
+                <label>Código Seguridad (CVV):</label>
+                <input type="text" class="w-full p-2 rounded bg-white border-2 border-black-500" />
+            </div>
+            <div>
+                <label>Código Postal:</label>
+                <input type="text" class="w-full p-2 rounded bg-white border-2 border-black-500" />
+            </div>
+            <div>
+                <label>Fecha de Expiración:</label>
+                <input type="date" class="w-full p-2 rounded bg-white border-2 border-black-500" />
+            </div>
+        </div>
+
+        <!-- Botón de pago -->
+        <div class="text-center mt-6">
+            <button type="submit" class="bg-blue-300 hover:bg-blue-400 text-black font-bold py-2 px-8 rounded-full">
+                Pagar
+            </button>
+        </div>
+    </form>
+</body>
+</html>

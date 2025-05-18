@@ -40,111 +40,62 @@
 
 
 
-<!-- Navegación -->
+
+
+<div class="pb-10">
+  <!-- Navegación -->
 <div class="mx-auto flex max-w-5xl space-x-1 border-gray-200 text-sm font-semibold">
   <button onclick="showForm('hoteles')" class="tab-btn flex items-center px-4 py-2 text-black" id="btn-hoteles">
-    <i class="ph ph-hotel mr-2"></i> Hoteles
-  </button>
-  <button onclick="showForm('vuelos')" class="tab-btn flex items-center px-4 py-2 text-black" id="btn-vuelos">
     <i class="ph ph-airplane-tilt mr-2 text-black"></i> Vuelos
-  </button>
-  <button onclick="showForm('vuelohotel')" class="tab-btn flex items-center px-4 py-2 text-black" id="btn-vuelohotel">
-    <i class="ph ph-suitcase mr-2 text-black"></i> Vuelos + Hotel
   </button>
   <button onclick="showForm('planes')" class="tab-btn flex items-center px-4 py-2 text-black" id="btn-planes">
     <i class="ph ph-ticket mr-2 text-black"></i> Planes
   </button>
 </div>
 
-<!-- Formularios -->
-<div class="mx-auto mt-4 max-w-5xl rounded-md border border-gray-200 p-6 shadow-sm">
+  <!-- Formularios -->
+  <div class="mx-auto mt-4 max-w-5xl rounded-md border border-gray-200 p-10 shadow-sm h-60">
 
-  <!-- Hoteles -->
-  <form id="form-hoteles" class="formulario">
-    <div class="grid gap-4 md:grid-cols-3">
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Ciudad</label>
-        <input type="text" placeholder="Ingrese una ciudad" class="w-full rounded border px-3 py-2 text-sm" />
+    <!-- Vuelos -->
+    <form id="form-hoteles" class="formulario">
+      <div class="grid gap-4 md:grid-cols-3">
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Origen</label>
+          <input type="text" placeholder="Ciudad de origen" class="w-full rounded border px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Destino</label>
+          <input type="text" placeholder="Ciudad de destino" class="w-full rounded border px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Fecha de salida</label>
+          <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Fecha de regreso</label>
+          <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
+        </div>
       </div>
+    </form>
+
+    <!-- Planes -->
+    <form id="form-planes" class="formulario hidden ">
       <div>
-        <label class="text-sm font-semibold text-gray-700">Entrada</label>
-        <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
+        <label class="text-sm font-semibold text-gray-700">Ciudad destino</label>
+        <input type="text" placeholder="Escriba una ciudad" class="w-full rounded border px-3 py-2 text-sm" />
       </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Salida</label>
-        <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Habitaciones</label>
-        <input type="number" value="1" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Personas</label>
-        <input type="number" value="2" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
+    </form>
+
+    <!-- Botón -->
+    <div class="mt-4 text-right">
+      <button class="rounded bg-[#0f172a] px-6 py-2 font-bold text-white shadow-md transition hover:bg-[#1e293b]">
+        Buscar
+      </button>
     </div>
-  </form>
 
-  <!-- Vuelos -->
-  <form id="form-vuelos" class="formulario hidden">
-    <div class="grid gap-4 md:grid-cols-3">
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Origen</label>
-        <input type="text" placeholder="Ciudad de origen" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Destino</label>
-        <input type="text" placeholder="Ciudad de destino" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Fecha de salida</label>
-        <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Fecha de regreso</label>
-        <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-    </div>
-  </form>
-
-  <!-- Vuelos + Hotel -->
-  <form id="form-vuelohotel" class="formulario hidden">
-    <div class="grid gap-4 md:grid-cols-3">
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Origen</label>
-        <input type="text" placeholder="Ciudad de origen" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Destino</label>
-        <input type="text" placeholder="Ciudad destino" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Entrada</label>
-        <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Salida</label>
-        <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
-      </div>
-    </div>
-  </form>
-
-  <!-- Planes -->
-  <form id="form-planes" class="formulario hidden ">
-    <div>
-      <label class="text-sm font-semibold text-gray-700">Ciudad destino</label>
-      <input type="text" placeholder="Escriba una ciudad" class="w-full rounded border px-3 py-2 text-sm" />
-    </div>
-  </form>
-
-  <!-- Botón -->
-  <div class="mt-4 text-right">
-    <button class="rounded bg-[#0f172a] px-6 py-2 font-bold text-white shadow-md transition hover:bg-[#1e293b]">
-      Buscar
-    </button>
   </div>
-
 </div>
+
 <!--tarjetas-->
 <div class=" bg-gray-100 min-h-screen p-4">
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">

@@ -8,12 +8,22 @@ using Microsoft.Extensions.Logging;
 
 namespace TravelingColombia.Controllers
 {
-   
+    
     public class ClienteController : Controller
     {
        
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        public IActionResult Pagos()
         {
             return View();
         }
