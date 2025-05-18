@@ -1,8 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using TravelingColombia.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();
+
+// Add ConnectionString
+builder.Services.AddDbContext<TravelingColombiabdContext>(opc =>
+    opc.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionDefault"))
+);
 
 var app = builder.Build();
 
