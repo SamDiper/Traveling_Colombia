@@ -82,11 +82,7 @@ namespace TravelingColombia.Controllers
         }
 
         
-        public async Task<IActionResult> Informes()
-        {
-            var users = await _adminRepository.GetAllAsync();
-            return View(users);
-        }
+       
 
     }
 }
