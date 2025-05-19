@@ -1,3 +1,5 @@
+@model IEnumerable<TravelingColombia.Models.Usuario>
+
 <div class="min-h-screen bg-gradient-to-b  flex flex-col items-center p-6 space-y-6">
     <!-- Botones superiores -->
     <div
@@ -18,8 +20,7 @@
         </button>
 
         <div class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white rounded-full">
-            <img src="~/imagenes/logviajescolombia.png"
-                class="w-full h-full bg-center " alt="">
+            <img src="~/imagenes/logviajescolombia.png" class="w-full h-full bg-center " alt="">
         </div>
 
         <button id="btn-reservas" onclick="mostrarSeccion('reservas')" class="text-black cursor-pointer bg-white font-semibold px-2 py-1 rounded-full 
@@ -41,10 +42,12 @@
 
     <!-- Contenedor de viajes -->
     <div id="viajes" class=" w-full max-w-[1500px] rounded-2xl p-8">
-        
+
         <div
             class="relative p-10 rounded-xl bg-[url('https://img.freepik.com/foto-gratis/terminal-aeropuerto_1417-1456.jpg?semt=ais_hybrid&w=740')] bg-cover ">
-            <h2 class="relative bottom-18  text-2xl w-[900px] h-[60px] rounded-full  border left-60 bg-white font-bold text-center pt-2">Informes de Viajes</h2>
+            <h2
+                class="relative bottom-18  text-2xl w-[900px] h-[60px] rounded-full  border left-60 bg-white font-bold text-center pt-2">
+                Informes de Viajes</h2>
             <!-- Formulario -->
             <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6  bg-white rounded-xl shadow-lg">
                 <!-- Campos del formulario -->
@@ -105,7 +108,8 @@
             </form>
 
             <!-- Tabla de viajes -->
-            <div class="bg-white w-full max-w-full h-[400px] p-4 mt-6 overflow-x-auto overflow-y-auto rounded-xl shadow-md">
+            <div
+                class="bg-white w-full max-w-full h-[400px] p-4 mt-6 overflow-x-auto overflow-y-auto rounded-xl shadow-md">
                 <table class="min-w-[700px] w-full  border-collapse table-auto">
                     <thead>
                         <tr class="bg-[#3085BC] text-white text-sm sm:text-base">
@@ -119,125 +123,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
+                        @foreach(var item in Model){
+                            <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
+                            <td class="px-4 py-2 border">@item.IdUsuario</td>
+                            <td class="px-4 py-2 border">@item.NombreUsuario</td>
+                            <td class="px-4 py-2 border">@item.ApellidoUsuario</td>
+                            <td class="px-4 py-2 border">@item.CelularUsuario</td>
+                            <td class="px-4 py-2 border">@item.EmailUsuario</td>
+                            <td class="px-4 py-2 border">@item.EdadUsuario</td>
+                            <td class="px-4 py-2 border">@item.IdRolNavigation?.IdRol</td>
                         </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
+                        }
                         
-                       
+                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
+                            <td class="px-4 py-2 border">Juan</td>
+                            <td class="px-4 py-2 border">Cartagena</td>
+                            <td class="px-4 py-2 border">2025-06-01</td>
+                            <td class="px-4 py-2 border">08:00</td>
+                            <td class="px-4 py-2 border">10:30</td>
+                            <td class="px-4 py-2 border">$300.000</td>
+                            <td class="px-4 py-2 border">Avianca</td>
+                        </tr>
+
+
 
                         <!-- Más filas aquí si lo necesitas -->
                     </tbody>
@@ -259,9 +167,11 @@
     <div id="planes" class="bg-white w-full max-w-[1500px] rounded-2xl p-8 hidden">
         <div
             class="relative p-10 rounded-xl bg-[url('https://img.freepik.com/foto-gratis/terminal-aeropuerto_1417-1456.jpg?semt=ais_hybrid&w=740')] bg-cover ">
-            <h2 class="relative bottom-18  text-2xl w-[900px] h-[60px] rounded-full  border left-60 bg-white font-bold text-center pt-2">Informes de Planes</h2>
+            <h2
+                class="relative bottom-18  text-2xl w-[900px] h-[60px] rounded-full  border left-60 bg-white font-bold text-center pt-2">
+                Informes de Planes</h2>
             <!-- Formulario -->
-             <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
+            <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
 
                 <!-- Campos personalizados -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
@@ -312,7 +222,8 @@
             </form>
 
             <!-- Tabla de planes -->
-            <div class="bg-white w-full max-w-full h-[400px] p-4 mt-6 overflow-x-auto overflow-y-auto rounded-xl shadow-md">
+            <div
+                class="bg-white w-full max-w-full h-[400px] p-4 mt-6 overflow-x-auto overflow-y-auto rounded-xl shadow-md">
                 <table class="min-w-[700px] w-full  border-collapse table-auto">
                     <thead>
                         <tr class="bg-[#3085BC] text-white text-sm sm:text-base">
@@ -326,7 +237,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
+                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
                             <td class="px-4 py-2 border"></td>
                             <td class="px-4 py-2 border"></td>
                             <td class="px-4 py-2 border"></td>
@@ -354,9 +265,11 @@
     <div id="reservas" class="bg-white w-full max-w-[1500px] rounded-2xl p-8 hidden">
         <div
             class="relative p-10 rounded-xl bg-[url('https://img.freepik.com/foto-gratis/terminal-aeropuerto_1417-1456.jpg?semt=ais_hybrid&w=740')] bg-cover ">
-            <h2 class="relative bottom-18  text-2xl w-[900px] h-[60px] rounded-full  border left-60 bg-white font-bold text-center pt-2">Informes de Reservas</h2>
+            <h2
+                class="relative bottom-18  text-2xl w-[900px] h-[60px] rounded-full  border left-60 bg-white font-bold text-center pt-2">
+                Informes de Reservas</h2>
             <!-- Formulario -->
-              <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
+            <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
 
 
                 <!-- Campos personalizados -->
@@ -401,11 +314,12 @@
             </form>
 
             <!-- Tabla de reservas -->
-            <div class="bg-white w-full max-w-full h-[400px] p-4 mt-6 overflow-x-auto overflow-y-auto rounded-xl shadow-md">
+            <div
+                class="bg-white w-full max-w-full h-[400px] p-4 mt-6 overflow-x-auto overflow-y-auto rounded-xl shadow-md">
                 <table class="min-w-[700px] w-full  border-collapse table-auto">
                     <thead>
                         <tr class="bg-[#3085BC] text-white text-sm sm:text-base">
-                             <th class="px-4 py-2 border">Usuario</th>
+                            <th class="px-4 py-2 border">Usuario</th>
                             <th class="px-4 py-2 border">Fecha Reserva</th>
                             <th class="px-4 py-2 border">Tipo</th>
                             <th class="px-4 py-2 border">Monto</th>
@@ -413,14 +327,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
+                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
                             <td class="px-4 py-2 border"></td>
                             <td class="px-4 py-2 border"></td>
                             <td class="px-4 py-2 border"></td>
                             <td class="px-4 py-2 border"></td>
                             <td class="px-4 py-2 border"></td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -438,11 +352,13 @@
 
     <!-- pagos-->
     <div id="pagos" class="bg-white w-full max-w-[1500px] rounded-2xl p-8 hidden">
-         <div
+        <div
             class="relative p-10 rounded-xl bg-[url('https://img.freepik.com/foto-gratis/terminal-aeropuerto_1417-1456.jpg?semt=ais_hybrid&w=740')] bg-cover ">
-            <h2 class="relative bottom-18  text-2xl w-[900px] h-[60px] rounded-full  border left-60 bg-white font-bold text-center pt-2">Informes de Pagos</h2>
+            <h2
+                class="relative bottom-18  text-2xl w-[900px] h-[60px] rounded-full  border left-60 bg-white font-bold text-center pt-2">
+                Informes de Pagos</h2>
             <!-- Formulario -->
-              <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
+            <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6 bg-white rounded-xl shadow-lg">
 
                 <!-- Campos personalizados -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
@@ -487,11 +403,12 @@
             </form>
 
             <!-- Tabla de pagos -->
-            <div class="bg-white w-full max-w-full h-[400px] p-4 mt-6 overflow-x-auto overflow-y-auto rounded-xl shadow-md">
+            <div
+                class="bg-white w-full max-w-full h-[400px] p-4 mt-6 overflow-x-auto overflow-y-auto rounded-xl shadow-md">
                 <table class="min-w-[700px] w-full  border-collapse table-auto">
                     <thead>
                         <tr class="bg-[#3085BC] text-white text-sm sm:text-base">
-                             <th class="px-4 py-2 border">Usuario</th>
+                            <th class="px-4 py-2 border">Usuario</th>
                             <th class="px-4 py-2 border">metodo de pago</th>
                             <th class="px-4 py-2 border">Fecha de pago</th>
                             <th class="px-4 py-2 border">tipo de reserva</th>
@@ -500,7 +417,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition"> 
+                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
                             <td class="px-4 py-2 border"></td>
                             <td class="px-4 py-2 border"></td>
                             <td class="px-4 py-2 border"></td>
@@ -508,8 +425,8 @@
                             <td class="px-4 py-2 border"></td>
                             <td class="px-4 py-2 border"></td>
                         </tr>
-                        
-                       
+
+
 
                         <!-- Más filas aquí si lo necesitas -->
                     </tbody>
@@ -525,29 +442,29 @@
                     PDF</button>
             </div>
         </div>
-</div>
+    </div>
 
 @section Scripts {
-    <script>
-        function mostrarSeccion(id) {
-            document.getElementById('viajes').classList.add('hidden');
-            document.getElementById('planes').classList.add('hidden');
-            document.getElementById('reservas').classList.add('hidden');
-            document.getElementById('pagos').classList.add('hidden');
-            document.getElementById('btn-viajes').classList.add('bg-white');
-            document.getElementById('btn-planes').classList.add('bg-white');
-            document.getElementById('btn-reservas').classList.add('bg-white');
-            document.getElementById('btn-pagos').classList.add('bg-white');
-            document.getElementById(`btn-viajes`).classList.replace('text-white', 'text-black');
-            document.getElementById(`btn-planes`).classList.replace('text-white', 'text-black');
-            document.getElementById(`btn-reservas`).classList.replace('text-white', 'text-black');
-            document.getElementById(`btn-pagos`).classList.replace('text-white', 'text-black');
+        <script>
+            function mostrarSeccion(id) {
+                document.getElementById('viajes').classList.add('hidden');
+                document.getElementById('planes').classList.add('hidden');
+                document.getElementById('reservas').classList.add('hidden');
+                document.getElementById('pagos').classList.add('hidden');
+                document.getElementById('btn-viajes').classList.add('bg-white');
+                document.getElementById('btn-planes').classList.add('bg-white');
+                document.getElementById('btn-reservas').classList.add('bg-white');
+                document.getElementById('btn-pagos').classList.add('bg-white');
+                document.getElementById(`btn-viajes`).classList.replace('text-white', 'text-black');
+                document.getElementById(`btn-planes`).classList.replace('text-white', 'text-black');
+                document.getElementById(`btn-reservas`).classList.replace('text-white', 'text-black');
+                document.getElementById(`btn-pagos`).classList.replace('text-white', 'text-black');
 
 
 
-            document.getElementById(`btn-${id}`).classList.replace('bg-white', 'bg-[#6ca7cf]');
-            document.getElementById(`btn-${id}`).classList.replace('text-black', 'text-white');
-            document.getElementById(id).classList.remove('hidden');
-        }
-    </script>
+                document.getElementById(`btn-${id}`).classList.replace('bg-white', 'bg-[#6ca7cf]');
+                document.getElementById(`btn-${id}`).classList.replace('text-black', 'text-white');
+                document.getElementById(id).classList.remove('hidden');
+            }
+        </script>
 }

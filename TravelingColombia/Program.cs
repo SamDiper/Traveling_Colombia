@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Repository.Implementacion;
+using Repository.Interface;
 using TravelingColombia.Models;
+using TravelingColombia.Repository.Implementacion;
+using TravelingColombia.Repository.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,10 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddDbContext<TravelingColombiabdContext>(opc =>
     opc.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionDefault"))
 );
+
+//Dependencias
+builder.Services.AddScoped(typeof(IRepositoryGeneric<,>),typeof(RepositoryGeneric<,>));
+builder.Services.AddScoped(typeof(IRepositoryAdmin),typeof(RepositoryAdmin));
 
 var app = builder.Build();
 
