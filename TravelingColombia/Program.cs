@@ -4,6 +4,8 @@ using Repository.Interface;
 using TravelingColombia.Models;
 using TravelingColombia.Repository.Implementacion;
 using TravelingColombia.Repository.Interface;
+using TravelingColombia.UnitOfWork.Implementacion;
+using TravelingColombia.UnitOfWork.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +19,8 @@ builder.Services.AddDbContext<TravelingColombiabdContext>(opc =>
 );
 
 //Dependencias
-builder.Services.AddScoped(typeof(IRepositoryGeneric<,>),typeof(RepositoryGeneric<,>));
-builder.Services.AddScoped(typeof(IRepositoryAdmin),typeof(RepositoryAdmin));
+builder.Services.AddScoped<IUnitUser, UnitUser>();
+builder.Services.AddScoped<IRepositoryViaje,RepositoryViaje>();
 
 var app = builder.Build();
 

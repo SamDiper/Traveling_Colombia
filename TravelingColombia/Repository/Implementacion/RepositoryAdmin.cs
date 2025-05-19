@@ -12,7 +12,6 @@ namespace TravelingColombia.Repository.Implementacion
     {
         public RepositoryAdmin(TravelingColombiabdContext context) : base(context)
         {
-            
         }
     }
 }

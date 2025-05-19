@@ -23,7 +23,6 @@ namespace Repository.Implementacion
         {
             try{
                 await _dbSet.AddAsync(t);
-                await _dbContext.SaveChangesAsync();
                 return t;
             }catch(Exception ex){Console.WriteLine("Error"+ex.Message); return null;}
         }
@@ -36,7 +35,6 @@ namespace Repository.Implementacion
                     return false;
                 }
                 _dbSet.Remove(entidad);
-                await _dbContext.SaveChangesAsync();
                 return true;
             }catch(Exception ex){Console.WriteLine("Error"+ex.Message); return false;}
         }
@@ -66,7 +64,6 @@ namespace Repository.Implementacion
         {
             try{
                 _dbSet.Update(t);
-                await _dbContext.SaveChangesAsync();
                 return true;
             }catch(Exception ex){Console.WriteLine("Error"+ex.Message); return false;}
         }

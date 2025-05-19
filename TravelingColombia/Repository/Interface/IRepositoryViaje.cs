@@ -7,8 +7,9 @@ using TravelingColombia.Models;
 
 namespace TravelingColombia.Repository.Interface
 {
-    public interface IRepositoryViaje : IRepositoryGeneric<Viaje,int>
+    public interface IRepositoryViaje : IRepositoryGeneric<Viaje, int>
     {
+        Task<IEnumerable<Viaje>> GetIncludesAsync();
         
     }
 }
