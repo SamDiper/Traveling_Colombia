@@ -1,3 +1,5 @@
+@model IEnumerable<TravelingColombia.Models.Viaje>
+
 <div class="min-h-screen bg-gradient-to-b  flex flex-col items-center p-6 space-y-6">
     <!-- Contenedor de viajes -->
     <div class=" w-full max-w-[1500px] rounded-2xl p-8 ">
@@ -72,25 +74,36 @@
                 <table class="min-w-[700px] w-full  border-collapse table-auto">
                     <thead>
                         <tr class="bg-[#3085BC] text-white text-sm sm:text-base">
-                            <th class="px-4 py-2 border">Usuario</th>
+                            <th class="px-4 py-2 border">Id Viaje</th>
+                            <th class="px-4 py-2 border">Imagen</th>
                             <th class="px-4 py-2 border">Destino</th>
-                            <th class="px-4 py-2 border">Fecha Viaje</th>
                             <th class="px-4 py-2 border">H. Salida</th>
                             <th class="px-4 py-2 border">H. Llegada</th>
+                            <th class="px-4 py-2 border">Fecha Viaje</th>
                             <th class="px-4 py-2 border">Precio</th>
+                            <th class="px-4 py-2 border">Cantidad Puestos</th>
                             <th class="px-4 py-2 border">Aerolínea</th>
+                            <th class="px-4 py-2 border">Clase</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
-                            <td class="px-4 py-2 border">Juan</td>
-                            <td class="px-4 py-2 border">Cartagena</td>
-                            <td class="px-4 py-2 border">2025-06-01</td>
-                            <td class="px-4 py-2 border">08:00</td>
-                            <td class="px-4 py-2 border">10:30</td>
-                            <td class="px-4 py-2 border">$300.000</td>
-                            <td class="px-4 py-2 border">Avianca</td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="text-sm  sm:text-base hover:bg-[#3085BC]/30 transition">
+
+                                <td class="px-4 py-2 border">@item.IdViaje</td>
+                                <td class="px-4 py-2 border">@item.Imagen</td>
+                                <td class="px-4 py-2 border">@item.IdDestinoNavigation?.NombreDestino</td>
+                                <td class="px-4 py-2 border">@item.HoraSalida</td>
+                                <td class="px-4 py-2 border">@item.HoraLlegada</td>
+                                <td class="px-4 py-2 border">@item.FechaViaje</td>
+                                <td class="px-4 py-2 border">$@item.PrecioViaje</td>
+                                <td class="px-4 py-2 border">@item.CantidadPuestos</td>
+                                <td class="px-4 py-2 border">@item.IdAerolineaNavigation?.NombreAerolinea</td>
+                                <td class="px-4 py-2 border">@item.IdClaseNavigation?.NombreClase</td>
+                            </tr>
+                        }
+
 
 
                     </tbody>
@@ -103,6 +116,3 @@
 
 
 </div>
-
-
-

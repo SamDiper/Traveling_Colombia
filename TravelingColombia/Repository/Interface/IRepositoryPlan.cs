@@ -9,6 +9,6 @@ namespace TravelingColombia.Repository.Interface
 {
     public interface IRepositoryPlan : IRepositoryGeneric<Plane,int>
     {
-        
+        Task<IEnumerable<Plane>> GetIncludesAsync();
     }
 }

@@ -1,3 +1,5 @@
+@model IEnumerable<TravelingColombia.Models.Reserva>
+
 <div class="min-h-screen bg-gradient-to-b  flex flex-col items-center p-6 space-y-6">
 
     <!-- Contenedor de Reservas -->
@@ -58,6 +60,7 @@
                 <table class="min-w-[700px] w-full  border-collapse table-auto">
                     <thead>
                         <tr class="bg-[#3085BC] text-white text-sm sm:text-base">
+                            <th class="px-4 py-2 border">Id Reserva</th>
                             <th class="px-4 py-2 border">Usuario</th>
                             <th class="px-4 py-2 border">Fecha Reserva</th>
                             <th class="px-4 py-2 border">Tipo</th>
@@ -66,13 +69,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                        </tr>
+                        @foreach(var item in Model){
+                            <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
+                                <td class="px-4 py-2 border">@item.IdReserva</td>
+                                <td class="px-4 py-2 border">@($"{item.IdUsuarioNavigation?.NombreUsuario} {item.IdUsuarioNavigation?.ApellidoUsuario}")</td>
+                                <td class="px-4 py-2 border">@item.FechaReserva</td>
+                                @if(@item.IdPlan!=null)
+                                {
+                                    <td class="px-4 py-2 border">Plan</td>
+                                    <td class="px-4 py-2 border">$@item.IdPlanNavigation?.PrecioPlan</td>
+
+                                }else{
+                                    <td class="px-4 py-2 border">Viaje</td>
+                                    <td class="px-4 py-2 border">$@item.IdViajeNavigation?.PrecioViaje</td>
+                                }
+                                <td class="px-4 py-2 border">@item.EstadoReservaNavigation?.Estado1</td>
+                            </tr>
+                        }
+                        
 
                     </tbody>
                 </table>

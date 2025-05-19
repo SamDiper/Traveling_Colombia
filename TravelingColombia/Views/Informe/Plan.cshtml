@@ -1,3 +1,6 @@
+@model IEnumerable<TravelingColombia.Models.Plane>
+
+
 <div class="min-h-screen bg-gradient-to-b  flex flex-col items-center p-6 space-y-6">
 
     <!-- Contenedor de viajes -->
@@ -64,7 +67,8 @@
                 <table class="min-w-[700px] w-full  border-collapse table-auto">
                     <thead>
                         <tr class="bg-[#3085BC] text-white text-sm sm:text-base">
-                            <th class="px-4 py-2 border">imagen</th>
+                            <th class="px-4 py-2 border">Id Plan</th>
+                            <th class="px-4 py-2 border">Imagen</th>
                             <th class="px-4 py-2 border">Plan</th>
                             <th class="px-4 py-2 border">Usuario</th>
                             <th class="px-4 py-2 border">Descripcion</th>
@@ -74,15 +78,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                            <td class="px-4 py-2 border"></td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
+                                <td class="px-4 py-2 border">@item</td>
+                                <td class="px-4 py-2 border">@item</td>
+                                <td class="px-4 py-2 border">@item</td>
+                                <td class="px-4 py-2 border">@item</td>
+                                <td class="px-4 py-2 border">@item</td>
+                                <td class="px-4 py-2 border">@item</td>
+                                <td class="px-4 py-2 border">@item</td>
+                                <td class="px-4 py-2 border">@item</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -90,4 +98,3 @@
         </div>
     </div>
 </div>
-

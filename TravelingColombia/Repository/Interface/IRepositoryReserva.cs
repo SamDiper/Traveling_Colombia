@@ -9,6 +9,7 @@ namespace TravelingColombia.Repository.Interface
 {
     public interface IRepositoryReserva : IRepositoryGeneric<Reserva,int>
     {
-        
+        Task<IEnumerable<Reserva>> GetIncludesAsync();
+
     }
 }
