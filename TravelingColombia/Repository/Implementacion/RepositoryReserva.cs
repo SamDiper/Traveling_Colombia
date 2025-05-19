@@ -11,7 +11,7 @@ namespace TravelingColombia.Repository.Implementacion
 {
     public class RepositoryReserva : RepositoryGeneric<Reserva, int>, IRepositoryReserva
     {
-        TravelingColombiabdContext _dbContext;
+        private readonly TravelingColombiabdContext _dbContext;
         public RepositoryReserva(TravelingColombiabdContext context) : base(context)
         {
             _dbContext = context;

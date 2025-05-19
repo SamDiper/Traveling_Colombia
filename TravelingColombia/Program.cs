@@ -22,6 +22,7 @@ builder.Services.AddDbContext<TravelingColombiabdContext>(opc =>
 builder.Services.AddScoped<IUnitUser, UnitUser>();
 builder.Services.AddScoped<IRepositoryViaje,RepositoryViaje>();
 builder.Services.AddScoped<IRepositoryReserva,RepositoryReserva>();
+builder.Services.AddScoped<IRepositoryPlan,RepositoryPlan>();
 
 
 var app = builder.Build();
