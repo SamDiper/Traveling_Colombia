@@ -56,9 +56,9 @@ namespace TravelingColombia.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Pago(string filtro = null)
+        public async Task<IActionResult> Pago(FiltroPagosViewModel filtros)
         {
-            var listaPagos = await _repositoryPago.ObtenerPagos(filtro);
+            var listaPagos = await _repositoryPago.ObtenerPagos(filtros);
 
             return View(listaPagos);
         }

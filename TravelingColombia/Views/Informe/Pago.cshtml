@@ -1,4 +1,4 @@
-@model List<TravelingColombia.ViewModels.PagosViewModel>
+@model TravelingColombia.ViewModels.PagosGenericoViewModel
 
 <div class="min-h-screen bg-gradient-to-b  flex flex-col items-center p-6 space-y-6">
 
@@ -14,42 +14,47 @@
 
                 <!-- Campos personalizados -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Buscar</label>
-                    <input type="text" name="filtro" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
+                    <label class="mb-1 font-semibold text-gray-700">Cedula</label>
+                    <input name="Cedula" type="text" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Cuenta</label>
+                    <input name="Cuenta" type="text" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
                 </div>
 
                 <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Tipo</label>
-                    <select class="p-2 rounded-lg border border-gray-300">
-                        <option value="">Seleccione Tipo</option>
-                        <option value="1">1</option>
+                    <label class="mb-1 font-semibold text-gray-700">Banco</label>
+                    <select name="IdBanco" class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Banco</option>
+                        @foreach(var banco in Model.ListadoBnaco){
+                            <option value="@banco.IdBanco">@banco.NombreBanco</option>
+                        }
+                    </select>
+                </div>
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Metodo Pago</label>
+                    <select name="IdMetodo" class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Metodo</option>
+                        @foreach(var Metodo in Model.ListadoMetodoPagos){
+                            <option value="@Metodo.IdMetodo">@Metodo.MetodoPago1</option>
+                        }
                     </select>
                 </div>
 
+
+                
                 <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Fecha Mínima</label>
-                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
-                </div>
-                <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Fecha Máxima</label>
-                    <input type="date" class="p-2 rounded-lg border border-gray-300" />
-                </div>
-                <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Precio Mínimo</label>
-                    <input type="number" placeholder="Ingrese precio mínimo"
+                    <label class="mb-1 font-semibold text-gray-700">Monto</label>
+                    <input name="Monto" type="number" placeholder="Ingrese precio mínimo"
                         class="p-2 rounded-lg border border-gray-300" />
                 </div>
-                <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Precio Máximo</label>
-                    <input type="number" placeholder="Ingrese precio máximo"
-                        class="p-2 rounded-lg border border-gray-300" />
-                </div>
+                
 
                 <!-- Botón buscar -->
                 <div class="flex justify-center w-full mt-4">
                     <button type="submit"
                         class="bg-[#3085BC] hover:bg-[#3084bcd2] text-white font-bold py-3 px-8 rounded-full transition duration-300">
-                        Buscar
+                        Listar
                     </button>
                 </div>
             </form>
@@ -70,7 +75,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(var item in Model){
+                        @foreach(var item in Model.ListadoPagos){
                             <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
                             <td class="px-4 py-2 border">@item.NombreUsuario</td>
                             <td class="px-4 py-2 border">@item.CedulaUsuario</td>
