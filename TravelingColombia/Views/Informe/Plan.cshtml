@@ -14,15 +14,15 @@
 
                 <!-- Campos personalizados -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Nombre</label>
-                    <input name="NombreDestino" type="text" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
+                    <label class="mb-1 font-semibold text-gray-700">Destino</label>
+                    <input name="NombreDestino" type="text" placeholder="Ingrese Destino" class="p-2 rounded-lg border border-gray-300" />
                 </div>
                 <div class="flex flex-col flex-1 min-w-[200px]">
                     <label class="mb-1 font-semibold text-gray-700">Plan</label>
-                    <input name="NombrePlan" type="text" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
+                    <input name="NombrePlan" type="text" placeholder="Nombre Plan" class="p-2 rounded-lg border border-gray-300" />
                 </div>
                 <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Tipo</label>
+                    <label class="mb-1 font-semibold text-gray-700">Tipo Plan</label>
                      <select name="IdTipoPlan" class="p-2 rounded-lg border border-gray-300">
                      <option value="">Seleccione Tipo</option>
                     @foreach (var tipoplan in Model.ListadoTipoPlanes)
@@ -42,7 +42,7 @@
                 
                 <div class="flex flex-col flex-1 min-w-[200px]">
                     <label class="mb-1 font-semibold text-gray-700">Precio</label>
-                    <input name="Precio" type="number" placeholder="Ingrese precio mínimo"
+                    <input name="Precio" type="number" placeholder="Ingrese precio "
                         class="p-2 rounded-lg border border-gray-300" />
                 </div>
                 
