@@ -9,7 +9,6 @@ namespace TravelingColombia.ViewModels
     public class PlanViewModel
     {
         public int IdPlan { get; set; }
-
         public string DestinoIda { get; set; }
         public string Pais { get; set; }
 
