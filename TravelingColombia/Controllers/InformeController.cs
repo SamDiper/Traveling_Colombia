@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TravelingColombia.Filtros;
 using TravelingColombia.Repository.Interface;
+using TravelingColombia.ViewModels;
 
 namespace TravelingColombia.Controllers
 {
@@ -30,7 +31,20 @@ namespace TravelingColombia.Controllers
         public async Task<IActionResult> Viaje()
         {
             var viajes = await _repositoryViaje.GetIncludesAsync();
-            return View(viajes);
+
+            var viewModel = new ViajesViewModel
+            {
+                ListadoViajes = viajes.ToList(),
+                ListadoAerolineas = viajes.Select(v => v.IdAerolineaNavigation).Distinct().ToList()
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Viaje(FiltroViajesViewModel filtroViajes)
+        {
+            var resultado = await _repositoryViaje.ObtenerViajesFiltradosAsync(filtroViajes);
+            return View(resultado);
         }
         public async Task<IActionResult> Plan()
         {

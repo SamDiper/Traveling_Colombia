@@ -2,4 +2,4 @@ bin/
 obj/
 node_modules/
 output.css
-appsettings.Development.json
+appsettings.json

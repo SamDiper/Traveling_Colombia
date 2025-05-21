@@ -43,18 +43,18 @@
 
             <!-- Sidebar -->
             <aside id="sidebar"
-                class="fixed top-0 left-0 z-50 h-full w-64 -translate-x-full transform bg-[#0f172a] p-4 text-sm text-white transition-transform duration-300 flex flex-col justify-between">
+                class="fixed top-0 left-0 z-50 h-full w-64 -translate-x-full transform backdrop-blur-sm bg-gradient-to-r from-gray-300 to-[#2E86C1] p-4 text-sm text-black transition-transform duration-300 flex flex-col justify-between">
 
                 <!-- Parte superior: navegación -->
                 <nav class="space-y-2">
-                    <div class="rounded bg-[#1e293b] px-4 py-2 font-semibold">General</div>
+                    <div class="rounded px-4 py-2 font-semibold">General</div>
                     <div>
                         <button onclick="toggleAccordion('teamsMenu')"
-                            class="flex w-full items-center justify-between rounded px-4 py-2 hover:bg-[#1e293b]">
+                            class="flex w-full items-center justify-between cursor-pointer rounded px-4 py-2 hover:text-white">
                             <span>Gestion</span>
                             <span>▾</span>
                         </button>
-                        <div id="teamsMenu" class="mt-1 ml-6 hidden space-y-1 text-gray-400">
+                        <div id="teamsMenu" class="mt-1 ml-6 hidden space-y-1 text-black">
                             <div class="cursor-pointer hover:text-white">Usuarios</div>
                             <div><a asp-action="Index" asp-controller="Viaje" class="cursor-pointer hover:text-white">Viajes</a></div>
                             <div><a asp-action="Index" asp-controller="Plan" class="cursor-pointer hover:text-white">Planes</a></div>
@@ -62,19 +62,19 @@
                             <div><a asp-action="Index" asp-controller="Reserva" class="cursor-pointer hover:text-white">Reservas</a></div>
                         </div>
                     </div>
-                    <div  class="cursor-pointer rounded px-4 py-2 text-gray-300 hover:bg-[#1e293b] hover:text-white">
+                    <div  class="cursor-pointer rounded px-4 py-2 text-black hover:text-white">
                         <a asp-action="Pagos" asp-controller="Cliente">Pagos</a>
                     </div>
                     <button onclick="toggleAccordion('accountMenu')"
-                        class="flex w-full items-center justify-between rounded px-4 py-2 hover:bg-[#1e293b]">
+                        class="flex w-full items-center justify-between rounded px-4 py-2 hover:text-white">
                         <span>Detalles</span>
                         <span>▾</span>
                     </button>
-                    <div id="accountMenu" class="mt-1 ml-6 hidden space-y-1 text-gray-400">
+                    <div id="accountMenu" class="mt-1 ml-6 hidden space-y-1 text-black">
                         <a asp-action="Informes" asp-controller="Admin" class="cursor-pointer hover:text-white">Informes</a>
                         <div class="cursor-pointer hover:text-white">Estadísticas</div>
                     </div>
-                    <div  class="cursor-pointer rounded px-4 py-2 text-gray-300 hover:bg-[#1e293b] hover:text-white">
+                    <div  class="cursor-pointer rounded px-4 py-2 text-black cursor-pointer hover:text-white">
                         <a asp-action="Perfil" asp-controller="Cliente">Perfil</a>
                     </div>
                     
