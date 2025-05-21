@@ -94,17 +94,15 @@ namespace TravelingColombia.Repository.Implementacion
                 }
             }
 
-            if (filtros.FechaMin.HasValue)
-                query = query.Where(p => p.FechaIda >= filtros.FechaMin.Value);
+            if (filtros.Fecha.HasValue)
+                query = query.Where(p => p.FechaIda >= filtros.Fecha.Value);
 
-            if (filtros.FechaMax.HasValue)
-                query = query.Where(p => p.FechaIda <= filtros.FechaMax.Value);
+            
 
-            if (filtros.PrecioMin.HasValue)
-                query = query.Where(p => p.PrecioPlan >= filtros.PrecioMin.Value);
+            if (filtros.Precio.HasValue)
+                query = query.Where(p => p.PrecioPlan == filtros.Precio.Value);
 
-            if (filtros.PrecioMax.HasValue)
-                query = query.Where(p => p.PrecioPlan <= filtros.PrecioMax.Value);
+            
 
             var planes = new PlanesViewModel
             {
