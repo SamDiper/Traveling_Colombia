@@ -13,57 +13,81 @@
             <form class="flex flex-wrap gap-x-10 gap-y-5 w-full p-6  bg-white rounded-xl shadow-lg">
                 <!-- Campos del formulario -->
 
+                <!-- Destino Ida -->
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Destino Ida</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Destino Ida</option>
+                        @foreach(var item in Model){
+                            <option value="">@item.IdDestinoIdaNavigation?.NombreDestino</option>
+                        }
+                    </select>
+                </div>
 
-                <!-- Campos personalizados -->
+                <!-- Destino Llegada -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Nombre</label>
-                    <input type="text" placeholder="Ingrese nombre" class="p-2 rounded-lg border border-gray-300" />
-                </div>
-                <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Destino</label>
+                    <label class="mb-1 font-semibold text-gray-700">Destino Llegada</label>
                     <select class="p-2 rounded-lg border border-gray-300">
-                        <option value="">Seleccione Destino</option>
-                        <option value="1">1</option>
+                        <option value="">Seleccione Destino Llegada</option>
+                        @foreach(var item in Model){
+                            <option value="">@item.IdDestinoIdaNavigation?.NombreDestino</option>
+                        }
                     </select>
                 </div>
+
+                <!-- Hora Salida -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Tipo</label>
-                    <select class="p-2 rounded-lg border border-gray-300">
-                        <option value="">Seleccione Tipo</option>
-                        <option value="1">1</option>
-                    </select>
+                    <label class="mb-1 font-semibold text-gray-700">Hora Salida</label>
+                    <input type="time" class="p-2 rounded-lg border border-gray-300" />
                 </div>
+
+                <!-- Hora Llegada -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
-                    <label class="mb-1 font-semibold text-gray-700">Clase</label>
-                    <select class="p-2 rounded-lg border border-gray-300">
-                        <option value="">Seleccione Clase</option>
-                        <option value="1">1</option>
-                    </select>
+                    <label class="mb-1 font-semibold text-gray-700">Hora Llegada</label>
+                    <input type="time" class="p-2 rounded-lg border border-gray-300" />
                 </div>
+
+                <!-- Fecha Mínima -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
                     <label class="mb-1 font-semibold text-gray-700">Fecha Mínima</label>
                     <input type="date" class="p-2 rounded-lg border border-gray-300" />
                 </div>
+
+                <!-- Fecha Máxima -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
                     <label class="mb-1 font-semibold text-gray-700">Fecha Máxima</label>
                     <input type="date" class="p-2 rounded-lg border border-gray-300" />
                 </div>
+
+                <!-- Precio Mínimo -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
                     <label class="mb-1 font-semibold text-gray-700">Precio Mínimo</label>
-                    <input type="number" placeholder="Ingrese precio mínimo"
-                        class="p-2 rounded-lg border border-gray-300" />
+                    <input type="number" class="p-2 rounded-lg border border-gray-300" />
                 </div>
+
+                <!-- Precio Máximo -->
                 <div class="flex flex-col flex-1 min-w-[200px]">
                     <label class="mb-1 font-semibold text-gray-700">Precio Máximo</label>
-                    <input type="number" placeholder="Ingrese precio máximo"
-                        class="p-2 rounded-lg border border-gray-300" />
+                    <input type="number" class="p-2 rounded-lg border border-gray-300" />
+                </div>
+
+                <!-- Aerolínea -->
+                <div class="flex flex-col flex-1 min-w-[200px]">
+                    <label class="mb-1 font-semibold text-gray-700">Aerolínea</label>
+                    <select class="p-2 rounded-lg border border-gray-300">
+                        <option value="">Seleccione Aerolínea</option>
+                        <!-- Opciones dinámicas aquí -->
+                        @foreach(var item in Model){
+                            <option value="">@item.IdAerolineaNavigation?.NombreAerolinea</option>
+                        }
+                    </select>
                 </div>
 
                 <!-- Botón buscar -->
                 <div class="flex justify-center w-full mt-4">
                     <button type="submit"
                         class="bg-[#3085BC] hover:bg-[#3084bcd2] cursor-pointer text-white font-bold py-3 px-8 rounded-full transition duration-300">
-                        Buscar
+                        Listar
                     </button>
                 </div>
             </form>
@@ -76,14 +100,14 @@
                         <tr class="bg-[#3085BC] text-white text-sm sm:text-base">
                             <th class="px-4 py-2 border">Id Viaje</th>
                             <th class="px-4 py-2 border">Imagen</th>
-                            <th class="px-4 py-2 border">Destino</th>
+                            <th class="px-4 py-2 border">Destino Ida</th>
+                            <th class="px-4 py-2 border">Destino Llegada</th>
                             <th class="px-4 py-2 border">H. Salida</th>
                             <th class="px-4 py-2 border">H. Llegada</th>
                             <th class="px-4 py-2 border">Fecha Viaje</th>
                             <th class="px-4 py-2 border">Precio</th>
                             <th class="px-4 py-2 border">Cantidad Puestos</th>
                             <th class="px-4 py-2 border">Aerolínea</th>
-                            <th class="px-4 py-2 border">Clase</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,19 +117,16 @@
 
                                 <td class="px-4 py-2 border">@item.IdViaje</td>
                                 <td class="px-4 py-2 border">@item.Imagen</td>
-                                <td class="px-4 py-2 border">@item.IdDestinoNavigation?.NombreDestino</td>
+                                <td class="px-4 py-2 border">@item.IdDestinoIdaNavigation?.NombreDestino</td>
+                                <td class="px-4 py-2 border">@item.IdDestinoLlegadaNavigation?.NombreDestino</td>
                                 <td class="px-4 py-2 border">@item.HoraSalida</td>
                                 <td class="px-4 py-2 border">@item.HoraLlegada</td>
                                 <td class="px-4 py-2 border">@item.FechaViaje</td>
                                 <td class="px-4 py-2 border">$@item.PrecioViaje</td>
                                 <td class="px-4 py-2 border">@item.CantidadPuestos</td>
                                 <td class="px-4 py-2 border">@item.IdAerolineaNavigation?.NombreAerolinea</td>
-                                <td class="px-4 py-2 border">@item.IdClaseNavigation?.NombreClase</td>
                             </tr>
                         }
-
-
-
                     </tbody>
                 </table>
             </div>

@@ -3,36 +3,46 @@
     <div class="md:col-span-2">
         <h2 class="text-2xl font-bold mb-4 text-gray-800">OUTLET SAN ANDRÉS HOTEL TIUNA</h2>
         <!-- Carousel wrapper -->
-        <div class="carousel w-full" id="carousel">
-  <div id="slide1" class="carousel-item relative w-full">
-    <img src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp" class="w-full" />
-    <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide4" class="btn btn-circle">❮</a>
-      <a href="#slide2" class="btn btn-circle">❯</a>
-    </div>
-  </div>
-  <div id="slide2" class="carousel-item relative w-full">
-    <img src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp" class="w-full" />
-    <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide1" class="btn btn-circle">❮</a>
-      <a href="#slide3" class="btn btn-circle">❯</a>
-    </div>
-  </div>
-  <div id="slide3" class="carousel-item relative w-full">
-    <img src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp" class="w-full" />
-    <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide2" class="btn btn-circle">❮</a>
-      <a href="#slide4" class="btn btn-circle">❯</a>
-    </div>
-  </div>
-  <div id="slide4" class="carousel-item relative w-full">
-    <img src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp" class="w-full" />
-    <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide3" class="btn btn-circle">❮</a>
-      <a href="#slide1" class="btn btn-circle">❯</a>
-    </div>
-  </div>
-</div>
+        <div class="relative overflow-hidden w-full" id="carousel">
+            <div class="flex transition-transform duration-500 ease-in-out" id="track">
+                <img src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+                    class="w-full flex-shrink-0" />
+                <img src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
+                    class="w-full flex-shrink-0" />
+                <img src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
+                    class="w-full flex-shrink-0" />
+                <img src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
+                    class="w-full flex-shrink-0" />
+            </div>
+
+            <div class="absolute inset-0 flex justify-between items-center px-4">
+                <button id="prev" class="btn btn-circle">❮</button>
+                <button id="next" class="btn btn-circle">❯</button>
+            </div>
+        </div>
+
+        <script>
+            const track = document.getElementById('track');
+            const slides = track.children.length;
+            let index = 0;
+
+            const move = () => track.style.transform = `translateX(-${index * 100}%)`;
+
+            document.getElementById('next').onclick = () => {
+                index = (index + 1) % slides;
+                move();
+            };
+
+            document.getElementById('prev').onclick = () => {
+                index = (index - 1 + slides) % slides;
+                move();
+            };
+
+            setInterval(() => {
+                index = (index + 1) % slides;
+                move();
+            }, 3000);
+        </script>
 
         <!--fin carrusel-->
 
@@ -59,9 +69,9 @@
     <div class="bg-gray-50 rounded-lg p-6 flex flex-col items-center justify-center border">
         <p class="text-lg font-semibold text-gray-700">Reserve Ahora</p>
         <p class="text-gray-400 line-through text-sm">COP 1.800.000</p>
-        <p class="text-2xl font-bold text-green-600">COP 1.528.000</p>
+        <p class="text-2xl font-bold text-[#2E86C1]">COP 1.528.000</p>
         <p class="text-sm text-gray-500 mb-4">por persona</p>
-        <button class="bg-green-700 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded">
+        <button class="bg-[#2E86C1] hover:bg-[#245d83] text-white font-semibold py-2 px-4 rounded">
             Ver Opciones
         </button>
     </div>
@@ -84,7 +94,7 @@
                 última fecha de regreso (la tarifa varía según la fecha de viaje y hotel elegido)
             </p>
         </div>
-        <button class="bg-green-700 text-white px-6 py-2 rounded-lg mt-4 md:mt-0 hover:bg-green-800">
+        <button class="bg-[#2E86C1] hover:bg-[#245d83] text-white px-6 py-2 rounded-lg mt-4 md:mt-0">
             ✔ Comprar Ahora
         </button>
     </div>
@@ -190,16 +200,3 @@
 <div class="h-20 w-60 ">
 
 </div>
-
-@section Scripts {
-
-<script>
-  const slides = ['#slide1', '#slide2', '#slide3', '#slide4'];
-  let current = 0;
-
-  setInterval(() => {
-    current = (current + 1) % slides.length;
-    window.location.hash = slides[current];
-  }, 3000);
-</script>
-}

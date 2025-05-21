@@ -23,7 +23,7 @@ namespace TravelingColombia.Repository.Implementacion
                 .Include(a => a.IdPlanNavigation)
                 .Include(a => a.IdUsuarioNavigation)
                 .Include(a => a.IdViajeNavigation)
-                .Include(a => a.EstadoReservaNavigation)
+                .Include(a => a.IdEstadoReservaNavigation)
                 .ToListAsync();
 
         }

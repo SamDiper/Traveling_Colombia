@@ -11,11 +11,11 @@ public partial class Destino
 
     public string Pais { get; set; } = null!;
 
-    public virtual ICollection<Plane> PlaneIdDestinoIdaNavigations { get; set; } = new List<Plane>();
+    public virtual ICollection<Plane> Planes { get; set; } = new List<Plane>();
 
-    public virtual ICollection<Plane> PlaneIdDestinoLlegadaNavigations { get; set; } = new List<Plane>();
+    public virtual ICollection<Viaje> ViajeIdDestinoIdaNavigations { get; set; } = new List<Viaje>();
 
-    public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
+    public virtual ICollection<Viaje> ViajeIdDestinoLlegadaNavigations { get; set; } = new List<Viaje>();
 
     public virtual ICollection<VuelosAerolinea> VuelosAerolineas { get; set; } = new List<VuelosAerolinea>();
 }
