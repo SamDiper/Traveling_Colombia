@@ -11,15 +11,15 @@ public partial class Reserva
 
     public int? IdViaje { get; set; }
 
-    public int EstadoReserva { get; set; }
+    public int IdEstadoReserva { get; set; }
 
     public int IdUsuario { get; set; }
 
     public int? IdPlan { get; set; }
 
-    public virtual Estado EstadoReservaNavigation { get; set; } = null!;
-
     public virtual ICollection<Factura> Facturas { get; set; } = new List<Factura>();
+
+    public virtual Estado IdEstadoReservaNavigation { get; set; } = null!;
 
     public virtual Plane? IdPlanNavigation { get; set; }
 

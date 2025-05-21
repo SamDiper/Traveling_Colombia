@@ -7,7 +7,7 @@ public partial class Factura
 {
     public int IdFactura { get; set; }
 
-    public DateOnly FechaPago { get; set; }
+    public DateOnly FechaFactura { get; set; }
 
     public int IdReserva { get; set; }
 

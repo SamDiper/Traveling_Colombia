@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Repository.Interface;
-using TravelingColombia.Filtros;
 using TravelingColombia.Models;
 using TravelingColombia.ViewModels;
 
 namespace TravelingColombia.Repository.Interface
 {
-    public interface IRepositoryPlan : IRepositoryGeneric<Plane, int>
+    public interface IRepositoryPago : IRepositoryGeneric<Pago, int>
     {
-        Task<PlanesViewModel> listadoPlanes();
-        Task<PlanesViewModel> ObtenerPlanesFiltrados(FiltroPlanesViewModel filtros);
+        Task<List<PagosViewModel>> ListadoPagos();
+        Task<List<PagosViewModel>> ObtenerPagos(string filtro = null);
     }
+
+    
 }

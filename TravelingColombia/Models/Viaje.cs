@@ -7,7 +7,9 @@ public partial class Viaje
 {
     public int IdViaje { get; set; }
 
-    public int IdDestino { get; set; }
+    public int IdDestinoIda { get; set; }
+
+    public int IdDestinoLlegada { get; set; }
 
     public TimeOnly HoraSalida { get; set; }
 
@@ -19,17 +21,15 @@ public partial class Viaje
 
     public int CantidadPuestos { get; set; }
 
-    public string Imagen { get; set; } = null!;
-
     public int IdAerolinea { get; set; }
 
-    public int IdClase { get; set; }
+    public string? Imagen { get; set; }
 
     public virtual Aerolinea IdAerolineaNavigation { get; set; } = null!;
 
-    public virtual Clase IdClaseNavigation { get; set; } = null!;
+    public virtual Destino IdDestinoIdaNavigation { get; set; } = null!;
 
-    public virtual Destino IdDestinoNavigation { get; set; } = null!;
+    public virtual Destino IdDestinoLlegadaNavigation { get; set; } = null!;
 
     public virtual ICollection<Informe> Informes { get; set; } = new List<Informe>();
 

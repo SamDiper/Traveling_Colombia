@@ -9,11 +9,13 @@ public partial class Plane
 
     public int IdDestinoIda { get; set; }
 
-    public int IdDestinoLlegada { get; set; }
+    public string NombrePlan { get; set; } = null!;
+
+    public DateOnly FechaIda { get; set; }
+
+    public DateOnly FechaRegreso { get; set; }
 
     public int IdTipoPlan { get; set; }
-
-    public string NombrePlan { get; set; } = null!;
 
     public string Descripcion { get; set; } = null!;
 
@@ -27,15 +29,9 @@ public partial class Plane
 
     public int IdAerolinea { get; set; }
 
-    public int IdClase { get; set; }
-
     public virtual Aerolinea IdAerolineaNavigation { get; set; } = null!;
 
-    public virtual Clase IdClaseNavigation { get; set; } = null!;
-
     public virtual Destino IdDestinoIdaNavigation { get; set; } = null!;
-
-    public virtual Destino IdDestinoLlegadaNavigation { get; set; } = null!;
 
     public virtual Hotele IdHotelNavigation { get; set; } = null!;
 

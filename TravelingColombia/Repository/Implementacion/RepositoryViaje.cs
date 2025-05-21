@@ -21,8 +21,8 @@ namespace TravelingColombia.Repository.Implementacion
         {
             return await _dbContext.Viajes
                 .Include(a => a.IdAerolineaNavigation)
-                .Include(c => c.IdClaseNavigation)
-                .Include(d => d.IdDestinoNavigation)
+                .Include(c => c.IdDestinoLlegadaNavigation)
+                .Include(d => d.IdDestinoIda)
                 .ToListAsync();
         }
     }
