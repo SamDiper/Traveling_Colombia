@@ -51,15 +51,11 @@ public partial class TravelingColombiabdContext : DbContext
 
     public virtual DbSet<VuelosAerolinea> VuelosAerolineas { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.;Database=TRAVELING_COLOMBIABD;Trusted_Connection=True;TrustServerCertificate=True");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Aerolinea>(entity =>
         {
-            entity.HasKey(e => e.IdAerolinea).HasName("PK__Aeroline__E58B9C72D8BA12BD");
+            entity.HasKey(e => e.IdAerolinea).HasName("PK__Aeroline__E58B9C724E424F78");
 
             entity.ToTable("Aerolinea");
 
@@ -72,7 +68,7 @@ public partial class TravelingColombiabdContext : DbContext
 
         modelBuilder.Entity<Banco>(entity =>
         {
-            entity.HasKey(e => e.IdBanco).HasName("PK__Banco__37C5FC6173E01729");
+            entity.HasKey(e => e.IdBanco).HasName("PK__Banco__37C5FC61911538FC");
 
             entity.ToTable("Banco");
 
@@ -85,7 +81,7 @@ public partial class TravelingColombiabdContext : DbContext
 
         modelBuilder.Entity<Clase>(entity =>
         {
-            entity.HasKey(e => e.IdClases).HasName("PK__Clases__2D2D19BF62FA6371");
+            entity.HasKey(e => e.IdClases).HasName("PK__Clases__2D2D19BF8715109E");
 
             entity.Property(e => e.IdClases).HasColumnName("Id_Clases");
             entity.Property(e => e.NombreClase)
@@ -99,7 +95,7 @@ public partial class TravelingColombiabdContext : DbContext
 
         modelBuilder.Entity<Destino>(entity =>
         {
-            entity.HasKey(e => e.IdDestino).HasName("PK__Destinos__CE218AE7CC43933A");
+            entity.HasKey(e => e.IdDestino).HasName("PK__Destinos__CE218AE7D26A20B6");
 
             entity.Property(e => e.IdDestino).HasColumnName("Id_Destino");
             entity.Property(e => e.NombreDestino)
@@ -113,7 +109,7 @@ public partial class TravelingColombiabdContext : DbContext
 
         modelBuilder.Entity<Estado>(entity =>
         {
-            entity.HasKey(e => e.IdEstado).HasName("PK__Estado__AB2EB6F8D6E8FD8D");
+            entity.HasKey(e => e.IdEstado).HasName("PK__Estado__AB2EB6F8C1B907B7");
 
             entity.ToTable("Estado");
 
@@ -126,7 +122,7 @@ public partial class TravelingColombiabdContext : DbContext
 
         modelBuilder.Entity<Factura>(entity =>
         {
-            entity.HasKey(e => e.IdFactura).HasName("PK__Factura__A8B88C22F47F9069");
+            entity.HasKey(e => e.IdFactura).HasName("PK__Factura__A8B88C22DB5E9AF3");
 
             entity.ToTable("Factura");
 
@@ -141,17 +137,17 @@ public partial class TravelingColombiabdContext : DbContext
             entity.HasOne(d => d.IdPagoNavigation).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.IdPago)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Factura__Id_Pago__6754599E");
+                .HasConstraintName("FK__Factura__Id_Pago__797309D9");
 
             entity.HasOne(d => d.IdReservaNavigation).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.IdReserva)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Factura__Id_Rese__66603565");
+                .HasConstraintName("FK__Factura__Id_Rese__787EE5A0");
         });
 
         modelBuilder.Entity<Habitacione>(entity =>
         {
-            entity.HasKey(e => e.IdHabitacion).HasName("PK__Habitaci__6B8A72E2C66B09E8");
+            entity.HasKey(e => e.IdHabitacion).HasName("PK__Habitaci__6B8A72E284605D7F");
 
             entity.Property(e => e.IdHabitacion).HasColumnName("Id_Habitacion");
             entity.Property(e => e.CantidadHabitacion).HasColumnName("Cantidad_Habitacion");
@@ -165,12 +161,12 @@ public partial class TravelingColombiabdContext : DbContext
             entity.HasOne(d => d.IdHotelNavigation).WithMany(p => p.Habitaciones)
                 .HasForeignKey(d => d.IdHotel)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Habitacio__Id_Ho__412EB0B6");
+                .HasConstraintName("FK__Habitacio__Id_Ho__534D60F1");
         });
 
         modelBuilder.Entity<Hotele>(entity =>
         {
-            entity.HasKey(e => e.IdHotel).HasName("PK__Hoteles__40D3513510E1EDF1");
+            entity.HasKey(e => e.IdHotel).HasName("PK__Hoteles__40D35135CC03795B");
 
             entity.Property(e => e.IdHotel).HasColumnName("Id_Hotel");
             entity.Property(e => e.NombreHotel)
@@ -185,7 +181,7 @@ public partial class TravelingColombiabdContext : DbContext
 
         modelBuilder.Entity<Informe>(entity =>
         {
-            entity.HasKey(e => e.IdInforme).HasName("PK__Informe__9369A0DD4BA386E8");
+            entity.HasKey(e => e.IdInforme).HasName("PK__Informe__9369A0DD744803E9");
 
             entity.ToTable("Informe");
 
@@ -197,24 +193,24 @@ public partial class TravelingColombiabdContext : DbContext
 
             entity.HasOne(d => d.IdFacturaNavigation).WithMany(p => p.Informes)
                 .HasForeignKey(d => d.IdFactura)
-                .HasConstraintName("FK__Informe__Id_Fact__6D0D32F4");
+                .HasConstraintName("FK__Informe__Id_Fact__7F2BE32F");
 
             entity.HasOne(d => d.IdPlanNavigation).WithMany(p => p.Informes)
                 .HasForeignKey(d => d.IdPlan)
-                .HasConstraintName("FK__Informe__Id_Plan__6A30C649");
+                .HasConstraintName("FK__Informe__Id_Plan__7C4F7684");
 
             entity.HasOne(d => d.IdReservaNavigation).WithMany(p => p.Informes)
                 .HasForeignKey(d => d.IdReserva)
-                .HasConstraintName("FK__Informe__Id_Rese__6C190EBB");
+                .HasConstraintName("FK__Informe__Id_Rese__7E37BEF6");
 
             entity.HasOne(d => d.IdViajeNavigation).WithMany(p => p.Informes)
                 .HasForeignKey(d => d.IdViaje)
-                .HasConstraintName("FK__Informe__Id_Viaj__6B24EA82");
+                .HasConstraintName("FK__Informe__Id_Viaj__7D439ABD");
         });
 
         modelBuilder.Entity<MetodoPago>(entity =>
         {
-            entity.HasKey(e => e.IdMetodo).HasName("PK__Metodo_P__BDBEE834D2E77988");
+            entity.HasKey(e => e.IdMetodo).HasName("PK__Metodo_P__BDBEE834CFE85FF5");
 
             entity.ToTable("Metodo_Pagos");
 
@@ -227,7 +223,7 @@ public partial class TravelingColombiabdContext : DbContext
 
         modelBuilder.Entity<Pago>(entity =>
         {
-            entity.HasKey(e => e.IdPago).HasName("PK__Pagos__3E79AD9AD52F04A4");
+            entity.HasKey(e => e.IdPago).HasName("PK__Pagos__3E79AD9AAAD15AB9");
 
             entity.Property(e => e.IdPago).HasColumnName("Id_Pago");
             entity.Property(e => e.Cedula)
@@ -246,17 +242,17 @@ public partial class TravelingColombiabdContext : DbContext
             entity.HasOne(d => d.IdBancoNavigation).WithMany(p => p.Pagos)
                 .HasForeignKey(d => d.IdBanco)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pagos__Id_Banco__5CD6CB2B");
+                .HasConstraintName("FK__Pagos__Id_Banco__6EF57B66");
 
             entity.HasOne(d => d.IdMetodoNavigation).WithMany(p => p.Pagos)
                 .HasForeignKey(d => d.IdMetodo)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pagos__Id_Metodo__5DCAEF64");
+                .HasConstraintName("FK__Pagos__Id_Metodo__6FE99F9F");
         });
 
         modelBuilder.Entity<Plane>(entity =>
         {
-            entity.HasKey(e => e.IdPlan).HasName("PK__Planes__3BD89AB6904DB57A");
+            entity.HasKey(e => e.IdPlan).HasName("PK__Planes__3BD89AB60C5765A9");
 
             entity.Property(e => e.IdPlan).HasColumnName("Id_Plan");
             entity.Property(e => e.CantidadPersonas).HasColumnName("Cantidad_Personas");
@@ -281,27 +277,27 @@ public partial class TravelingColombiabdContext : DbContext
             entity.HasOne(d => d.IdAerolineaNavigation).WithMany(p => p.Planes)
                 .HasForeignKey(d => d.IdAerolinea)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Planes__Id_Aerol__52593CB8");
+                .HasConstraintName("FK__Planes__Id_Aerol__6477ECF3");
 
             entity.HasOne(d => d.IdDestinoIdaNavigation).WithMany(p => p.Planes)
                 .HasForeignKey(d => d.IdDestinoIda)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Planes__Id_Desti__4F7CD00D");
+                .HasConstraintName("FK__Planes__Id_Desti__619B8048");
 
             entity.HasOne(d => d.IdHotelNavigation).WithMany(p => p.Planes)
                 .HasForeignKey(d => d.IdHotel)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Planes__Id_Hotel__5165187F");
+                .HasConstraintName("FK__Planes__Id_Hotel__6383C8BA");
 
             entity.HasOne(d => d.IdTipoPlanNavigation).WithMany(p => p.Planes)
                 .HasForeignKey(d => d.IdTipoPlan)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Planes__Id_Tipo___5070F446");
+                .HasConstraintName("FK__Planes__Id_Tipo___628FA481");
         });
 
         modelBuilder.Entity<Reserva>(entity =>
         {
-            entity.HasKey(e => e.IdReserva).HasName("PK__Reservas__9E953BE1A5C2CF40");
+            entity.HasKey(e => e.IdReserva).HasName("PK__Reservas__9E953BE1A62228AB");
 
             entity.Property(e => e.IdReserva).HasColumnName("Id_Reserva");
             entity.Property(e => e.FechaReserva).HasColumnName("Fecha_Reserva");
@@ -313,25 +309,25 @@ public partial class TravelingColombiabdContext : DbContext
             entity.HasOne(d => d.IdEstadoReservaNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdEstadoReserva)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Reservas__Id_Est__619B8048");
+                .HasConstraintName("FK__Reservas__Id_Est__73BA3083");
 
             entity.HasOne(d => d.IdPlanNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdPlan)
-                .HasConstraintName("FK__Reservas__Id_Pla__6383C8BA");
+                .HasConstraintName("FK__Reservas__Id_Pla__75A278F5");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Reservas__Id_Usu__628FA481");
+                .HasConstraintName("FK__Reservas__Id_Usu__74AE54BC");
 
             entity.HasOne(d => d.IdViajeNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdViaje)
-                .HasConstraintName("FK__Reservas__Id_Via__60A75C0F");
+                .HasConstraintName("FK__Reservas__Id_Via__72C60C4A");
         });
 
         modelBuilder.Entity<Rol>(entity =>
         {
-            entity.HasKey(e => e.IdRol).HasName("PK__Rol__55932E86A5C77162");
+            entity.HasKey(e => e.IdRol).HasName("PK__Rol__55932E861064CBFD");
 
             entity.ToTable("Rol");
 
@@ -344,7 +340,7 @@ public partial class TravelingColombiabdContext : DbContext
 
         modelBuilder.Entity<TipoPlan>(entity =>
         {
-            entity.HasKey(e => e.IdTipoPlan).HasName("PK__Tipo_Pla__A24A0733E250924B");
+            entity.HasKey(e => e.IdTipoPlan).HasName("PK__Tipo_Pla__A24A073381CB676C");
 
             entity.ToTable("Tipo_Plan");
 
@@ -357,7 +353,7 @@ public partial class TravelingColombiabdContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuarios__63C76BE2805FC9AC");
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuarios__63C76BE2E60FCE79");
 
             entity.Property(e => e.IdUsuario).HasColumnName("Id_Usuario");
             entity.Property(e => e.ApellidoUsuario)
@@ -386,12 +382,12 @@ public partial class TravelingColombiabdContext : DbContext
             entity.HasOne(d => d.IdRolNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdRol)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Usuarios__Id_Rol__59FA5E80");
+                .HasConstraintName("FK__Usuarios__Id_Rol__6C190EBB");
         });
 
         modelBuilder.Entity<Viaje>(entity =>
         {
-            entity.HasKey(e => e.IdViaje).HasName("PK__Viajes__9BC209F794549882");
+            entity.HasKey(e => e.IdViaje).HasName("PK__Viajes__9BC209F7692866B0");
 
             entity.Property(e => e.IdViaje).HasColumnName("Id_Viaje");
             entity.Property(e => e.CantidadPuestos).HasColumnName("Cantidad_Puestos");
@@ -411,22 +407,22 @@ public partial class TravelingColombiabdContext : DbContext
             entity.HasOne(d => d.IdAerolineaNavigation).WithMany(p => p.Viajes)
                 .HasForeignKey(d => d.IdAerolinea)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Viajes__Id_Aerol__571DF1D5");
+                .HasConstraintName("FK__Viajes__Id_Aerol__693CA210");
 
             entity.HasOne(d => d.IdDestinoIdaNavigation).WithMany(p => p.ViajeIdDestinoIdaNavigations)
                 .HasForeignKey(d => d.IdDestinoIda)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Viajes__Id_Desti__5535A963");
+                .HasConstraintName("FK__Viajes__Id_Desti__6754599E");
 
             entity.HasOne(d => d.IdDestinoLlegadaNavigation).WithMany(p => p.ViajeIdDestinoLlegadaNavigations)
                 .HasForeignKey(d => d.IdDestinoLlegada)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Viajes__Id_Desti__5629CD9C");
+                .HasConstraintName("FK__Viajes__Id_Desti__68487DD7");
         });
 
         modelBuilder.Entity<VuelosAerolinea>(entity =>
         {
-            entity.HasKey(e => e.IdVueloAerolinea).HasName("PK__VuelosAe__F52B80B2165B0CE3");
+            entity.HasKey(e => e.IdVueloAerolinea).HasName("PK__VuelosAe__F52B80B2E799120A");
 
             entity.ToTable("VuelosAerolinea");
 
@@ -438,12 +434,12 @@ public partial class TravelingColombiabdContext : DbContext
             entity.HasOne(d => d.IdAerolineaNavigation).WithMany(p => p.VuelosAerolineas)
                 .HasForeignKey(d => d.IdAerolinea)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__VuelosAer__Id_Ae__4CA06362");
+                .HasConstraintName("FK__VuelosAer__Id_Ae__5EBF139D");
 
             entity.HasOne(d => d.IdDestinoNavigation).WithMany(p => p.VuelosAerolineas)
                 .HasForeignKey(d => d.IdDestino)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__VuelosAer__Id_De__4BAC3F29");
+                .HasConstraintName("FK__VuelosAer__Id_De__5DCAEF64");
         });
 
         OnModelCreatingPartial(modelBuilder);

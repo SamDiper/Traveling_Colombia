@@ -23,6 +23,7 @@ builder.Services.AddScoped<IUnitUser, UnitUser>();
 builder.Services.AddScoped<IRepositoryViaje,RepositoryViaje>();
 builder.Services.AddScoped<IRepositoryReserva,RepositoryReserva>();
 builder.Services.AddScoped<IRepositoryPlan,RepositoryPlan>();
+builder.Services.AddScoped<IRepositoryPago,RepositoryPago>();
 
 
 var app = builder.Build();

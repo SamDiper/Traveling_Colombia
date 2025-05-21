@@ -8,7 +8,7 @@ namespace Repository.Interface
 {
     public interface IRepositoryGeneric<T,Tkey> where T : class
     {
-        Task<T> GetByIdAsync(Tkey tkey);
+        Task<T?> GetByIdAsync(Tkey tkey);
         Task<List<T>> GetAllAsync();
         Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate);
         Task<T> Create(T t);
