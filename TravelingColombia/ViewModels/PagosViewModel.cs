@@ -7,6 +7,7 @@ namespace TravelingColombia.ViewModels
 {
     public class PagosViewModel
     {
+        public int IdPago { get; set;}
         public string? NombreUsuario { get; set; }
         public string? CedulaUsuario { get; set; }
         public string? CuentaBanco { get; set; }

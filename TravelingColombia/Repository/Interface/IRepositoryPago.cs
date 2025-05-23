@@ -12,6 +12,8 @@ namespace TravelingColombia.Repository.Interface
     public interface IRepositoryPago : IRepositoryGeneric<Pago, int>
     {
         Task<PagosGenericoViewModel> ListadoPagos();
+        Task<List<MetodoPago>> ListaMetodosPagos();
+        Task<List<Banco>> ListaBancos();
         Task<PagosGenericoViewModel> ObtenerPagos(FiltroPagosViewModel filtros);
     }
 

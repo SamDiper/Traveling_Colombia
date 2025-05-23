@@ -24,6 +24,8 @@ builder.Services.AddScoped<IRepositoryViaje,RepositoryViaje>();
 builder.Services.AddScoped<IRepositoryReserva,RepositoryReserva>();
 builder.Services.AddScoped<IRepositoryPlan,RepositoryPlan>();
 builder.Services.AddScoped<IRepositoryPago,RepositoryPago>();
+builder.Services.AddScoped(typeof(IRepositoryGeneric<,>), typeof(RepositoryGeneric<,>));
+
 
 
 var app = builder.Build();

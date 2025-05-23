@@ -7,7 +7,8 @@ namespace TravelingColombia.Filtros
 {
     public class FiltroPagosViewModel
     {
-       
+        
+        public int IdPago { get; set; }
         public string? Nombre { get; set; } 
 
         public string? Cedula { get; set; } 
