@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Repository.Implementacion;
+using Repository.Interface;
 using TravelingColombia.Filtros;
 using TravelingColombia.Models;
 using TravelingColombia.Repository.Interface;
@@ -14,9 +15,14 @@ namespace TravelingColombia.Repository.Implementacion
     public class RepositoryPago : RepositoryGeneric<Pago, int>, IRepositoryPago
     {
         private readonly TravelingColombiabdContext _dbcontext;
-        public RepositoryPago(TravelingColombiabdContext context) : base(context)
+        private readonly IRepositoryGeneric<MetodoPago, int> _ListaMetodosPagos;
+        private readonly IRepositoryGeneric<Banco, int> _ListaBancos;
+
+        public RepositoryPago(TravelingColombiabdContext context, IRepositoryGeneric<MetodoPago, int> ListaMetodosPagos, IRepositoryGeneric<Banco, int> ListaBancos) : base(context)
         {
             _dbcontext = context;
+            _ListaMetodosPagos = ListaMetodosPagos;
+            _ListaBancos = ListaBancos;
         }
 
         public async Task<PagosGenericoViewModel> ListadoPagos()
@@ -26,6 +32,7 @@ namespace TravelingColombia.Repository.Implementacion
                                join b in _dbcontext.Bancos on p.IdBanco equals b.IdBanco
                                select new PagosViewModel
                                {
+                                   IdPago = p.IdPago,
                                    NombreUsuario = p.Nombre,
                                    CedulaUsuario = p.Cedula,
                                    NombreBanco = b.NombreBanco,
@@ -37,23 +44,34 @@ namespace TravelingColombia.Repository.Implementacion
             var pagos = new PagosGenericoViewModel
             {
                 ListadoPagos = lista,
-                ListadoBnaco= await _dbcontext.Bancos.ToListAsync(),
-                ListadoMetodoPagos= await _dbcontext.MetodoPagos.ToListAsync(),
+                ListadoBnaco = await _dbcontext.Bancos.ToListAsync(),
+                ListadoMetodoPagos = await _dbcontext.MetodoPagos.ToListAsync(),
             };
 
             return pagos;
         }
 
 
+        public async Task<List<MetodoPago>> ListaMetodosPagos()
+        {
+            return await _ListaMetodosPagos.GetAllAsync();
+        }
+        public async Task<List<Banco>> ListaBancos()
+        {
+            return await _ListaBancos.GetAllAsync();
+        }
+
+
         public async Task<PagosGenericoViewModel> ObtenerPagos(FiltroPagosViewModel filtros)
         {
 
-            var query = 
+            var query =
                 from p in _dbcontext.Pagos
                 join mp in _dbcontext.MetodoPagos on p.IdMetodo equals mp.IdMetodo
                 join b in _dbcontext.Bancos on p.IdBanco equals b.IdBanco
                 select new PagosViewModel
                 {
+                    IdPago = p.IdPago,
                     NombreUsuario = p.Nombre,
                     CedulaUsuario = p.Cedula,
                     NombreBanco = b.NombreBanco,
@@ -63,9 +81,9 @@ namespace TravelingColombia.Repository.Implementacion
                 };
 
 
-                 if (!string.IsNullOrWhiteSpace(filtros.Nombre))
+            if (!string.IsNullOrWhiteSpace(filtros.Nombre))
                 query = query.Where(p => p.NombreUsuario.Contains(filtros.Nombre));
-                
+
             if (!string.IsNullOrWhiteSpace(filtros.Cedula))
                 query = query.Where(p => p.CedulaUsuario.Contains(filtros.Cedula));
 
@@ -103,8 +121,8 @@ namespace TravelingColombia.Repository.Implementacion
             var pagos = new PagosGenericoViewModel
             {
                 ListadoPagos = query.ToList(),
-                ListadoBnaco= await _dbcontext.Bancos.ToListAsync(),
-                ListadoMetodoPagos= await _dbcontext.MetodoPagos.ToListAsync(),
+                ListadoBnaco = await _dbcontext.Bancos.ToListAsync(),
+                ListadoMetodoPagos = await _dbcontext.MetodoPagos.ToListAsync(),
             };
 
 
