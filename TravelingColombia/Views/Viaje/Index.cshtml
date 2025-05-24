@@ -1,4 +1,4 @@
-@model IEnumerable<TravelingColombia.Models.Viaje>
+@model TravelingColombia.ViewModels.ViajesGenericoViewModel
 
 <div class="min-h-screen bg-gradient-to-b flex flex-col items-center p-6 space-y-6">
 
@@ -100,24 +100,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.ListadoViajes)
                         {
                             <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
                                 <td class="px-4 py-2 border">@item.IdViaje</td>
                                 <td class="px-4 py-2 border">@item.Imagen</td>
-                                <td class="px-4 py-2 border">@item.IdDestinoIdaNavigation?.NombreDestino</td>
-                                <td class="px-4 py-2 border">@item.IdDestinoLlegadaNavigation?.NombreDestino</td>
+                                <td class="px-4 py-2 border">@item.DestinoIda</td>
+                                <td class="px-4 py-2 border">@item.DestinoLlegada</td>
                                 <td class="px-4 py-2 border">@item.HoraSalida</td>
                                 <td class="px-4 py-2 border">@item.HoraLlegada</td>
                                 <td class="px-4 py-2 border">@item.FechaViaje</td>
                                 <td class="px-4 py-2 border">$@item.PrecioViaje</td>
                                 <td class="px-4 py-2 border">@item.CantidadPuestos</td>
-                                <td class="px-4 py-2 border">@item.IdAerolineaNavigation?.NombreAerolinea</td>
+                                <td class="px-4 py-2 border">@item.AerolineaNombre</td>
                                 <td class="flex justify-center gap-2 px-4 py-2 border">
                                     <a asp-action="Editar" asp-route-id="@item.IdViaje"
                                         class="btn btn-sm btn-warning">Editar</a>
                                     <form asp-action="Delete" asp-route-id="@item.IdViaje" asp-controller="Viaje" method="post"
-                                        onsubmit="return confirm('¿Estás seguro de eliminar este empleado?');"
+                                        onsubmit="return confirm('¿Estás seguro de eliminar este viaje?');"
                                         class="inline">
                                         <button type="submit" class="btn btn-sm btn-error">Eliminar</button>
                                     </form>
@@ -138,10 +138,10 @@
                 <label class="mb-1 font-semibold text-gray-700">Destino Ida</label>
                 <select name="DestinoIda" class="p-2 rounded-lg border border-gray-300">
                     <option value="">Seleccione Destino Ida</option>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.ListadoDestino)
                     {
-                        <option value="@item.IdDestinoIda">
-                            @item.IdDestinoIdaNavigation?.NombreDestino</option>
+                        <option value="@item.IdDestino">
+                            @item.NombreDestino</option>
                     }
                 </select>
             </div>
@@ -149,10 +149,10 @@
                 <label class="mb-1 font-semibold text-gray-700">Destino Llegada</label>
                 <select name="DestinoLlegada" class="p-2 rounded-lg border border-gray-300">
                     <option value="">Seleccione Destino Llegada</option>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.ListadoDestino)
                     {
-                        <option value="@item.IdDestinoLlegada">
-                            @item.IdDestinoLlegadaNavigation?.NombreDestino</option>
+                        <option value="@item.IdDestino">
+                            @item.NombreDestino</option>
                     }
                 </select>
             </div>
@@ -182,9 +182,9 @@
                 <label class="mb-1 font-semibold text-gray-700">Aerolinea</label>
                 <select name="AerolineaId" class="p-2 rounded-lg border border-gray-300">
                     <option value="">Seleccione Aerolinea</option>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.ListadoAerolinea)
                     {
-                        <option value="@item.IdAerolinea">@item.IdAerolineaNavigation?.NombreAerolinea</option>
+                        <option value="@item.IdAerolinea">@item.NombreAerolinea</option>
                     }
                 </select>
             </div>

@@ -1,4 +1,4 @@
-@model TravelingColombia.ViewModels.ViajesViewModel
+@model TravelingColombia.ViewModels.ViajesGenericoViewModel
 
 <div class="min-h-screen bg-gradient-to-b  flex flex-col items-center p-6 space-y-6">
     <!-- Contenedor de viajes -->
@@ -16,9 +16,9 @@
                     <label class="mb-1 font-semibold text-gray-700">Destino Ida</label>
                     <select name="DestinoIda" class="p-2 rounded-lg border border-gray-300">
                         <option value="">Seleccione Destino Ida</option>
-                        @foreach (var item in Model.ListadoViajes)
+                        @foreach (var item in Model.ListadoDestino)
                         {
-                            <option value="@item.IdDestinoIdaNavigation?.NombreDestino">@item.IdDestinoIdaNavigation?.NombreDestino</option>
+                            <option value="@item.IdDestino">@item.NombreDestino</option>
                         }
                     </select>
                 </div>
@@ -26,9 +26,9 @@
                     <label class="mb-1 font-semibold text-gray-700">Destino Llegada</label>
                     <select name="DestinoLlegada" class="p-2 rounded-lg border border-gray-300">
                         <option value="">Seleccione Destino Llegada</option>
-                        @foreach (var item in Model.ListadoViajes)
+                        @foreach (var item in Model.ListadoDestino)
                         {
-                            <option value="@item.IdDestinoLlegadaNavigation?.NombreDestino">@item.IdDestinoLlegadaNavigation?.NombreDestino</option>
+                            <option value="@item.IdDestino">@item.NombreDestino</option>
                         }
                     </select>
                 </div>
@@ -67,7 +67,7 @@
                     <label class="mb-1 font-semibold text-gray-700">Aerolinea</label>
                     <select name="AerolineaId" class="p-2 rounded-lg border border-gray-300">
                         <option value="">Seleccione Aerolinea</option>
-                        @foreach (var item in Model.ListadoAerolineas)
+                        @foreach (var item in Model.ListadoAerolinea)
                         {
                             <option value="@item.IdAerolinea">@item.NombreAerolinea</option>
                         }
@@ -107,14 +107,14 @@
 
                                 <td class="px-4 py-2 border">@item.IdViaje</td>
                                 <td class="px-4 py-2 border">@item.Imagen</td>
-                                <td class="px-4 py-2 border">@item.IdDestinoIdaNavigation?.NombreDestino</td>
-                                <td class="px-4 py-2 border">@item.IdDestinoLlegadaNavigation?.NombreDestino</td>
+                                <td class="px-4 py-2 border">@item.DestinoIda</td>
+                                <td class="px-4 py-2 border">@item.DestinoLlegada</td>
                                 <td class="px-4 py-2 border">@item.HoraSalida</td>
                                 <td class="px-4 py-2 border">@item.HoraLlegada</td>
                                 <td class="px-4 py-2 border">@item.FechaViaje</td>
                                 <td class="px-4 py-2 border">$@item.PrecioViaje</td>
                                 <td class="px-4 py-2 border">@item.CantidadPuestos</td>
-                                <td class="px-4 py-2 border">@item.IdAerolineaNavigation?.NombreAerolinea</td>
+                                <td class="px-4 py-2 border">@item.AerolineaNombre</td>
                             </tr>
                         }
                     </tbody>

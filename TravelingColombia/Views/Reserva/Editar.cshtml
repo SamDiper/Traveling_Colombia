@@ -1,60 +1,65 @@
-<div id="Crear" class="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg hidden">
-        <h2 class="text-2xl font-bold mb-6 text-center text-[#38BDF8]">Registrar Reserva</h2>
+@model TravelingColombia.Filtros.FiltroReservasViewModel
 
-        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+@{
+    ViewData["Title"] = "Editar Reserva";
+}
 
-            <!-- Fecha Reserva -->
-            <div>
-                <label for="fecha_reserva" class="block text-gray-700 font-semibold mb-1">Fecha de Reserva</label>
-                <input type="date" id="fecha_reserva" name="Fecha_Reserva"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#38BDF8]"
-                    required />
-            </div>
+<h2 class="text-2xl font-bold mb-6 text-gray-800">Editar Reserva</h2>
 
-            <!-- Id Viaje -->
-            <div>
-                <label for="id_viaje" class="block text-gray-700 font-semibold mb-1">ID del Viaje</label>
-                <input type="number" id="id_viaje" name="Id_Viaje" placeholder="Ej: 3"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#38BDF8]"
-                    required />
-            </div>
+<form asp-action="Editar" method="post" class="max-w-xl mx-auto bg-white p-6 shadow-md rounded-lg">
+    <input type="hidden" asp-for="IdReserva" />
 
-            <!-- Estado Reserva -->
-            <div>
-                <label for="estado" class="block text-gray-700 font-semibold mb-1">Estado de la Reserva</label>
-                <select id="estado" name="estado_Reserva"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#38BDF8]"
-                    required>
-                    <option value="">Seleccione estado</option>
-                    <option value="Pendiente">Pendiente</option>
-                    <option value="Confirmada">Confirmada</option>
-                    <option value="Cancelada">Cancelada</option>
-                </select>
-            </div>
-
-            <!-- Id Usuario -->
-            <div>
-                <label for="id_usuario" class="block text-gray-700 font-semibold mb-1">ID del Usuario</label>
-                <input type="number" id="id_usuario" name="Id_Usuario" placeholder="Ej: 7"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#38BDF8]"
-                    required />
-            </div>
-
-            <!-- Id Plan -->
-            <div>
-                <label for="id_plan" class="block text-gray-700 font-semibold mb-1">ID del Plan</label>
-                <input type="number" id="id_plan" name="Id_Plan" placeholder="Ej: 12"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#38BDF8]"
-                    required />
-            </div>
-
-            <!-- Botón Enviar -->
-            <div class="md:col-span-2 flex justify-center">
-                <button type="submit"
-                    class="bg-[#38BDF8] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#0ea5e9] transition duration-300">
-                    Registrar Reserva
-                </button>
-            </div>
-
-        </form>
+    <div class="mb-4">
+        <label asp-for="IdUsuario" class="block text-gray-700 font-semibold mb-1"></label>
+        <input asp-for="IdUsuario" class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+        <span asp-validation-for="IdUsuario" class="text-red-600 text-sm"></span>
     </div>
+
+    @if (Model.IdPlan != null)
+    {
+        <div class="mb-4">
+            <label asp-for="IdPlan" class="block text-gray-700 font-semibold mb-1">Plan</label>
+            <select asp-for="IdPlan" class="w-full px-4 py-2 border border-gray-300 rounded-lg" asp-items="ViewBag.Planes">
+                <option value="">Seleccione un plan</option>
+            </select>
+        </div>
+    }
+    else if (Model.IdViaje != null)
+    {
+        <div class="mb-4">
+            <label asp-for="IdViaje" class="block text-gray-700 font-semibold mb-1">Viaje</label>
+            <select asp-for="IdViaje" class="w-full px-4 py-2 border border-gray-300 rounded-lg" asp-items="ViewBag.Viajes">
+                <option value="">Seleccione un viaje</option>
+            </select>
+        </div>
+    }
+    else
+    {
+        <div class="mb-4 text-yellow-700 font-semibold">No hay plan ni viaje asociado.</div>
+    }
+
+    <div class="mb-4">
+        <label asp-for="FechaReserva" class="block text-gray-700 font-semibold mb-1"></label>
+        <input asp-for="FechaReserva" type="date" class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+        <span asp-validation-for="FechaReserva" class="text-red-600 text-sm"></span>
+    </div>
+
+    <div class="mb-4">
+        <label asp-for="IdEstadoReserva" class="block text-gray-700 font-semibold mb-1"></label>
+        <select asp-for="IdEstadoReserva" class="w-full px-4 py-2 border border-gray-300 rounded-lg" asp-items="ViewBag.Estados">
+            <option value="">Seleccione un estado</option>
+        </select>
+        <span asp-validation-for="IdEstadoReserva" class="text-red-600 text-sm"></span>
+    </div>
+
+    <div class="flex justify-end space-x-4">
+        <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition duration-200">Guardar cambios</button>
+        <a asp-action="Index" class="bg-gray-300 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-400 transition duration-200">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
