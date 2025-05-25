@@ -45,7 +45,7 @@ namespace TravelingColombia.Controllers
 
             var listaBancos = await _repositoryPago.ListaBancos();
             var ListaMetodoPago = await _repositoryPago.ListaMetodosPagos();
-            ViewBag.ListaBancos = new SelectList(listaBancos, "IdBanco", "NombreBanco", PagoFiltro?.IdPago);
+            ViewBag.ListaBancos = new SelectList(listaBancos, "IdBanco", "NombreBanco", PagoFiltro?.IdBanco);
             ViewBag.MetodosPago = new SelectList(ListaMetodoPago, "IdMetodo", "MetodoPago1", PagoFiltro?.IdMetodo);
             return View(pago);
         }

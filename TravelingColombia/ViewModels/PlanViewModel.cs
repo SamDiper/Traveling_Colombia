@@ -26,11 +26,20 @@ namespace TravelingColombia.ViewModels
 
         public string Imagen { get; set; } = null!;
 
-        public decimal PrecioPlan { get; set; }
 
         public string Hotel { get; set; }
 
         public string Aerolinea { get; set; }
+        public decimal PrecioPlan { get; set; }
+
+        public int IdDestinoIda { get; set; }
+
+
+        public int IdTipoPlan { get; set; }
+
+        public int IdHotel { get; set; }
+
+        public int IdAerolinea { get; set; }
 
     }
 }

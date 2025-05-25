@@ -12,6 +12,8 @@ namespace TravelingColombia.Filtros
         public int? IdTipoPlan { get; set; }
         public DateOnly? Fecha { get; set; }
         public decimal? Precio { get; set; }
+        
+
 
     }
 }

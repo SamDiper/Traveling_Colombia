@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Repository.Implementacion;
+using Repository.Interface;
 using TravelingColombia.Filtros;
 using TravelingColombia.Models;
 using TravelingColombia.Repository.Interface;
@@ -14,9 +15,15 @@ namespace TravelingColombia.Repository.Implementacion
     public class RepositoryPlan : RepositoryGeneric<Plane, int>, IRepositoryPlan
     {
         private readonly TravelingColombiabdContext _context;
-        public RepositoryPlan(TravelingColombiabdContext context) : base(context)
+        private readonly IRepositoryGeneric<Hotele, int> _repositoryHoteles;
+        private readonly IRepositoryGeneric<Aerolinea, int> _repositoryAerolineas;
+        private readonly IRepositoryGeneric<Destino, int> _repositoryDestinos;
+        public RepositoryPlan(TravelingColombiabdContext context, IRepositoryGeneric<Hotele, int> repositoryHoteles, IRepositoryGeneric<Aerolinea, int> repositoryAerolineas, IRepositoryGeneric<Destino, int> repositoryDestinos) : base(context)
         {
             _context = context;
+            _repositoryAerolineas = repositoryAerolineas;
+            _repositoryHoteles = repositoryHoteles;
+            _repositoryDestinos = repositoryDestinos;
         }
 
         public async Task<PlanesViewModel> listadoPlanes()
@@ -29,9 +36,10 @@ namespace TravelingColombia.Repository.Implementacion
                                    join a in _context.Aerolineas on p.IdAerolinea equals a.IdAerolinea
                                    select new PlanViewModel
                                    {
-                                       NombrePlan = p.NombrePlan,
+                                       IdPlan = p.IdPlan,
                                        DestinoIda = d.NombreDestino,
                                        Pais = d.Pais,
+                                       NombrePlan = p.NombrePlan,
                                        FechaIda = p.FechaIda,
                                        FechaRegreso = p.FechaRegreso,
                                        TipoPlan = tp.NombrePlan,
@@ -41,10 +49,18 @@ namespace TravelingColombia.Repository.Implementacion
                                        Hotel = h.NombreHotel,
                                        Aerolinea = a.NombreAerolinea,
                                        PrecioPlan = p.PrecioPlan,
+                                       IdDestinoIda = d.IdDestino,
+                                       IdTipoPlan = tp.IdTipoPlan,
+                                       IdHotel = h.IdHotel,
+                                       IdAerolinea = a.IdAerolinea
+
                                    }).ToListAsync();
 
             planes.ListadoPlanes = resultado;
             planes.ListadoTipoPlanes = await _context.TipoPlans.ToListAsync();
+            planes.ListadoHoteles = await _repositoryHoteles.GetAllAsync();
+            planes.ListadoAerolinea = await _repositoryAerolineas.GetAllAsync();
+            planes.ListadoDestino = await _repositoryDestinos.GetAllAsync();
 
             return planes;
 
@@ -74,10 +90,10 @@ namespace TravelingColombia.Repository.Implementacion
                             PrecioPlan = p.PrecioPlan
                         };
 
-            
+
             if (!string.IsNullOrWhiteSpace(filtros.NombreDestino))
                 query = query.Where(p => p.DestinoIda.Contains(filtros.NombreDestino));
-                
+
             if (!string.IsNullOrWhiteSpace(filtros.NombrePlan))
                 query = query.Where(p => p.NombrePlan.Contains(filtros.NombrePlan));
 
@@ -97,17 +113,21 @@ namespace TravelingColombia.Repository.Implementacion
             if (filtros.Fecha.HasValue)
                 query = query.Where(p => p.FechaIda >= filtros.Fecha.Value);
 
-            
+
 
             if (filtros.Precio.HasValue)
                 query = query.Where(p => p.PrecioPlan == filtros.Precio.Value);
 
-            
+
 
             var planes = new PlanesViewModel
             {
                 ListadoPlanes = query.ToList(),
-                ListadoTipoPlanes = await _context.TipoPlans.ToListAsync()
+                ListadoTipoPlanes = await _context.TipoPlans.ToListAsync(),
+                ListadoHoteles = await _repositoryHoteles.GetAllAsync(),
+                ListadoAerolinea = await _repositoryAerolineas.GetAllAsync(),
+                ListadoDestino = await _repositoryDestinos.GetAllAsync()
+
             };
 
             return planes;
