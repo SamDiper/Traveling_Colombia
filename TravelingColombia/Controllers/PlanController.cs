@@ -95,8 +95,6 @@ namespace TravelingColombia.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(Plane plan)
         {
-
-
             await _repositoryPlan.Create(plan);
             await _unitUser.SaveChangesAsync();
 

@@ -1,0 +1,80 @@
+@model TravelingColombia.ViewModels.UsuarioViewModel
+
+<div id="Crear" class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg ">
+        <h2 class="text-2xl font-bold mb-6 text-center text-[#3085BC]">Registrar Usuario</h2>
+
+        <form method="post" asp-action="Editar" asp-controller="Usuario" >
+            <input value="@Model.IdUsuario" name="IdUsuario" type="text" 
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 hidden" />
+            <!-- Nombre -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                <label class="block text-sm font-medium text-gray-700">Nombre</label>
+                <input value="@Model.NombreUsuario" name="NombreUsuario" type="text" placeholder="Carlos"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+            </div>
+
+            <!-- Apellido -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Apellido</label>
+                <input value="@Model.ApellidoUsuario" name="ApellidoUsuario" type="text" placeholder="Pérez"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+            </div>
+
+            <!-- Celular -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Celular</label>
+                <input value="@Model.CelularUsuario" name="CelularUsuario" type="text" placeholder="3001234567"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Email</label>
+                <input value="@Model.EmailUsuario" name="EmailUsuario" type="email" placeholder="correo@ejemplo.com"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+            </div>
+
+            <!-- Edad -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Edad</label>
+                <input value="@Model.EdadUsuario" name="EdadUsuario" type="number" placeholder="30"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+            </div>
+
+            <!-- Rol -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Rol</label>
+                <select name="IdRol" class="p-2 rounded-lg border border-gray-300" asp-items="ViewBag.ListaRol">
+                        <option value="">Seleccione Rol</option>
+                        
+                    </select>
+            </div>
+
+            <!-- Cantidad de Facturas -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Cantidad de Facturas</label>
+                <input value="@Model.CantidadFacturas" name="CantidadFacturas" type="number" placeholder="0"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+            </div>
+
+            <!-- Contraseña -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+                <input value="@Model.Contrasena" name="Contrasena" type="password" placeholder="********"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+            </div>
+
+            <!-- Botón -->
+            
+            </div>
+
+            <div class="text-center my-6">
+                <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow">
+                    Guardar Usuario
+                </button>
+            </div>
+
+        </form>
+    </div>
