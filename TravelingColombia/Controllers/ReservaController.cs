@@ -91,12 +91,18 @@ namespace TravelingColombia.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(FiltroReservasViewModel filtro)
         {
+            // Validación básica antes de usar los valores
+            if (filtro.IdViaje == 0)
+                filtro.IdViaje = null;
 
-            Reserva reserva = new Reserva
+            if (filtro.IdPlan == 0)
+                filtro.IdPlan = null;
+
+            var reserva = new Reserva
             {
                 IdUsuario = filtro.IdUsuario,
-                IdViaje = filtro?.IdViaje ?? 0,
-                IdPlan = filtro?.IdPlan ?? 0,
+                IdViaje = filtro.IdViaje,
+                IdPlan = filtro.IdPlan,
                 IdEstadoReserva = filtro.IdEstadoReserva,
                 FechaReserva = filtro.FechaReserva
             };
