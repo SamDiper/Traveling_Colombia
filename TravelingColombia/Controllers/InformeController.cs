@@ -30,20 +30,15 @@ namespace TravelingColombia.Controllers
         }
         public async Task<IActionResult> Viaje()
         {
-            var viajes = await _repositoryViaje.GetIncludesAsync();
+            var viajes = await _repositoryViaje.ListadoViajes();
 
-            var viewModel = new ViajesViewModel
-            {
-                ListadoViajes = viajes.ToList(),
-                ListadoAerolineas = viajes.Select(v => v.IdAerolineaNavigation).Distinct().ToList()
-            };
-            return View(viewModel);
+            return View(viajes);
         }
 
         [HttpPost]
         public async Task<IActionResult> Viaje(FiltroViajesViewModel filtroViajes)
         {
-            var resultado = await _repositoryViaje.ObtenerViajesFiltradosAsync(filtroViajes);
+            var resultado = await _repositoryViaje.ObtenerViajesFiltrados(filtroViajes);
             return View(resultado);
         }
         public async Task<IActionResult> Plan()
@@ -60,7 +55,14 @@ namespace TravelingColombia.Controllers
         }
         public async Task<IActionResult> Reserva()
         {
-            var reservas = await _repositoryReserva.GetIncludesAsync();
+            var reservas = await _repositoryReserva.ListaReservas();
+            return View(reservas);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Reserva(FiltroReservasViewModel filtro)
+        {
+            var reservas = await _repositoryReserva.ObtenerReservasFiltrados(filtro);
             return View(reservas);
         }
         public async Task<IActionResult> Pago()

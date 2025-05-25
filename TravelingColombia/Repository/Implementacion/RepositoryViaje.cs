@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Repository.Implementacion;
+using Repository.Interface;
 using TravelingColombia.Filtros;
 using TravelingColombia.Models;
 using TravelingColombia.Repository.Interface;
@@ -13,64 +14,161 @@ namespace TravelingColombia.Repository.Implementacion
 {
     public class RepositoryViaje : RepositoryGeneric<Viaje, int>, IRepositoryViaje
     {
-        private readonly TravelingColombiabdContext _dbContext;
-        public RepositoryViaje(TravelingColombiabdContext context) : base(context)
+        private readonly TravelingColombiabdContext _dbcontext;
+        private readonly IRepositoryGeneric<Aerolinea, int> _ListaAerolinea;
+        private readonly IRepositoryGeneric<Destino, int> _ListaDestino;
+
+        public RepositoryViaje(TravelingColombiabdContext context, IRepositoryGeneric<Aerolinea, int> listaAerolinea, IRepositoryGeneric<Destino, int> listaDestino) : base(context)
         {
-            _dbContext = context;
+            _dbcontext = context;
+            _ListaAerolinea = listaAerolinea;
+            _ListaDestino = listaDestino;
         }
 
-        public async Task<IEnumerable<Viaje>> GetIncludesAsync()
+        public async Task<List<Aerolinea>> ListaAerolineas()
         {
-            return await _dbContext.Viajes
-                .Include(a => a.IdAerolineaNavigation)
-                .Include(d => d.IdDestinoIdaNavigation)
-                .Include(d => d.IdDestinoLlegadaNavigation)
-                .ToListAsync();
+            return await _ListaAerolinea.GetAllAsync();
         }
 
-        public async Task<ViajesViewModel> ObtenerViajesFiltradosAsync(FiltroViajesViewModel filtros)
+        public async Task<List<Destino>> ListaDestinos()
         {
-            var query = _dbContext.Viajes
-    .Include(v => v.IdAerolineaNavigation)
-    .Include(v => v.IdDestinoIdaNavigation)
-    .Include(v => v.IdDestinoLlegadaNavigation)
-    .AsQueryable();
+            return await _ListaDestino.GetAllAsync();
+        }
 
-            if (!string.IsNullOrWhiteSpace(filtros.DestinoIda))
-                query = query.Where(v => v.IdDestinoIdaNavigation.NombreDestino.Contains(filtros.DestinoIda));
-
-            if (!string.IsNullOrWhiteSpace(filtros.DestinoLlegada))
-                query = query.Where(v => v.IdDestinoLlegadaNavigation.NombreDestino.Contains(filtros.DestinoLlegada));
-
-            if (filtros.HoraSalida.HasValue)
-                query = query.Where(v => v.HoraSalida >= filtros.HoraSalida.Value);
-
-            if (filtros.HoraLlegada.HasValue)
-                query = query.Where(v => v.HoraLlegada <= filtros.HoraLlegada.Value);
-
-            if (filtros.FechaMinima.HasValue)
-                query = query.Where(v => v.FechaViaje >= DateOnly.FromDateTime(filtros.FechaMinima.Value));
-
-            if (filtros.FechaMaxima.HasValue)
-                query = query.Where(v => v.FechaViaje <= DateOnly.FromDateTime(filtros.FechaMaxima.Value));
-
-            if (filtros.PrecioMinimo.HasValue)
-                query = query.Where(v => v.PrecioViaje >= filtros.PrecioMinimo.Value);
-
-            if (filtros.PrecioMaximo.HasValue)
-                query = query.Where(v => v.PrecioViaje <= filtros.PrecioMaximo.Value);
-
-            if (filtros.AerolineaId.HasValue)
-                query = query.Where(v => v.IdAerolinea == filtros.AerolineaId.Value);
-
-            var viewModel = new ViajesViewModel
+        public async Task<ViajesGenericoViewModel> ListadoViajes()
+        {
+            var lista = await (
+            from v in _dbcontext.Viajes
+            join a in _dbcontext.Aerolineas on v.IdAerolinea equals a.IdAerolinea
+            join dIda in _dbcontext.Destinos on v.IdDestinoIda equals dIda.IdDestino
+            join dLlegada in _dbcontext.Destinos on v.IdDestinoLlegada equals dLlegada.IdDestino
+            select new ViajesViewModel
             {
-                ListadoViajes = await query.ToListAsync(),
-                ListadoAerolineas = await _dbContext.Aerolineas.ToListAsync(),
-                Filtros = filtros
+                IdViaje = v.IdViaje,
+                DestinoIda = dIda.NombreDestino,
+                DestinoLlegada = dLlegada.NombreDestino,
+                HoraSalida = v.HoraSalida,
+                HoraLlegada = v.HoraLlegada,
+                FechaViaje = v.FechaViaje,
+                PrecioViaje = v.PrecioViaje,
+                CantidadPuestos = v.CantidadPuestos,
+                AerolineaNombre = a.NombreAerolinea,
+                Imagen = v.Imagen
+            }).ToListAsync();
+
+            var model = new ViajesGenericoViewModel
+            {
+                ListadoViajes = lista,
+                ListadoAerolinea = await _dbcontext.Aerolineas.ToListAsync(),
+                ListadoDestino = await _dbcontext.Destinos.ToListAsync(),
             };
 
-            return viewModel;
+            return model;
         }
+
+        public async Task<ViajesGenericoViewModel> ObtenerViajesFiltrados(FiltroViajesViewModel filtros)
+        {
+            // Empieza con el query base sin filtros
+            var query =
+                from v in _dbcontext.Viajes
+                join a in _dbcontext.Aerolineas on v.IdAerolinea equals a.IdAerolinea
+                join dIda in _dbcontext.Destinos on v.IdDestinoIda equals dIda.IdDestino
+                join dLlegada in _dbcontext.Destinos on v.IdDestinoLlegada equals dLlegada.IdDestino
+                select new ViajesViewModel
+                {
+                    IdViaje = v.IdViaje,
+                    DestinoIda = dIda.NombreDestino,
+                    DestinoLlegada = dLlegada.NombreDestino,
+                    HoraSalida = v.HoraSalida,
+                    HoraLlegada = v.HoraLlegada,
+                    FechaViaje = v.FechaViaje,
+                    PrecioViaje = v.PrecioViaje,
+                    CantidadPuestos = v.CantidadPuestos,
+                    AerolineaNombre = a.NombreAerolinea,
+                    Imagen = v.Imagen
+                };
+
+
+            if (filtros.IdViaje != 0) 
+            {
+                query = query.Where(v => v.IdViaje == filtros.IdViaje);
+            }
+
+            if (filtros.IdDestinoIda != 0)
+            {
+                var destinoIda = await _dbcontext.Destinos
+                    .Where(d => d.IdDestino == filtros.IdDestinoIda)
+                    .Select(d => d.NombreDestino)
+                    .FirstOrDefaultAsync();
+
+                if (!string.IsNullOrEmpty(destinoIda))
+                    query = query.Where(v => v.DestinoIda == destinoIda);
+            }
+
+            if (filtros.IdDestinoLlegada != 0)
+            {
+                var destinoLlegada = await _dbcontext.Destinos
+                    .Where(d => d.IdDestino == filtros.IdDestinoLlegada)
+                    .Select(d => d.NombreDestino)
+                    .FirstOrDefaultAsync();
+
+                if (!string.IsNullOrEmpty(destinoLlegada))
+                    query = query.Where(v => v.DestinoLlegada == destinoLlegada);
+            }
+
+            if (filtros.HoraSalida != default)
+            {
+                query = query.Where(v => v.HoraSalida == filtros.HoraSalida);
+            }
+
+            if (filtros.HoraLlegada != default)
+            {
+                query = query.Where(v => v.HoraLlegada == filtros.HoraLlegada);
+            }
+
+            if (filtros.FechaViaje != default)
+            {
+                query = query.Where(v => v.FechaViaje == filtros.FechaViaje);
+            }
+
+            if (filtros.PrecioViaje != 0)
+            {
+                query = query.Where(v => v.PrecioViaje == filtros.PrecioViaje);
+            }
+
+            if (filtros.CantidadPuestos != 0)
+            {
+                query = query.Where(v => v.CantidadPuestos == filtros.CantidadPuestos);
+            }
+
+            if (filtros.IdAerolinea != 0)
+            {
+                var nombreAerolinea = await _dbcontext.Aerolineas
+                    .Where(a => a.IdAerolinea == filtros.IdAerolinea)
+                    .Select(a => a.NombreAerolinea)
+                    .FirstOrDefaultAsync();
+
+                if (!string.IsNullOrEmpty(nombreAerolinea))
+                    query = query.Where(v => v.AerolineaNombre == nombreAerolinea);
+            }
+
+            if (!string.IsNullOrWhiteSpace(filtros.Imagen))
+            {
+                query = query.Where(v => v.Imagen.Contains(filtros.Imagen));
+            }
+
+            // Finalmente convertimos la consulta a lista asincrónicamente
+            var lista = await query.ToListAsync();
+
+            var model = new ViajesGenericoViewModel
+            {
+                ListadoViajes = lista,
+                ListadoAerolinea = await _dbcontext.Aerolineas.ToListAsync(),
+                ListadoDestino = await _dbcontext.Destinos.ToListAsync(),
+            };
+
+            return model;
+        }
+
     }
 }
