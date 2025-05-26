@@ -35,7 +35,7 @@
   <div class="mx-auto mt-4 max-w-5xl rounded-md border border-gray-200 p-10 shadow-sm h-60">
 
     <!-- Vuelos -->
-    <form id="form-hoteles" class="formulario">
+  <form asp-action="IndexViajes" asp-controller="Home" method="get" class="formulario" id="form-hoteles">
       <div class="grid gap-4 md:grid-cols-3">
         <div>
           <label class="text-sm font-semibold text-gray-700">Origen</label>
@@ -53,23 +53,29 @@
           <label class="text-sm font-semibold text-gray-700">Fecha de regreso</label>
           <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
         </div>
-      </div>
+        </div>
+              <div class="mt-4 text-right">
+          <button type="submit" class="rounded bg-[#0f172a] px-6 py-2 font-bold text-white shadow-md transition hover:bg-[#1e293b]">
+            Buscar
+          </button>
+        </div>
     </form>
 
     <!-- Planes -->
-    <form id="form-planes" class="formulario hidden ">
+  <form asp-action="IndexPlanes" asp-controller="Home" method="get" class="formulario hidden" id="form-planes">
       <div>
         <label class="text-sm font-semibold text-gray-700">Ciudad destino</label>
         <input type="text" placeholder="Escriba una ciudad" class="w-full rounded border px-3 py-2 text-sm" />
       </div>
+          <!-- Botón -->
+      <div class="mt-4 text-right">
+        <button type="submit" class="rounded bg-[#0f172a] px-6 py-2 font-bold text-white shadow-md transition hover:bg-[#1e293b]">
+          Buscar
+        </button>
+      </div>
     </form>
 
-    <!-- Botón -->
-    <div class="mt-4 text-right">
-      <button class="rounded bg-[#0f172a] px-6 py-2 font-bold text-white shadow-md transition hover:bg-[#1e293b]">
-        Buscar
-      </button>
-    </div>
+
 
   </div>
 </div>
@@ -103,6 +109,31 @@
 
         </div>
       </div>
+    }
+    @foreach (var viaje in Model.ListaViajes.ListadoViajes)
+    {
+        <div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-72">
+            <div class="relative p-2.5 h-60 overflow-hidden rounded-xl bg-clip-border">
+                <img src="@viaje.Imagen" alt="imagen viaje" class="h-full w-full object-cover rounded-md" />
+            </div>
+            <div class="p-4">
+                <div class="mb-2 flex items-center justify-between">
+                    <p class="text-slate-800 text-xl font-semibold">Vuelo: @($"{viaje.DestinoIda} - {viaje.DestinoLlegada}")</p>
+                    <p class="text-cyan-600 text-xl font-semibold">$@viaje.PrecioViaje</p>
+                </div>
+                <p class="text-slate-600 leading-normal font-light">
+                    Salida: @viaje.FechaViaje.ToString("dd MMM yyyy")<br />
+                    Hora: @viaje.HoraSalida - @viaje.HoraLlegada
+                </p>
+                <form method="get" asp-action="Editar" asp-controller="Viaje">
+                    <input type="hidden" name="id" value="@viaje.IdViaje" />
+                    <button class="rounded-md w-full mt-6 bg-blue-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-blue-700 active:bg-blue-700 hover:bg-blue-700"
+                            type="submit">
+                        Ver Viaje
+                    </button>
+                </form>
+            </div>
+        </div>
     }
 
 

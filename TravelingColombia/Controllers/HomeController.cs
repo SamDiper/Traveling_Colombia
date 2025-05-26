@@ -25,7 +25,8 @@ public class HomeController : Controller
 
         LayoutViewModel listas = new LayoutViewModel
         {
-            listaPlanes = await _repositoryPlan.listadoPlanes()
+            listaPlanes = await _repositoryPlan.listadoPlanes(),
+            ListaViajes = await _repositoryViaje.ListadoViajes()
         };
         return View(listas);
     }
