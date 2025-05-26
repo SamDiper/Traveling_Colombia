@@ -8,10 +8,10 @@ using Microsoft.Extensions.Logging;
 using TravelingColombia.Filtros;
 using TravelingColombia.Repository.Interface;
 using TravelingColombia.ViewModels;
-
+using Microsoft.AspNetCore.Authorization;
 namespace TravelingColombia.Controllers
 {
-
+    [Authorize(Roles = "Administrador")]
     public class InformeController : Controller
     {
         private readonly IRepositoryViaje _repositoryViaje;

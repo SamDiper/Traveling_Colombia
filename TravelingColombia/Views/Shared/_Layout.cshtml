@@ -90,7 +90,7 @@
                 </nav>
 
                 <!-- Parte inferior: Perfil + Botón cerrar -->
-                <div class="space-y-4 absolute left-10 top-[820px] ">
+                <div class="space-y-4 absolute left-10 top-[720px] ">
                     <!-- Perfil -->
                     <div class="flex items-center space-x-3">
                         <div class="avatar">
@@ -101,7 +101,11 @@
                         <div class="mr-10">
                             <p class="font-bold text-sm">Alejandro <br>Soto López</p>
                         </div>
-                        <i class="fa-solid fa-right-from-bracket cursor-pointer "></i>
+                        <a asp-action="Salir" asp-controller="Cliente"
+                            class="cursor-pointer text-blue-500 hover:text-blue-700">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+
                     </div>
                 </div>
 

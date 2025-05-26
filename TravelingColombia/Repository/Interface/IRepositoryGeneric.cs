@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Interface
 {
-    public interface IRepositoryGeneric<T,Tkey> where T : class
+    public interface IRepositoryGeneric<T, Tkey> where T : class
     {
         Task<T?> GetByIdAsync(Tkey tkey);
         Task<List<T>> GetAllAsync();
@@ -14,5 +14,6 @@ namespace Repository.Interface
         Task<T> Create(T t);
         Task<bool> Update(T t);
         Task<bool> DeleteByIdAsync(Tkey tkey);
+        
     }
 }

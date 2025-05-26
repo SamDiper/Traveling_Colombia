@@ -6,12 +6,21 @@ using TravelingColombia.Repository.Implementacion;
 using TravelingColombia.Repository.Interface;
 using TravelingColombia.UnitOfWork.Implementacion;
 using TravelingColombia.UnitOfWork.Interface;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Cliente/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        options.AccessDeniedPath = "/Cliente/Login";
+    });
 
 // Add ConnectionString
 builder.Services.AddDbContext<TravelingColombiabdContext>(opc =>
@@ -43,6 +52,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
