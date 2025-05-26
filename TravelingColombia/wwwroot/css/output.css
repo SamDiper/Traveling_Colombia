@@ -1965,17 +1965,8 @@
   .top-\[50\%\] {
     top: 50%;
   }
-  .top-\[520px\] {
-    top: 520px;
-  }
-  .top-\[620px\] {
-    top: 620px;
-  }
   .top-\[720px\] {
     top: 720px;
-  }
-  .top-\[820px\] {
-    top: 820px;
   }
   .right-0 {
     right: calc(var(--spacing) * 0);
@@ -4201,9 +4192,6 @@
   }
   .text-black {
     color: var(--color-black);
-  }
-  .text-blue-500 {
-    color: var(--color-blue-500);
   }
   .text-blue-600 {
     color: var(--color-blue-600);

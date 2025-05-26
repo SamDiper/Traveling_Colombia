@@ -56,7 +56,7 @@ namespace TravelingColombia.Repository.Implementacion
             {
                 var usuarioFiltrado = await _context.Usuarios
                     .Include(u => u.IdRolNavigation)
-                    .Where(u => u.EmailUsuario == usuario.EmailUsuario && u.Contrasena == usuario.Contrasena)
+                    .Where(u => u.EmailUsuario == usuario.EmailUsuario && u.Contrasena == usuario.Contrasena||u.IdUsuario==usuario.IdUsuario)
                     .Select(u => new UsuarioViewModel
                     {
                         IdUsuario = u.IdUsuario,

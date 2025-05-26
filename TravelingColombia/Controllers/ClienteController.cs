@@ -13,6 +13,7 @@ using TravelingColombia.UnitOfWork.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore.Storage;
 namespace TravelingColombia.Controllers
 {
 
@@ -47,9 +48,15 @@ namespace TravelingColombia.Controllers
         }
 
 
-        public IActionResult Perfil()
+        public async Task<IActionResult> Perfil()
         {
-            return View();
+            int idUsuario = int.Parse(User.FindFirst("IdUsuario")?.Value ?? "0");
+            Usuario usuario = new Usuario
+            {
+                IdUsuario = idUsuario,
+            };
+            var usuarioFiltrado =  await _RepositoryUsuario.BuscarUsuario(usuario);
+            return View(usuarioFiltrado);
         }
         public IActionResult Login()
         {
@@ -59,16 +66,21 @@ namespace TravelingColombia.Controllers
         public async Task<IActionResult> Login(Usuario usuario)
         {
             var usuarioFiltrado =  await _RepositoryUsuario.BuscarUsuario(usuario);
+            
+
 
             if (usuarioFiltrado != null)
             {
-                
+
                 var Claims = new List<Claim>{
                     new Claim(ClaimTypes.Email,usuarioFiltrado.EmailUsuario),
-                    new Claim(ClaimTypes.Role,usuarioFiltrado.Rol),   
+                    new Claim(ClaimTypes.Role,usuarioFiltrado.Rol),
+                    new Claim("Nombre",usuarioFiltrado.NombreUsuario),
+                    new Claim("Apellido",usuarioFiltrado.ApellidoUsuario),
+                    new Claim("IdUsuario", usuarioFiltrado.IdUsuario.ToString())
                 };
 
-                var claimsIdentity= new ClaimsIdentity(Claims,CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsIdentity = new ClaimsIdentity(Claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                 return RedirectToAction("Index", "Home");
