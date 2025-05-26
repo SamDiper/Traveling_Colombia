@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Repository.Implementacion;
@@ -31,9 +32,9 @@ namespace TravelingColombia.Repository.Implementacion
                     CelularUsuario = u.CelularUsuario,
                     EmailUsuario = u.EmailUsuario,
                     EdadUsuario = u.EdadUsuario,
-                    CantidadFacturas=u.CantidadFacturas,
+                    CantidadFacturas = u.CantidadFacturas,
                     Rol = u.IdRolNavigation.Rol1,
-                    IdRol = u.IdRol 
+                    IdRol = u.IdRol
                 });
 
             if (!string.IsNullOrWhiteSpace(filtro.EmailUsuario))
@@ -48,6 +49,37 @@ namespace TravelingColombia.Repository.Implementacion
 
             return await query.ToListAsync();
         }
+
+        public async Task<UsuarioViewModel> BuscarUsuario(Usuario usuario)
+        {
+            try
+            {
+                var usuarioFiltrado = await _context.Usuarios
+                    .Include(u => u.IdRolNavigation)
+                    .Where(u => u.EmailUsuario == usuario.EmailUsuario && u.Contrasena == usuario.Contrasena||u.IdUsuario==usuario.IdUsuario)
+                    .Select(u => new UsuarioViewModel
+                    {
+                        IdUsuario = u.IdUsuario,
+                        NombreUsuario = u.NombreUsuario,
+                        ApellidoUsuario = u.ApellidoUsuario,
+                        CelularUsuario = u.CelularUsuario,
+                        EmailUsuario = u.EmailUsuario,
+                        EdadUsuario = u.EdadUsuario,
+                        CantidadFacturas = u.CantidadFacturas,
+                        Rol = u.IdRolNavigation.Rol1,
+                        IdRol = u.IdRol
+                    })
+                    .FirstOrDefaultAsync();
+
+                return usuarioFiltrado;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return new UsuarioViewModel();
+            }
+        }
+
 
     }
 }
