@@ -160,7 +160,7 @@
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
                     required>
                     <option value="">Seleccione un banco</option>
-                     @foreach (var banco in Model.ListadoBnaco)
+                    @foreach (var banco in Model.ListadoBnaco)
                         {
                             <option value="@banco.IdBanco">@banco.NombreBanco</option>
                         }

@@ -7,11 +7,14 @@ namespace TravelingColombia.Filtros
 {
     public class FiltroPlanesViewModel
     {
+        public int IdPlan { get; set; }
         public string? NombreDestino { get; set; }
         public string? NombrePlan { get; set; }
         public int? IdTipoPlan { get; set; }
         public DateOnly? Fecha { get; set; }
         public decimal? Precio { get; set; }
+        
+
 
     }
 }

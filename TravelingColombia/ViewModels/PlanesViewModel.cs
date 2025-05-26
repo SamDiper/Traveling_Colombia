@@ -10,6 +10,9 @@ namespace TravelingColombia.ViewModels
     {
         public List<PlanViewModel>? ListadoPlanes { get; set; }
         public List<TipoPlan>? ListadoTipoPlanes { get; set; }
+        public List<Hotele>? ListadoHoteles { get; set; }
+        public List<Aerolinea>? ListadoAerolinea { get; set; }
+        public List<Destino>? ListadoDestino { get; set; }
         
         
     }

@@ -29,6 +29,8 @@ public partial class Plane
 
     public int IdAerolinea { get; set; }
 
+    public string? Introduccion { get; set; }
+
     public virtual Aerolinea IdAerolineaNavigation { get; set; } = null!;
 
     public virtual Destino IdDestinoIdaNavigation { get; set; } = null!;

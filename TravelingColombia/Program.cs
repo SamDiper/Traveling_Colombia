@@ -43,7 +43,9 @@ builder.Services.AddScoped<IUnitUser, UnitUser>();
 builder.Services.AddScoped<IRepositoryViaje,RepositoryViaje>();
 builder.Services.AddScoped<IRepositoryReserva,RepositoryReserva>();
 builder.Services.AddScoped<IRepositoryPlan,RepositoryPlan>();
-builder.Services.AddScoped<IRepositoryPago,RepositoryPago>();
+builder.Services.AddScoped<IRepositoryPago, RepositoryPago>();
+builder.Services.AddScoped<IRepositoryUsuario, RepositoryUsuario>();
+
 builder.Services.AddScoped(typeof(IRepositoryGeneric<,>), typeof(RepositoryGeneric<,>));
 
 

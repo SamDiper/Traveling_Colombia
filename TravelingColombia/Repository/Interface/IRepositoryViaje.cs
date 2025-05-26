@@ -15,6 +15,7 @@ namespace TravelingColombia.Repository.Interface
         Task<List<Aerolinea>> ListaAerolineas();
         Task<List<Destino>> ListaDestinos();
         Task<ViajesGenericoViewModel> ObtenerViajesFiltrados(FiltroViajesViewModel filtros);
+        Task<ViajesViewModel> ObtenerViaje(int id);
 
     }
 }

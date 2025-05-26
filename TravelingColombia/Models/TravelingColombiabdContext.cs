@@ -51,6 +51,7 @@ public partial class TravelingColombiabdContext : DbContext
 
     public virtual DbSet<VuelosAerolinea> VuelosAerolineas { get; set; }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Aerolinea>(entity =>
@@ -256,7 +257,6 @@ public partial class TravelingColombiabdContext : DbContext
 
             entity.Property(e => e.IdPlan).HasColumnName("Id_Plan");
             entity.Property(e => e.CantidadPersonas).HasColumnName("Cantidad_Personas");
-            entity.Property(e => e.Descripcion).HasColumnType("text");
             entity.Property(e => e.FechaIda).HasColumnName("Fecha_Ida");
             entity.Property(e => e.FechaRegreso).HasColumnName("Fecha_Regreso");
             entity.Property(e => e.IdAerolinea).HasColumnName("Id_Aerolinea");
@@ -305,6 +305,7 @@ public partial class TravelingColombiabdContext : DbContext
             entity.Property(e => e.IdPlan).HasColumnName("Id_Plan");
             entity.Property(e => e.IdUsuario).HasColumnName("Id_Usuario");
             entity.Property(e => e.IdViaje).HasColumnName("Id_Viaje");
+            entity.Property(e => e.TotalReserva).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.IdEstadoReservaNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdEstadoReserva)

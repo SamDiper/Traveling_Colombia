@@ -18,18 +18,26 @@ namespace TravelingColombia.Controllers
     public class ReservaController : Controller
     {
         private readonly IRepositoryReserva _repositoryReserva;
+        private readonly IRepositoryPlan _RepositoryPlan;
         private readonly IUnitUser _unidadadtrabajo;
 
-        public ReservaController(IRepositoryReserva repositoryReserva, IUnitUser unitUser)
+        public ReservaController(IRepositoryReserva repositoryReserva, IUnitUser unitUser, IRepositoryPlan RepositoryPlan)
         {
             _repositoryReserva = repositoryReserva;
             _unidadadtrabajo = unitUser;
+            _RepositoryPlan=RepositoryPlan;
         }
 
         public async Task<IActionResult> Index(FiltroReservasViewModel filtros)
         {
             var reservas = await _repositoryReserva.ObtenerReservasFiltrados(filtros);
             return View(reservas);
+        }
+        public async Task<IActionResult> FormularioUsuario(int id)
+        {
+            var lista = await _RepositoryPlan.ObtenerPlan(id);
+
+            return View(lista);
         }
 
         public async Task<IActionResult> Editar(int id)
