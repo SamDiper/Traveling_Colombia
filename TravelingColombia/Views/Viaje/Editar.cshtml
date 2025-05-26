@@ -3,7 +3,7 @@
 <div id="Editar" class="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg">
     <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">Editar Viaje</h2>
 
-    <form method="post" asp-action="Editar" asp-controller="Viaje" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form method="post" asp-action="Editar" asp-controller="Viaje" class="grid grid-cols-1 md:grid-cols-2 gap-6" enctype="multipart/form-data">
         
         <!-- ID Viaje (oculto) -->
         <input type="hidden" asp-for="IdViaje" />
@@ -64,11 +64,18 @@
                 <option value="">Seleccione una aerolínea</option>
             </select>
         </div>
-
+        @if (!string.IsNullOrEmpty(Model.Imagen))
+        {
+            <div class="md:col-span-2 mb-4">
+                <label class="block text-sm font-medium text-gray-700">Imagen Actual</label>
+                <img src="@Model.Imagen" alt="Imagen viaje" class="w-48 h-auto rounded-md" />
+            </div>
+        }
         <!-- Imagen (URL o nombre del archivo) -->
-        <div class="md:col-span-2">
-            <label asp-for="Imagen" class="block text-gray-700 font-semibold mb-1">Imagen</label>
-            <input asp-for="Imagen" type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Imagen</label>
+            <input asp-for="ImagenArchivo" type="file" name="ImagenArchivo" accept="image/*"
+                class="mt-1 block w-full text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
         </div>
 
         <!-- Botón de Guardar -->

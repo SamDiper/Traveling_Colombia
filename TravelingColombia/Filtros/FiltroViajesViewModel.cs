@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TravelingColombia.Filtros
 {
@@ -22,6 +23,9 @@ namespace TravelingColombia.Filtros
 
         public int IdAerolinea { get; set; }
 
-        public string Imagen { get; set; }
+        [NotMapped]
+        public IFormFile ImagenArchivo { get; set; }
+
+        public string? Imagen { get; set; }
     }
 }
