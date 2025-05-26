@@ -89,7 +89,7 @@ namespace TravelingColombia.Repository.Implementacion
                 };
 
 
-            if (filtros.IdViaje != 0) 
+            if (filtros.IdViaje != 0)
             {
                 query = query.Where(v => v.IdViaje == filtros.IdViaje);
             }
@@ -168,6 +168,32 @@ namespace TravelingColombia.Repository.Implementacion
             };
 
             return model;
+        }
+
+        public async Task<ViajesViewModel> ObtenerViaje(int id)
+        {
+            // Empieza con el query base sin filtros
+            var Viaje = await (
+                from v in _dbcontext.Viajes
+                join a in _dbcontext.Aerolineas on v.IdAerolinea equals a.IdAerolinea
+                join dIda in _dbcontext.Destinos on v.IdDestinoIda equals dIda.IdDestino
+                join dLlegada in _dbcontext.Destinos on v.IdDestinoLlegada equals dLlegada.IdDestino
+                select new ViajesViewModel
+                {
+                    IdViaje = v.IdViaje,
+                    DestinoIda = dIda.NombreDestino,
+                    DestinoLlegada = dLlegada.NombreDestino,
+                    HoraSalida = v.HoraSalida,
+                    HoraLlegada = v.HoraLlegada,
+                    FechaViaje = v.FechaViaje,
+                    PrecioViaje = v.PrecioViaje,
+                    CantidadPuestos = v.CantidadPuestos,
+                    AerolineaNombre = a.NombreAerolinea,
+                    Imagen = v.Imagen
+                }).FirstOrDefaultAsync(v => v.IdViaje == id);
+
+            return Viaje;
+
         }
 
     }

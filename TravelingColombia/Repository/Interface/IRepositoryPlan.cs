@@ -13,5 +13,6 @@ namespace TravelingColombia.Repository.Interface
     {
         Task<PlanesViewModel> listadoPlanes();
         Task<PlanesViewModel> ObtenerPlanesFiltrados(FiltroPlanesViewModel filtros);
+        Task<PlanViewModel> ObtenerPlan(int id);
     }
 }

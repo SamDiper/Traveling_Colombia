@@ -1,31 +1,44 @@
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TravelingColombia.Filtros;
 using TravelingColombia.Models;
+using TravelingColombia.Repository.Interface;
+using TravelingColombia.ViewModels;
 
 namespace TravelingColombia.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+
+    private readonly IRepositoryViaje _repositoryViaje;
+    private readonly IRepositoryPlan _repositoryPlan;
+
+    public HomeController(IRepositoryViaje repositoryViaje, IRepositoryPlan repositoryPlan)
     {
-        _logger = logger;
+        _repositoryPlan = repositoryPlan;
+        _repositoryViaje = repositoryViaje;
     }
-
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+
+        LayoutViewModel listas = new LayoutViewModel
+        {
+            listaPlanes = await _repositoryPlan.listadoPlanes()
+        };
+        return View(listas);
     }
 
     public IActionResult Privacy()
     {
         return View();
     }
-
-    public IActionResult Detalles()
+[HttpGet]
+    public async Task<IActionResult> DetallesPlan(int id)
     {
-        return View();
+        var plan = await _repositoryPlan.ObtenerPlan(id);
+        return View(plan);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

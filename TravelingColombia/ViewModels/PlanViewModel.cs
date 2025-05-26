@@ -33,6 +33,7 @@ namespace TravelingColombia.ViewModels
         public decimal PrecioPlan { get; set; }
 
         public int IdDestinoIda { get; set; }
+        public string? Introduccion { get; set; }
 
 
         public int IdTipoPlan { get; set; }

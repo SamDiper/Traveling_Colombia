@@ -84,6 +84,7 @@ namespace TravelingColombia.Controllers
             planFiltrado.PrecioPlan = plan.PrecioPlan;
             planFiltrado.IdHotel = plan.IdHotel;
             planFiltrado.IdAerolinea = plan.IdAerolinea;
+            planFiltrado.Introduccion=plan.Introduccion;
 
             await _repositoryPlan.Update(planFiltrado);
             await _unitUser.SaveChangesAsync();
@@ -95,6 +96,7 @@ namespace TravelingColombia.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(Plane plan)
         {
+            
             await _repositoryPlan.Create(plan);
             await _unitUser.SaveChangesAsync();
 
@@ -102,12 +104,12 @@ namespace TravelingColombia.Controllers
 
             return RedirectToAction("Index", "Plan");
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> Eliminar(int id)
         {
 
-        
+
             await _repositoryPlan.DeleteByIdAsync(id);
             await _unitUser.SaveChangesAsync();
 

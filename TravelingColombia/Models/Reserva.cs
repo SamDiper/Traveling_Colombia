@@ -17,6 +17,10 @@ public partial class Reserva
 
     public int? IdPlan { get; set; }
 
+    public int? CantidadPersonas { get; set; }
+
+    public decimal? TotalReserva { get; set; }
+
     public virtual ICollection<Factura> Facturas { get; set; } = new List<Factura>();
 
     public virtual Estado IdEstadoReservaNavigation { get; set; } = null!;

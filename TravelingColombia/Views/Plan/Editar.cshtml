@@ -1,108 +1,119 @@
 @model TravelingColombia.Models.Plane
 
-    <div id="Crear" class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg ">
-        <h2 class="text-2xl font-bold mb-6 text-center text-[#3085BC]">Registrar Plan Turístico</h2>
+<div id="Crear" class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg ">
+    <h2 class="text-2xl font-bold mb-6 text-center text-[#3085BC]">Registrar Plan Turístico</h2>
 
-       <form method="post" asp-controller="Plan" asp-action="Editar" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input value="@Model.IdPlan" type="text" id="nombre_plan" name="IdPlan" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC] hidden"
-                    required />
-            <!-- Id_Destino_Ida -->
-            <div>
-                <label for="tipo_plan" class="block text-gray-700 font-semibold mb-1">Destino</label>
-                <select id="tipo_plan" name="IdDestinoIda"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]" asp-items="ViewBag.ListadoDestino"
-                    required>
-                    <option value="">seleccione una opcion</option>
-                    
-                </select>
-            </div>
+    <form method="post" asp-controller="Plan" asp-action="Editar" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input value="@Model.IdPlan" type="text" id="nombre_plan" name="IdPlan"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC] hidden"
+            required />
+        <!-- Id_Destino_Ida -->
+        <div>
+            <label for="tipo_plan" class="block text-gray-700 font-semibold mb-1">Destino</label>
+            <select id="tipo_plan" name="IdDestinoIda"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                asp-items="ViewBag.ListadoDestino" required>
+                <option value="">seleccione una opcion</option>
 
-            
-            <!-- Nombre_Plan -->
-            <div>
-                <label for="nombre_plan" class="block text-gray-700 font-semibold mb-1">Nombre del Plan</label>
-                <input value="@Model.NombrePlan" type="text" id="nombre_plan" name="NombrePlan" 
+            </select>
+        </div>
+
+
+        <!-- Nombre_Plan -->
+        <div>
+            <label for="nombre_plan" class="block text-gray-700 font-semibold mb-1">Nombre del Plan</label>
+            <input value="@Model.NombrePlan" type="text" id="nombre_plan" name="NombrePlan"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                required />
+        </div>
+        <div>
+                <label for="nombre_plan" class="block text-gray-700 font-semibold mb-1">Introduccion</label>
+                <input type="text" value="@Model.Introduccion" id="nombre_plan" name="Introduccion" 
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
                     required />
             </div>
 
-            <!-- Id_tipo_plan -->
-            <div>
-                <label for="tipo_plan" class="block text-gray-700 font-semibold mb-1">Tipo de Plan</label>
-                <select id="IdTipoPlan" name="IdTipoPlan"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]" asp-items="ViewBag.ListadoTipoPlanes"
-                    required>
-                    <option value="">seleccione una opcion</option>
-                    
-                </select>
-            </div>
-            <div>
-                <label for="FechaIda" class="block text-gray-700 font-semibold mb-1">Fecha Ida</label>
-                <input value="@Model.FechaIda.ToString("yyyy-MM-dd")" type="date" id="FechaIda" name="FechaIda" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
-                    required />
-            </div>
-            <div>
-                <label for="FechaRegreso" class="block text-gray-700 font-semibold mb-1">Fecha Regreso</label>
-                <input value="@Model.FechaRegreso.ToString("yyyy-MM-dd")" type="date" id="FechaRegreso" name="FechaRegreso" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
-                    required />
-            </div>
+        <!-- Id_tipo_plan -->
+        <div>
+            <label for="tipo_plan" class="block text-gray-700 font-semibold mb-1">Tipo de Plan</label>
+            <select id="IdTipoPlan" name="IdTipoPlan"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                asp-items="ViewBag.ListadoTipoPlanes" required>
+                <option value="">seleccione una opcion</option>
 
-            <!-- Descripción -->
-            <div class="md:col-span-2">
-                <label for="descripcion" class="block text-gray-700 font-semibold mb-1">Descripción</label>
-                <textarea id="descripcion" name="Descripcion" rows="4" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
-                    required>@Model.Descripcion</textarea>
-            </div>
+            </select>
+        </div>
+        <div>
+            <label for="FechaIda" class="block text-gray-700 font-semibold mb-1">Fecha Ida</label>
+            <input value="@Model.FechaIda.ToString("yyyy-MM-dd")" type="date" id="FechaIda" name="FechaIda"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                required />
+        </div>
+        <div>
+            <label for="FechaRegreso" class="block text-gray-700 font-semibold mb-1">Fecha Regreso</label>
+            <input value="@Model.FechaRegreso.ToString("yyyy-MM-dd")" type="date" id="FechaRegreso" name="FechaRegreso"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                required />
+        </div>
 
-            <!-- Cantidad_Personas -->
-            <div>
-                <label for="cantidad" class="block text-gray-700 font-semibold mb-1">Cantidad de Personas</label>
-                <input value="@Model.CantidadPersonas" type="text" id="cantidad" name="CantidadPersonas" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
-                    required />
-            </div>
 
-            <!-- Imagen -->
-            <div>
-                <label for="imagen" class="block text-gray-700 font-semibold mb-1">Imagen</label>
-                <input value="@Model.Imagen" type="file" id="imagen" name="Imagen"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]" />
-            </div>
+        <!-- Cantidad_Personas -->
+        <div>
+            <label for="cantidad" class="block text-gray-700 font-semibold mb-1">Cantidad de Personas</label>
+            <input value="@Model.CantidadPersonas" type="text" id="cantidad" name="CantidadPersonas"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                required />
+        </div>
 
-            <!-- Precio_Plan -->
-            <div>
-                <label for="precio" class="block text-gray-700 font-semibold mb-1">Precio del Plan</label>
-                <input value="@Model.PrecioPlan" type="text" id="precio" name="PrecioPlan" step="0.01" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
-                    required />
-            </div>
+        <!-- Imagen -->
+        <div>
+            <label for="imagen" class="block text-gray-700 font-semibold mb-1">Imagen</label>
+            <input value="@Model.Imagen" type="file" id="imagen" name="Imagen"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]" />
+        </div>
 
-            <!-- Id_Hotel -->
-             <div>
-                <label for="tipo_plan" class="block text-gray-700 font-semibold mb-1">Hotel</label>
-                <select id="IdTipoPlan" name="IdHotel"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]" asp-items="ViewBag.ListadoHoteles"
-                    required>
-                    <option value="">seleccione una opcion</option>
-                    
-                </select>
-            </div>
+        <!-- Precio_Plan -->
+        <div>
+            <label for="precio" class="block text-gray-700 font-semibold mb-1">Precio del Plan</label>
+            <input value="@Model.PrecioPlan" type="text" id="precio" name="PrecioPlan" step="0.01"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                required />
+        </div>
 
-            <!-- Id_Aerolinea -->
-             <div>
-                <label for="tipo_plan" class="block text-gray-700 font-semibold mb-1">Aerolinea</label>
-                <select id="IdTipoPlan" name="IdAerolinea"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]" asp-items="ViewBag.ListadoAerolinea"
-                    required>
-                    <option value="">seleccione una opcion</option>
-                    
-                </select>
-            </div>
+        <!-- Id_Hotel -->
+        <div>
+            <label for="tipo_plan" class="block text-gray-700 font-semibold mb-1">Hotel</label>
+            <select id="IdTipoPlan" name="IdHotel"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                asp-items="ViewBag.ListadoHoteles" required>
+                <option value="">seleccione una opcion</option>
 
+            </select>
+        </div>
+
+        <!-- Id_Aerolinea -->
+        <div>
+            <label for="tipo_plan" class="block text-gray-700 font-semibold mb-1">Aerolinea</label>
+            <select id="IdTipoPlan" name="IdAerolinea"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3085BC]"
+                asp-items="ViewBag.ListadoAerolinea" required>
+                <option value="">seleccione una opcion</option>
+
+            </select>
+        </div>
+
+
+        <div class="md:col-span-2">
+            <label class="block text-gray-700 font-semibold mb-1">Descripción </label>
+            <div id="editor" style="height: 200px; background-color: white;" class="mb-2"></div>
+            <input type="hidden" name="Descripcion" id="Descripcion" />
+            <div class="md:col-span-2 flex justify-center">
+                <button type="button" id="btnGuardarDescripcion"
+                    class="bg-yellow-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-yellow-600 transition duration-300 mr-4">
+                    Guardar Descripción
+                </button>
+
+            </div>
             <!-- Botón de Enviar -->
             <div class="md:col-span-2 flex justify-center">
                 <button type="submit"
@@ -111,5 +122,25 @@
                 </button>
             </div>
 
-        </form>
-    </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script>
+         var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    var descripcionDesdeDB = `@Html.Raw(Model.Descripcion?.Replace("`", "\\`"))`;
+
+    quill.root.innerHTML = descripcionDesdeDB;
+    document.getElementById("btnGuardarDescripcion").addEventListener("click", function () {
+        var contenido = quill.root.innerHTML;
+        document.getElementById("Descripcion").value = contenido;
+
+        alert("Descripción guardada correctamente.");
+    });
+
+   
+    </script>
+}
