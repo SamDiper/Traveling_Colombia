@@ -15,7 +15,7 @@ using TravelingColombia.ViewModels;
 
 namespace TravelingColombia.Controllers
 {
-    
+
     public class ReservaController : Controller
     {
         private readonly IRepositoryReserva _repositoryReserva;
