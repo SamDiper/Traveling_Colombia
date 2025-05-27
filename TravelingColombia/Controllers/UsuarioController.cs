@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -15,18 +16,18 @@ using TravelingColombia.ViewModels;
 
 namespace TravelingColombia.Controllers
 {
-   
+    [Authorize(Roles = "Administrador")]
     public class UsuarioController : Controller
     {
 
         private readonly IRepositoryUsuario _RepositorioUsuario;
-        private readonly IRepositoryGeneric<Rol,int> _RepositorioRol;
+        private readonly IRepositoryGeneric<Rol, int> _RepositorioRol;
         private readonly IUnitUser _unitUser;
         public UsuarioController(IUnitUser unitUser, IRepositoryUsuario RepositorioUsuario, IRepositoryGeneric<Rol, int> RepositorioRol)
         {
             _RepositorioRol = RepositorioRol;
             _RepositorioUsuario = RepositorioUsuario;
-            _unitUser=unitUser;
+            _unitUser = unitUser;
         }
         public async Task<IActionResult> Index(UsuarioViewModel filtro)
         {
@@ -38,7 +39,7 @@ namespace TravelingColombia.Controllers
             };
             return View(vista);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Crear(UsuarioViewModel usuarioview)
         {
@@ -61,10 +62,10 @@ namespace TravelingColombia.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(int id)
         {
-           var UsuarioFiltrado = await _RepositorioUsuario.GetByIdAsync(id);
-           UsuarioViewModel usuario = new UsuarioViewModel
+            var UsuarioFiltrado = await _RepositorioUsuario.GetByIdAsync(id);
+            UsuarioViewModel usuario = new UsuarioViewModel
             {
-                IdUsuario=UsuarioFiltrado.IdUsuario,
+                IdUsuario = UsuarioFiltrado.IdUsuario,
                 NombreUsuario = UsuarioFiltrado.NombreUsuario,
                 ApellidoUsuario = UsuarioFiltrado.ApellidoUsuario,
                 CelularUsuario = UsuarioFiltrado.CelularUsuario,
@@ -75,11 +76,11 @@ namespace TravelingColombia.Controllers
                 Contrasena = UsuarioFiltrado.Contrasena,
             };
             var ListaRol = await _RepositorioRol.GetAllAsync();
-            ViewBag.ListaRol= new SelectList(ListaRol,"IdRol","Rol1", UsuarioFiltrado?.IdRol);
-            
+            ViewBag.ListaRol = new SelectList(ListaRol, "IdRol", "Rol1", UsuarioFiltrado?.IdRol);
+
             return View(usuario);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Editar(UsuarioViewModel usuarioview)
         {
@@ -94,13 +95,11 @@ namespace TravelingColombia.Controllers
             Usuario.IdRol = usuarioview.IdRol;
             Usuario.CantidadFacturas = usuarioview.CantidadFacturas;
             Usuario.Contrasena = usuarioview.Contrasena;
-           
+
 
             await _RepositorioUsuario.Update(Usuario);
             await _unitUser.SaveChangesAsync();
             return RedirectToAction("Index", "Usuario");
         }
-
-      
     }
 }

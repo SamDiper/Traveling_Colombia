@@ -52,6 +52,7 @@ public partial class TravelingColombiabdContext : DbContext
     public virtual DbSet<VuelosAerolinea> VuelosAerolineas { get; set; }
 
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Aerolinea>(entity =>
@@ -230,9 +231,6 @@ public partial class TravelingColombiabdContext : DbContext
             entity.Property(e => e.Cedula)
                 .HasMaxLength(20)
                 .IsUnicode(false);
-            entity.Property(e => e.Cuenta)
-                .HasMaxLength(20)
-                .IsUnicode(false);
             entity.Property(e => e.IdBanco).HasColumnName("Id_Banco");
             entity.Property(e => e.IdMetodo).HasColumnName("Id_Metodo");
             entity.Property(e => e.Monto).HasColumnType("decimal(10, 2)");
@@ -362,6 +360,9 @@ public partial class TravelingColombiabdContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("Apellido_Usuario");
             entity.Property(e => e.CantidadFacturas).HasColumnName("Cantidad_Facturas");
+            entity.Property(e => e.CedulaUsuario)
+                .HasMaxLength(255)
+                .HasColumnName("Cedula_Usuario");
             entity.Property(e => e.CelularUsuario)
                 .HasMaxLength(15)
                 .IsUnicode(false)
@@ -374,6 +375,9 @@ public partial class TravelingColombiabdContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("Email_Usuario");
+            entity.Property(e => e.FotoUsuario)
+                .HasMaxLength(255)
+                .HasColumnName("Foto_Usuario");
             entity.Property(e => e.IdRol).HasColumnName("Id_Rol");
             entity.Property(e => e.NombreUsuario)
                 .HasMaxLength(100)

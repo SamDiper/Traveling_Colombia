@@ -13,8 +13,6 @@ public partial class Pago
 
     public int IdBanco { get; set; }
 
-    public string Cuenta { get; set; } = null!;
-
     public decimal Monto { get; set; }
 
     public int IdMetodo { get; set; }

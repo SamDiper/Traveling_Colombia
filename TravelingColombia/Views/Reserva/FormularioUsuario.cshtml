@@ -1,6 +1,6 @@
-@model TravelingColombia.ViewModels.PlanViewModel
+@model TravelingColombia.ViewModels.vistaPagoViewModel
 
-<form class="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-6">
+<form asp-action="Pagos" asp-controller="Cliente" method="get" class="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-6">
     <h2 class="col-span-2 text-2xl font-bold text-gray-800">Formulario de Reserva</h2>
 
     <div>
@@ -10,22 +10,23 @@
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Fecha de Ida</label>
-        <input type="date" value="@Model.FechaIda.ToString("yyyy-MM-dd")" name="Fecha_Ida" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="date" value="@Model.Plan.FechaIda.ToString("yyyy-MM-dd")" name="Fecha_Ida" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Nombre del Plan</label>
-        <input type="text" value="@Model.NombrePlan" name="Nombre_Plan" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="text" value="@Model.Plan.NombrePlan" name="Nombre_Plan" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="text" value="@Model.Plan.IdPlan" name="IdPlan" class="mt-1 w-full border-gray-300 rounded-md shadow-sm " />
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Tipo de Plan</label>
-        <input type="text" value="@Model.TipoPlan" name="Tipo_Plan" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="text" value="@Model.Plan.TipoPlan" name="Tipo_Plan" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Destino</label>
-        <input type="text" value="@Model.DestinoIda" name="Nombre_Destino" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="text" value="@Model.Plan.DestinoIda" name="Nombre_Destino" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
     </div>
 
     <div>
@@ -35,37 +36,37 @@
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Nombre del Usuario</label>
-        <input type="text" name="Nombre_Usuario" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="text" value="@Model.Usuario.NombreUsuario" name="Nombre_Usuario" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Apellido del Usuario</label>
-        <input type="text" name="Apellido_Usuario" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="text" value="@Model.Usuario.ApellidoUsuario" name="Apellido_Usuario" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Celular</label>
-        <input type="tel" name="Celular_Usuario" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="tel" value="@Model.Usuario.CelularUsuario" name="Celular_Usuario" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Email</label>
-        <input type="email" name="Email_Usuario" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="email" value="@Model.Usuario.EmailUsuario" name="Email_Usuario" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Cantidad de Personas</label>
-        <input type="number" name="CantidadPersonas" min="1" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="number"  name="CantidadPersonas" min="1" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
     </div>
 
     <div class="col-span-2">
         <label class="block text-sm font-medium text-gray-700">Total de la Reserva</label>
-        <input type="number" @Model.PrecioPlan name="TotalReserva" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+        <input type="number" value="@Model.Plan.PrecioPlan" name="PrecioPlan" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
     </div>
 
     <div class="col-span-2 flex justify-end">
-        <a asp-action="Pagos" asp-controller="Cliente" type="submit"
+        <button   type="submit"
             class="btn bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors">Realizar
-            Reserva</a>
+            Reserva</button>
     </div>
 </form>

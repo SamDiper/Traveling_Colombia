@@ -29,6 +29,10 @@ namespace TravelingColombia.Repository.Implementacion
             _ListaViajes = ListaViajes;
             _ListaUsuarios = ListaUsuarios;
         }
+        public RepositoryReserva(TravelingColombiabdContext dbContext):base(dbContext)
+        {
+            _dbContext=dbContext;
+        }
 
         public async Task<List<Estado>> ListaEstados()
         {

@@ -34,7 +34,8 @@ namespace TravelingColombia.Repository.Implementacion
                     EdadUsuario = u.EdadUsuario,
                     CantidadFacturas = u.CantidadFacturas,
                     Rol = u.IdRolNavigation.Rol1,
-                    IdRol = u.IdRol
+                    IdRol = u.IdRol,
+                    CedulaUsuario=u.CelularUsuario
                 });
 
             if (!string.IsNullOrWhiteSpace(filtro.EmailUsuario))
@@ -67,7 +68,9 @@ namespace TravelingColombia.Repository.Implementacion
                         EdadUsuario = u.EdadUsuario,
                         CantidadFacturas = u.CantidadFacturas,
                         Rol = u.IdRolNavigation.Rol1,
-                        IdRol = u.IdRol
+                        IdRol = u.IdRol,
+                        FotoUsuario = u.FotoUsuario,
+                        CedulaUsuario=u.CedulaUsuario,
                     })
                     .FirstOrDefaultAsync();
 

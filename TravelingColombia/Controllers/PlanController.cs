@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -17,6 +18,7 @@ using TravelingColombia.ViewModels;
 namespace TravelingColombia.Controllers
 {
 
+    [Authorize(Roles = "Administrador,Planificador")]
     public class PlanController : Controller
     {
 
@@ -84,7 +86,7 @@ namespace TravelingColombia.Controllers
             planFiltrado.PrecioPlan = plan.PrecioPlan;
             planFiltrado.IdHotel = plan.IdHotel;
             planFiltrado.IdAerolinea = plan.IdAerolinea;
-            planFiltrado.Introduccion=plan.Introduccion;
+            planFiltrado.Introduccion = plan.Introduccion;
 
             await _repositoryPlan.Update(planFiltrado);
             await _unitUser.SaveChangesAsync();
@@ -96,7 +98,7 @@ namespace TravelingColombia.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(Plane plan)
         {
-            
+
             await _repositoryPlan.Create(plan);
             await _unitUser.SaveChangesAsync();
 
