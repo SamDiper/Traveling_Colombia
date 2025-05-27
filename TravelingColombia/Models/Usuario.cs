@@ -23,6 +23,10 @@ public partial class Usuario
 
     public string Contrasena { get; set; } = null!;
 
+    public string? FotoUsuario { get; set; }
+
+    public string? CedulaUsuario { get; set; }
+
     public virtual Rol IdRolNavigation { get; set; } = null!;
 
     public virtual ICollection<Reserva> Reservas { get; set; } = new List<Reserva>();

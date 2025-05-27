@@ -25,37 +25,41 @@ namespace TravelingColombia.Repository.Implementacion
             _repositoryHoteles = repositoryHoteles;
             _repositoryDestinos = repositoryDestinos;
         }
+        public RepositoryPlan(TravelingColombiabdContext context):base(context)
+        {
+            _context=context;
+        }
 
         public async Task<PlanesViewModel> listadoPlanes()
         {
             var planes = new PlanesViewModel();
             var resultado = await (from p in _context.Planes
-                                join d in _context.Destinos on p.IdDestinoIda equals d.IdDestino
-                                join tp in _context.TipoPlans on p.IdTipoPlan equals tp.IdTipoPlan
-                                join h in _context.Hoteles on p.IdHotel equals h.IdHotel
-                                join a in _context.Aerolineas on p.IdAerolinea equals a.IdAerolinea
-                                select new PlanViewModel
-                                {
-                                    IdPlan = p.IdPlan,
-                                    DestinoIda = d.NombreDestino,
-                                    Pais = d.Pais,
-                                    NombrePlan = p.NombrePlan,
-                                    FechaIda = p.FechaIda,
-                                    FechaRegreso = p.FechaRegreso,
-                                    TipoPlan = tp.NombrePlan,
-                                    Descripcion = p.Descripcion,
-                                    CantidadPersonas = p.CantidadPersonas,
-                                    Imagen = p.Imagen,
-                                    Hotel = h.NombreHotel,
-                                    Aerolinea = a.NombreAerolinea,
-                                    PrecioPlan = p.PrecioPlan,
-                                    IdDestinoIda = d.IdDestino,
-                                    IdTipoPlan = tp.IdTipoPlan,
-                                    IdHotel = h.IdHotel,
-                                    IdAerolinea = a.IdAerolinea,
-                                    Introduccion=p.Introduccion
+                                   join d in _context.Destinos on p.IdDestinoIda equals d.IdDestino
+                                   join tp in _context.TipoPlans on p.IdTipoPlan equals tp.IdTipoPlan
+                                   join h in _context.Hoteles on p.IdHotel equals h.IdHotel
+                                   join a in _context.Aerolineas on p.IdAerolinea equals a.IdAerolinea
+                                   select new PlanViewModel
+                                   {
+                                       IdPlan = p.IdPlan,
+                                       DestinoIda = d.NombreDestino,
+                                       Pais = d.Pais,
+                                       NombrePlan = p.NombrePlan,
+                                       FechaIda = p.FechaIda,
+                                       FechaRegreso = p.FechaRegreso,
+                                       TipoPlan = tp.NombrePlan,
+                                       Descripcion = p.Descripcion,
+                                       CantidadPersonas = p.CantidadPersonas,
+                                       Imagen = p.Imagen,
+                                       Hotel = h.NombreHotel,
+                                       Aerolinea = a.NombreAerolinea,
+                                       PrecioPlan = p.PrecioPlan,
+                                       IdDestinoIda = d.IdDestino,
+                                       IdTipoPlan = tp.IdTipoPlan,
+                                       IdHotel = h.IdHotel,
+                                       IdAerolinea = a.IdAerolinea,
+                                       Introduccion = p.Introduccion
 
-                                }).ToListAsync();
+                                   }).ToListAsync();
 
             planes.ListadoPlanes = resultado;
             planes.ListadoTipoPlanes = await _context.TipoPlans.ToListAsync();

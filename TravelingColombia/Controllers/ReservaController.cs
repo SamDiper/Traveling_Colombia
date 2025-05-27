@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -14,32 +15,48 @@ using TravelingColombia.ViewModels;
 
 namespace TravelingColombia.Controllers
 {
-
+    
     public class ReservaController : Controller
     {
         private readonly IRepositoryReserva _repositoryReserva;
         private readonly IRepositoryPlan _RepositoryPlan;
+        private readonly IRepositoryUsuario _RepositoryUsuario;
+
         private readonly IUnitUser _unidadadtrabajo;
 
-        public ReservaController(IRepositoryReserva repositoryReserva, IUnitUser unitUser, IRepositoryPlan RepositoryPlan)
+        public ReservaController(IRepositoryUsuario RepositoryUsuario, IRepositoryReserva repositoryReserva, IUnitUser unitUser, IRepositoryPlan RepositoryPlan)
         {
             _repositoryReserva = repositoryReserva;
             _unidadadtrabajo = unitUser;
-            _RepositoryPlan=RepositoryPlan;
+            _RepositoryPlan = RepositoryPlan;
+            _RepositoryUsuario = RepositoryUsuario;
         }
-
+        
         public async Task<IActionResult> Index(FiltroReservasViewModel filtros)
         {
             var reservas = await _repositoryReserva.ObtenerReservasFiltrados(filtros);
             return View(reservas);
         }
-        public async Task<IActionResult> FormularioUsuario(int id)
+        
+        [Authorize(Roles = "Cliente,Administrador,Vendedor")]
+        public async Task<IActionResult> FormularioUsuario(transaccionReservaViewModel  transaccionReserva)
         {
-            var lista = await _RepositoryPlan.ObtenerPlan(id);
+            int idUsuario = int.Parse(User.FindFirst("IdUsuario")?.Value ?? "0");
+            Usuario usuario = new Usuario
+            {
+                IdUsuario = idUsuario,
+            };
+            vistaPagoViewModel PlanUsuario = new vistaPagoViewModel
+            {
+                Plan = await _RepositoryPlan.ObtenerPlan(transaccionReserva.IdPlan),
+                Usuario = await _RepositoryUsuario.BuscarUsuario(usuario),
+                transaccionReserva=transaccionReserva
+            };
 
-            return View(lista);
+
+            return View(PlanUsuario);
         }
-
+[Authorize(Roles = "Administrador,Vendedor")]
         public async Task<IActionResult> Editar(int id)
         {
             var reserva = await _repositoryReserva.GetByIdAsync(id);
@@ -65,6 +82,7 @@ namespace TravelingColombia.Controllers
             return View(viewModel);
         }
 
+[Authorize(Roles = "Administrador,Vendedor")]
 
         [HttpPost]
         public async Task<IActionResult> Editar(FiltroReservasViewModel filtro)
@@ -95,7 +113,7 @@ namespace TravelingColombia.Controllers
             return RedirectToAction("Index");
         }
 
-
+    [Authorize(Roles = "Administrador,Vendedor")]
         [HttpPost]
         public async Task<IActionResult> Crear(FiltroReservasViewModel filtro)
         {

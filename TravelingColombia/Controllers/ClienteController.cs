@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore.Storage;
+using TravelingColombia.ViewModels;
 namespace TravelingColombia.Controllers
 {
 
@@ -22,11 +23,13 @@ namespace TravelingColombia.Controllers
 
         private readonly IRepositoryPago _repositoryPago;
         private readonly IRepositoryUsuario _RepositoryUsuario;
+        private readonly IRepositoryPlan _RepositoryPlan;
 
-        public ClienteController(IRepositoryPago repositoryPago, IRepositoryUsuario RepositoryUsuario)
+        public ClienteController(IRepositoryPlan RepositoryPlan, IRepositoryPago repositoryPago, IRepositoryUsuario RepositoryUsuario)
         {
             _repositoryPago = repositoryPago;
             _RepositoryUsuario = RepositoryUsuario;
+            _RepositoryPlan = RepositoryPlan;
         }
         public IActionResult Index()
         {
@@ -37,15 +40,27 @@ namespace TravelingColombia.Controllers
         {
             return View();
         }
-
-        public async Task<IActionResult> Pagos()
+        
+        public async Task<IActionResult> Pagos(PlanViewModel plan)
         {
+            int idUsuario = int.Parse(User.FindFirst("IdUsuario")?.Value ?? "0");
+            Usuario usuario = new Usuario
+            {
+                IdUsuario = idUsuario,
+            };
+            vistaPagoViewModel procesoPago = new vistaPagoViewModel
+            {
+                Plan = await _RepositoryPlan.ObtenerPlan(plan.IdPlan),
+                Usuario = await _RepositoryUsuario.BuscarUsuario(usuario)
+            };
+
             var listaBancos = await _repositoryPago.ListaBancos();
             var ListaMetodoPago = await _repositoryPago.ListaMetodosPagos();
             ViewBag.ListaBancos = new SelectList(listaBancos, "IdBanco", "NombreBanco");
             ViewBag.MetodosPago = new SelectList(ListaMetodoPago, "IdMetodo", "MetodoPago1");
-            return View();
+            return View(procesoPago);
         }
+        
 
 
         public async Task<IActionResult> Perfil()
