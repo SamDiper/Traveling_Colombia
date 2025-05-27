@@ -1,80 +1,94 @@
- @model TravelingColombia.Filtros.FiltroPagosViewModel
- 
-  <div id="Crear" class="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg ">
-        <h2 class="text-2xl font-bold mb-6 text-center text-[#4ade80]">Registrar Pago</h2>
+@model TravelingColombia.Filtros.FiltroPagosViewModel
 
-        <form method="post" asp-action="Editar" asp-controller="Pago" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-                
-                <input type="text" value="@Model.IdPago" id="nombre" name="IdPago" placeholder="Nombre del pagador"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80] hidden"
-                    required readonly/>
-           
-            <!-- Nombre -->
-            <div>
-                <label for="nombre" class="block text-gray-700 font-semibold mb-1">Nombre</label>
-                <input type="text" value="@Model.Nombre" id="nombre" name="Nombre" placeholder="Nombre del pagador"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
-                    required readonly/>
-            </div>
+<div id="Crear" class="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg ">
+    <h2 class="text-2xl font-bold mb-6 text-center text-[#4ade80]">Registrar Pago</h2>
 
-            <!-- Cédula -->
-            <div>
-                <label for="cedula" class="block text-gray-700 font-semibold mb-1">Cédula</label>
-                <input type="text" value="@Model.Cedula" id="cedula" name="Cedula" placeholder="Número de cédula"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
-                    required readonly/>
-            </div>
+    <form method="post" asp-action="Editar" asp-controller="Pago" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <!-- Banco -->
-            <div>
-                <label for="id_banco" class="block text-gray-700 font-semibold mb-1">Banco</label>
-                
-                <select id="id_banco" name="IdBanco"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80] " asp-items="ViewBag.ListaBancos"
-                    required >
-                    <option value=""></option>
-                    
-                    
-                    <!-- Agrega más bancos según tu base de datos -->
-                </select>
-            </div>
 
-            <!-- Cuenta -->
-            <div>
-                <label for="cuenta" class="block text-gray-700 font-semibold mb-1">Número de Cuenta</label>
-                <input type="text" value="@Model.Cuenta" id="cuenta" name="Cuenta" placeholder="Ej: 1234567890"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
-                    required readonly />
-            </div>
+        <input type="text" value="@Model.IdPago" id="nombre" name="IdPago" placeholder="Nombre del pagador"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80] hidden"
+            required readonly />
 
-            <!-- Monto -->
-            <div>
-                <label for="monto" class="block text-gray-700 font-semibold mb-1">Monto</label>
-                <input type="text" value="@Model.Monto" id="monto" name="Monto" placeholder="Ej: 150000"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
-                    required />
-            </div>
+        <!-- Nombre -->
+        <div>
+            <label for="nombre" class="block text-gray-700 font-semibold mb-1">Nombre</label>
+            <input type="text" value="@Model.Nombre" id="nombre" name="Nombre" placeholder="Nombre del pagador"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                required readonly />
+        </div>
 
-            <!-- Método de pago -->
-            <div>
-                <label for="id_metodo" class="block text-gray-700 font-semibold mb-1">Método de Pago</label>
-                <select id="id_metodo" name="IdMetodo"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]" asp-items="ViewBag.MetodosPago"
-                    required >
-                    <option value=""></option>
-                    
-                    <!-- Agrega más métodos según tu base de datos -->
-                </select>
-            </div>
+        <!-- Cédula -->
+        <div>
+            <label for="cedula" class="block text-gray-700 font-semibold mb-1">Cédula</label>
+            <input type="text" value="@Model.Cedula" id="cedula" name="Cedula" placeholder="Número de cédula"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                required readonly />
+        </div>
 
-            <!-- Botón de envío -->
-            <div class="md:col-span-2 flex justify-center">
-                <button type="submit"
-                    class="bg-[#4ade80] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#22c55e] transition duration-300">
-                    Registrar Pago
-                </button>
-            </div>
+        <!-- Banco -->
+        <div>
+            <label for="id_banco" class="block text-gray-700 font-semibold mb-1">Banco</label>
 
-        </form>
-    </div>
+            <select id="id_banco"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80] "
+                asp-items="ViewBag.ListaBancos" required disabled>
+                <option value=""></option>
+
+
+                <!-- Agrega más bancos según tu base de datos -->
+            </select>
+        </div>
+        <div class="hidden">
+            <label for="id_banco" class="block text-gray-700 font-semibold mb-1">Banco</label>
+
+            <select id="id_banco" name="IdBanco"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80] "
+                asp-items="ViewBag.ListaBancos" required>
+                <option value=""></option>
+
+
+                <!-- Agrega más bancos según tu base de datos -->
+            </select>
+        </div>
+
+        <!-- Monto -->
+        <div>
+            <label for="monto" class="block text-gray-700 font-semibold mb-1">Monto</label>
+            <input type="text" value="@Model.Monto" id="monto" name="Monto" placeholder="Ej: 150000"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                required />
+        </div>
+
+        <!-- Método de pago -->
+        <div>
+            <label for="id_metodo" class="block text-gray-700 font-semibold mb-1">Método de Pago</label>
+            <select id="id_metodo"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                asp-items="ViewBag.MetodosPago" required disabled>
+                <option value=""></option>
+
+                <!-- Agrega más métodos según tu base de datos -->
+            </select>
+        </div>
+        <div class="hidden">
+            <label for="id_metodo" class="block text-gray-700 font-semibold mb-1">Método de Pago</label>
+            <select id="id_metodo" name="IdMetodo"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                asp-items="ViewBag.MetodosPago" required>
+                <option value=""></option>
+
+                <!-- Agrega más métodos según tu base de datos -->
+            </select>
+        </div>
+
+        <!-- Botón de envío -->
+        <div class="md:col-span-2 flex justify-center">
+            <button type="submit"
+                class="bg-[#4ade80] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#22c55e] transition duration-300">
+                Registrar Pago
+            </button>
+        </div>
+
+    </form>
+</div>
