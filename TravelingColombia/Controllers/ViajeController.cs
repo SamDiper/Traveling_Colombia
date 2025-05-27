@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TravelingColombia.Filtros;
@@ -30,21 +32,45 @@ namespace TravelingColombia.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(FiltroViajesViewModel filtro)
+        public async Task<IActionResult> Create(FiltroViajesViewModel filtro, [FromServices] Cloudinary cloudinary)
         {
+            string imageUrl = null;
+
+            if (filtro.ImagenArchivo != null && filtro.ImagenArchivo.Length > 0)
+            {
+                using var stream = filtro.ImagenArchivo.OpenReadStream();
+
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filtro.ImagenArchivo.FileName, stream),
+                    Folder = "viajes"
+                };
+
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                }
+                else
+                {
+                    ModelState.AddModelError("ImagenArchivo", "Error al subir la imagen");
+                    return View(filtro);
+                }
+            }
+
             var viaje = new Viaje
             {
-                IdDestinoIda = filtro?.IdDestinoIda?? 0,
-                IdDestinoLlegada = filtro?.IdDestinoLlegada??0,
+                IdDestinoIda = filtro.IdDestinoIda,
+                IdDestinoLlegada = filtro.IdDestinoLlegada,
                 HoraSalida = filtro.HoraSalida,
                 HoraLlegada = filtro.HoraLlegada,
                 FechaViaje = filtro.FechaViaje,
                 PrecioViaje = filtro.PrecioViaje,
                 CantidadPuestos = filtro.CantidadPuestos,
-                IdAerolinea = filtro?.IdAerolinea??0,
-                Imagen = filtro.Imagen
+                IdAerolinea = filtro.IdAerolinea,
+                Imagen = imageUrl
             };
-
             await _viajeRepository.Create(viaje);
             await _unitUser.SaveChangesAsync();
 
@@ -80,8 +106,32 @@ namespace TravelingColombia.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Editar(FiltroViajesViewModel filtro)
+        public async Task<IActionResult> Editar(FiltroViajesViewModel filtro, [FromServices] Cloudinary cloudinary)
         {
+            string imageUrl = null;
+
+            if (filtro.ImagenArchivo != null && filtro.ImagenArchivo.Length > 0)
+            {
+                using var stream = filtro.ImagenArchivo.OpenReadStream();
+
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filtro.ImagenArchivo.FileName, stream),
+                    Folder = "viajes"
+                };
+
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                }
+                else
+                {
+                    ModelState.AddModelError("ImagenArchivo", "Error al subir la imagen");
+                }
+            }
+
             if (!ModelState.IsValid)
             {
                 ViewBag.ListadoDestinos = new SelectList(_context.Destinos.ToList(), "IdDestino", "NombreDestino", filtro.IdDestinoIda);
@@ -103,13 +153,18 @@ namespace TravelingColombia.Controllers
             viaje.PrecioViaje = filtro.PrecioViaje;
             viaje.CantidadPuestos = filtro.CantidadPuestos;
             viaje.IdAerolinea = filtro.IdAerolinea;
-            viaje.Imagen = filtro.Imagen;
+
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                viaje.Imagen = imageUrl;
+            }
 
             await _viajeRepository.Update(viaje);
             await _unitUser.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }
+
 
         public async Task<IActionResult> Delete(int id)
         {

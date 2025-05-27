@@ -16,7 +16,6 @@ using TravelingColombia.ViewModels;
 
 namespace TravelingColombia.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class UsuarioController : Controller
     {
 

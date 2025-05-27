@@ -1,6 +1,9 @@
+using CloudinaryDotNet;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Repository.Implementacion;
 using Repository.Interface;
+using TravelingColombia.Helpers;
 using TravelingColombia.Models;
 using TravelingColombia.Repository.Implementacion;
 using TravelingColombia.Repository.Interface;
@@ -9,6 +12,23 @@ using TravelingColombia.UnitOfWork.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//cloudinary
+builder.Services.AddSingleton(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    var settings = config.GetSection("CloudinarySettings").Get<CloudinarySettings>();
+
+    if (string.IsNullOrEmpty(settings?.CloudName))
+    {
+        throw new ArgumentException("Cloud name is missing in configuration.");
+    }
+
+    var account = new Account(settings.CloudName, settings.ApiKey, settings.ApiSecret);
+    return new CloudinaryDotNet.Cloudinary(account);
+});
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews()

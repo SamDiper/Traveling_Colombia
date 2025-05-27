@@ -10,7 +10,7 @@ namespace TravelingColombia.Filtros
     public class FiltroUsuarioCiewModel
     {
         public List<UsuarioViewModel> listaUsuarios { get; set; }
-       public List<Rol> ListaRoles { get; set; }
+        public List<Rol> ListaRoles { get; set; }
 
     }
 }

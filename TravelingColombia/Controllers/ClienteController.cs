@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore.Storage;
 using TravelingColombia.ViewModels;
+using TravelingColombia.Filtros;
+using TravelingColombia.ViewModels;
 namespace TravelingColombia.Controllers
 {
 
@@ -24,21 +26,28 @@ namespace TravelingColombia.Controllers
         private readonly IRepositoryPago _repositoryPago;
         private readonly IRepositoryUsuario _RepositoryUsuario;
         private readonly IRepositoryPlan _RepositoryPlan;
+        private readonly TravelingColombiabdContext _context;
 
-        public ClienteController(IRepositoryPlan RepositoryPlan, IRepositoryPago repositoryPago, IRepositoryUsuario RepositoryUsuario)
+        public ClienteController(IRepositoryPlan RepositoryPlan, IRepositoryPago repositoryPago, IRepositoryUsuario RepositoryUsuario, TravelingColombiabdContext context)
         {
             _repositoryPago = repositoryPago;
             _RepositoryUsuario = RepositoryUsuario;
             _RepositoryPlan = RepositoryPlan;
+            _context = context;
         }
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Register()
+        public async Task<IActionResult> Register(UsuarioViewModel usuario)
         {
-            return View();
+            var Roles = new FiltroUsuarioCiewModel
+            {
+                ListaRoles = _context.Rols.ToList(),
+                listaUsuarios = await _RepositoryUsuario.ListaUsuarios(usuario),
+            };
+            return View(Roles);
         }
         
         public async Task<IActionResult> Pagos(PlanViewModel plan)
