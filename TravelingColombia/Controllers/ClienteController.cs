@@ -28,8 +28,7 @@ namespace TravelingColombia.Controllers
         private readonly IRepositoryPlan _RepositoryPlan;
         private readonly TravelingColombiabdContext _context;
 
-        public ClienteController(IRepositoryPlan RepositoryPlan, IRepositoryPago repositoryPago, IRepositoryUsuario RepositoryUsuario)
-        public ClienteController(IRepositoryPago repositoryPago, IRepositoryUsuario RepositoryUsuario, TravelingColombiabdContext context)
+        public ClienteController(IRepositoryPlan RepositoryPlan, IRepositoryPago repositoryPago, IRepositoryUsuario RepositoryUsuario, TravelingColombiabdContext context)
         {
             _repositoryPago = repositoryPago;
             _RepositoryUsuario = RepositoryUsuario;

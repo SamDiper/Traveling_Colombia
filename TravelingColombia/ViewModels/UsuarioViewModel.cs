@@ -26,9 +26,9 @@ namespace TravelingColombia.ViewModels
         public int CantidadFacturas { get; set; }
 
         public string Contrasena { get; set; } = null!;
-    public string? FotoUsuario { get; set; }
+        public string? FotoUsuario { get; set; }
 
-    public string? CedulaUsuario { get; set; }
+        public string? CedulaUsuario { get; set; }
 
     }
 }
