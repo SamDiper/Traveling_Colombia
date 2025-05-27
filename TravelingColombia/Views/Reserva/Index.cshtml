@@ -102,14 +102,15 @@
                                 <td class="px-4 py-2 border">@(reserva.IdPlan != null ? reserva.PrecioPlan :
                                                                     reserva.PrecioViaje)</td>
                             <td class="px-4 py-2 border">@reserva.EstadoReserva</td>
-                            <td class="flex justify-center gap-2 px-4 py-2 border">
-                                <a asp-action="Editar" asp-controller="Reserva" asp-route-id="@reserva.IdReserva"
-                                    class="btn btn-sm btn-warning">Editar</a>
-                                <form asp-action="Delete" asp-controller="Reserva" asp-route-id="@reserva.IdReserva"
+                            <td class="px-4 py-2 border">
+                                    <div class="flex justify-between gap-4">
+                                        <a asp-action="Editar" asp-controller="Reserva" asp-route-id="@reserva.IdReserva" class="btn bg-white hover:bg-yellow-600">Editar</a>
+                                    <form asp-action="Delete" asp-controller="Reserva" asp-route-id="@reserva.IdReserva"
                                     method="post" onsubmit="return confirm('¿Estás seguro de eliminar esta Reserva?');"
-                                    class="inline">
-                                    <button type="submit" class="btn btn-sm btn-error">Eliminar</button>
-                                </form>
+                                    class="btn bg-white hover:bg-red-600">
+                                        <button type="submit" >Eliminar</button>
+                                    </form>
+                                    </div>
                             </td>
                         </tr>
                                                 }

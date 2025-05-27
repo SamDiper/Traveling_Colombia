@@ -1,20 +1,30 @@
 ﻿@model TravelingColombia.ViewModels.LayoutViewModel
 <!-- Carrusel -->
 
-<div class="relative overflow-hidden w-full" id="carousel">
+<div class="relative overflow-hidden w-full h-[600px]" id="carousel">
   <div class="flex transition-transform duration-500 ease-in-out" id="track">
-    <img src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
-      class="w-full flex-shrink-0" />
-    <img src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-      class="w-full flex-shrink-0" />
-    <img src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-      class="w-full flex-shrink-0" />
-    <img src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-      class="w-full flex-shrink-0" />
+    <img
+      src="https://images.unsplash.com/photo-1533699224246-6dc3b3ed3304?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      class="w-full h-[600px] flex-shrink-0" />
+    <img
+      src="https://images.unsplash.com/photo-1582568742002-499ac33758ce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      class="w-full h-[600px] flex-shrink-0" />
+    <img
+      src="https://images.unsplash.com/photo-1583531352515-8884af319dc1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      class="w-full h-[600px] flex-shrink-0" />
+    <img
+      src="https://images.unsplash.com/photo-1694968126212-067a6b7f6726?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      class="w-full h-[600px] flex-shrink-0" />
   </div>
 
-  <div class="absolute inset-0 flex justify-between items-center px-4">
+  <div class="absolute inset-0 flex justify-between items-center px-4 bg-white/30">
     <button id="prev" class="btn btn-circle">❮</button>
+    <div class="flex justify-center items-center h-[1600px] w-[600px] ">
+      <h1
+        class="text-[100px] font-extrabold text-transparent bg-clip-text bg-[url('https://media.istockphoto.com/id/1031312380/photo/closeup-of-ruffled-colombia-flag.webp?b=1&s=170667a&w=0&k=20&c=gBS1OV8pq4eZDOINXu04QlDVkgAFDkePFfLmaH6QhcE=')] bg-cover bg-center">
+        TRAVELING COLOMBIA
+      </h1>
+    </div>
     <button id="next" class="btn btn-circle">❯</button>
   </div>
 </div>
@@ -32,48 +42,125 @@
   </div>
 
   <!-- Formularios -->
-  <div class="mx-auto mt-4 max-w-5xl rounded-md border border-gray-200 p-10 shadow-sm h-60">
+  <div class="mx-auto mt-4 max-w-5xl rounded-md border border-gray-200 p-10 shadow-sm h-70">
 
     <!-- Vuelos -->
-  <form asp-action="IndexViajes" asp-controller="Home" method="get" class="formulario" id="form-hoteles">
+    <form asp-action="IndexViajes" asp-controller="Home" method="get" class="formulario hidden" id="form-hoteles">
       <div class="grid gap-4 md:grid-cols-3">
+
         <div>
           <label class="text-sm font-semibold text-gray-700">Origen</label>
-          <input type="text" placeholder="Ciudad de origen" class="w-full rounded border px-3 py-2 text-sm" />
+          <select name="IdDestinoIda" class="w-full rounded border px-3 py-2 text-sm">
+            <option value="">-- Selecciona origen --</option>
+            @foreach (var destino in Model.ListaViajes.ListadoDestino)
+            {
+              <option value="@destino.IdDestino">@destino.NombreDestino</option>
+            }
+          </select>
         </div>
+
         <div>
           <label class="text-sm font-semibold text-gray-700">Destino</label>
-          <input type="text" placeholder="Ciudad de destino" class="w-full rounded border px-3 py-2 text-sm" />
+          <select name="IdDestinoLlegada" class="w-full rounded border px-3 py-2 text-sm">
+            <option value="">-- Selecciona destino --</option>
+            @foreach (var destino in Model.ListaViajes.ListadoDestino)
+            {
+              <option value="@destino.IdDestino">@destino.NombreDestino</option>
+            }
+          </select>
         </div>
-        <div>
-          <label class="text-sm font-semibold text-gray-700">Fecha de salida</label>
-          <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
-        </div>
-        <div>
-          <label class="text-sm font-semibold text-gray-700">Fecha de regreso</label>
-          <input type="date" class="w-full rounded border px-3 py-2 text-sm" />
-        </div>
-        </div>
-              <div class="mt-4 text-right">
-          <button type="submit" class="rounded bg-[#0f172a] px-6 py-2 font-bold text-white shadow-md transition hover:bg-[#1e293b]">
-            Buscar
-          </button>
-        </div>
-    </form>
 
-    <!-- Planes -->
-  <form asp-action="IndexPlanes" asp-controller="Home" method="get" class="formulario hidden" id="form-planes">
-      <div>
-        <label class="text-sm font-semibold text-gray-700">Ciudad destino</label>
-        <input type="text" placeholder="Escriba una ciudad" class="w-full rounded border px-3 py-2 text-sm" />
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Fecha de viaje</label>
+          <input type="date" name="FechaViaje" class="w-full rounded border px-3 py-2 text-sm" />
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Hora de salida</label>
+          <input type="time" name="HoraSalida" class="w-full rounded border px-3 py-2 text-sm" />
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Aerolínea</label>
+          <select name="IdAerolinea" class="w-full rounded border px-3 py-2 text-sm">
+            <option value="">-- Todas --</option>
+            @foreach (var aerolinea in Model.ListaViajes.ListadoAerolinea)
+            {
+              <option value="@aerolinea.IdAerolinea">@aerolinea.NombreAerolinea</option>
+            }
+          </select>
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Precio máximo</label>
+          <input type="number" name="PrecioViaje" placeholder="Ej. 900000"
+            class="w-full rounded border px-3 py-2 text-sm" min="0" />
+        </div>
+
       </div>
-          <!-- Botón -->
+
       <div class="mt-4 text-right">
-        <button type="submit" class="rounded bg-[#0f172a] px-6 py-2 font-bold text-white shadow-md transition hover:bg-[#1e293b]">
+        <button type="submit"
+          class="rounded bg-[#2e86c1] px-6 py-2 font-bold text-white shadow-md transition hover:bg-[#3084bcd2]">
           Buscar
         </button>
       </div>
     </form>
+
+
+    <!-- Planes -->
+    <form asp-action="IndexPlanes" asp-controller="Home" method="get" class="formulario hidden" id="form-planes">
+      <div class="grid gap-4 md:grid-cols-3">
+
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Destino</label>
+          <select name="IdDestinoLlegada" class="w-full rounded border px-3 py-2 text-sm">
+            <option value="">-- Selecciona destino --</option>
+            @foreach (var destino in Model.listaPlanes.ListadoDestino)
+            {
+              <option value="@destino.IdDestino">@destino.NombreDestino</option>
+            }
+          </select>
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Nombre del Plan</label>
+          <input type="text" name="NombrePlan" placeholder="Nombre del plan"
+            class="w-full rounded border px-3 py-2 text-sm" />
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Tipo de Plan</label>
+          <select name="IdTipoPlan" class="w-full rounded border px-3 py-2 text-sm">
+            <option value="">-- Todos --</option>
+            @foreach (var tipo in Model.listaPlanes.ListadoTipoPlanes)
+            {
+              <option value="@tipo.IdTipoPlan">@tipo.NombrePlan</option>
+            }
+          </select>
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Fecha</label>
+          <input type="date" name="Fecha" class="w-full rounded border px-3 py-2 text-sm" />
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold text-gray-700">Precio máximo</label>
+          <input type="number" name="Precio" placeholder="Ej. 1000000" class="w-full rounded border px-3 py-2 text-sm"
+            min="0" />
+        </div>
+
+      </div>
+
+      <div class="mt-4 text-right">
+        <button type="submit"
+          class="rounded bg-[#2e86c1] px-6 py-2 font-bold text-white shadow-md transition hover:bg-[#3084bcd2]">
+          Buscar
+        </button>
+      </div>
+    </form>
+
 
 
 
@@ -101,7 +188,8 @@
           </p>
           <form method="get" asp-action="DetallesPlan" asp-controller="Home">
             <input type="text" name="id" value="@plan.IdPlan" class="hidden">
-            <button class="  rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 active:bg-cyan-700 hover:bg-cyan-700"
+            <button
+              class="  rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 active:bg-cyan-700 hover:bg-cyan-700"
               type="submit">
               Informacion
             </button>
@@ -112,28 +200,29 @@
     }
     @foreach (var viaje in Model.ListaViajes.ListadoViajes)
     {
-        <div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-72">
-            <div class="relative p-2.5 h-60 overflow-hidden rounded-xl bg-clip-border">
-                <img src="@viaje.Imagen" alt="imagen viaje" class="h-full w-full object-cover rounded-md" />
-            </div>
-            <div class="p-4">
-                <div class="mb-2 flex items-center justify-between">
-                    <p class="text-slate-800 text-xl font-semibold">Vuelo: @($"{viaje.DestinoIda} - {viaje.DestinoLlegada}")</p>
-                    <p class="text-cyan-600 text-xl font-semibold">$@viaje.PrecioViaje</p>
-                </div>
-                <p class="text-slate-600 leading-normal font-light">
-                    Salida: @viaje.FechaViaje.ToString("dd MMM yyyy")<br />
-                    Hora: @viaje.HoraSalida - @viaje.HoraLlegada
-                </p>
-                <form method="get" asp-action="Editar" asp-controller="Viaje">
-                    <input type="hidden" name="id" value="@viaje.IdViaje" />
-                    <button class="rounded-md w-full mt-6 bg-blue-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-blue-700 active:bg-blue-700 hover:bg-blue-700"
-                            type="submit">
-                        Ver Viaje
-                    </button>
-                </form>
-            </div>
+      <div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-72">
+        <div class="relative p-2.5 h-60 overflow-hidden rounded-xl bg-clip-border">
+          <img src="@viaje.Imagen" alt="imagen viaje" class="h-full w-full object-cover rounded-md" />
         </div>
+        <div class="p-4">
+          <div class="mb-2 flex items-center justify-between">
+            <p class="text-slate-800 text-xl font-semibold">Vuelo: @($"{viaje.DestinoIda} - {viaje.DestinoLlegada}")</p>
+            <p class="text-cyan-600 text-xl font-semibold">$@viaje.PrecioViaje</p>
+          </div>
+          <p class="text-slate-600 leading-normal font-light">
+            Salida: @viaje.FechaViaje.ToString("dd MMM yyyy")<br />
+            Hora: @viaje.HoraSalida - @viaje.HoraLlegada
+          </p>
+          <form method="get" asp-action="Editar" asp-controller="Viaje">
+            <input type="hidden" name="id" value="@viaje.IdViaje" />
+            <button
+              class="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 active:bg-cyan-700 hover:bg-cyan-700"
+              type="submit">
+              Ver Viaje
+            </button>
+          </form>
+        </div>
+      </div>
     }
 
 
@@ -156,9 +245,9 @@
 
       // resaltar botón activo
       document.querySelectorAll(".tab-btn").forEach(btn => {
-        btn.classList.remove("bg-[#0f172a]", "text-white");
+        btn.classList.remove("bg-[#3084bcd2]", "text-white");
       });
-      document.getElementById(`btn-${type}`).classList.add("bg-[#0f172a]", "text-white");
+      document.getElementById(`btn-${type}`).classList.add("bg-[#3084bcd2]", "text-white");
     }
 
     // activar por defecto "hoteles"

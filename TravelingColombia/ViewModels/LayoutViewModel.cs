@@ -12,7 +12,8 @@ namespace TravelingColombia.ViewModels
         public ViajesGenericoViewModel ListaViajes { get; set; }
         public ViajesViewModel Viaje { get; set; }
 
-            // Campos de búsqueda
+
+        // Campos de búsqueda
         public string BusquedaOrigen { get; set; }
         public string BusquedaDestino { get; set; }
         public DateTime? FechaSalida { get; set; }

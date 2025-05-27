@@ -8,7 +8,7 @@ namespace TravelingColombia.ViewModels
 {
     public class UsuarioViewModel
     {
-       public int IdUsuario { get; set; }
+    public int IdUsuario { get; set; }
 
     public string NombreUsuario { get; set; } = null!;
 

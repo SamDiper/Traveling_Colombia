@@ -42,11 +42,12 @@
         <div id="overlay"></div>
 
         <!-- Contenedor con Sidebar + Main -->
-        <div class="flex">
+        <div class="relative flex">
 
             <!-- Sidebar -->
+            <!-- Sidebar -->
             <aside id="sidebar"
-                class="fixed top-0 left-0 z-50 h-full w-64 -translate-x-full transform backdrop-blur-sm bg-gradient-to-r from-gray-300 to-[#2E86C1] p-4 text-sm text-black transition-transform duration-300 flex flex-col justify-between">
+                class="fixed top-0 left-0 z-50 h-full w-64 transform -translate-x-full backdrop-blur-sm bg-gradient-to-r from-gray-300 to-[#2E86C1] p-4 text-sm text-black transition-transform duration-300 flex flex-col justify-between overflow-hidden">
 
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -63,46 +64,50 @@
                                     <span>▾</span>
                                 </button>
                                 <div id="teamsMenu" class="mt-1 ml-6 hidden space-y-1 text-black">
-                                    <div class="cursor-pointer hover:text-white">Usuarios</div>
-                                    <div><a asp-action="Viaje" asp-controller="Informe"
+                                    <div><a asp-action="Index" asp-controller="Usuario"
+                                            class="cursor-pointer hover:text-white">Usuarios</a></div>
+                                    <div><a asp-action="Index" asp-controller="Viaje"
                                             class="cursor-pointer hover:text-white">Viajes</a></div>
-                                    <div><a asp-action="Plan" asp-controller="Informe"
+                                    <div><a asp-action="Index" asp-controller="Plan"
                                             class="cursor-pointer hover:text-white">Planes</a></div>
-                                    <div><a asp-action="Pago" asp-controller="Informe"
+                                    <div><a asp-action="Index" asp-controller="Pago"
                                             class="cursor-pointer hover:text-white">Pagos</a></div>
-                                    <div><a asp-action="Reserva" asp-controller="Informe"
+                                    <div><a asp-action="Index" asp-controller="Reserva"
                                             class="cursor-pointer hover:text-white">Reservas</a></div>
                                 </div>
                             </div>
                         }
                         @if (User.IsInRole("Cliente"))
                         {
-                        <div class="cursor-pointer rounded px-4 py-2 text-black hover:text-white">
-                            <a asp-action="Pagos" asp-controller="Cliente">Pagos</a>
-                        </div>
+                            <div class="cursor-pointer rounded px-4 py-2 text-black hover:text-white">
+                                <a asp-action="Pagos" asp-controller="Cliente">Pagos</a>
+                            </div>
                         }
                         @if (User.IsInRole("Administrador"))
                         {
                             <button onclick="toggleAccordion('accountMenu')"
                                 class="flex w-full items-center justify-between rounded px-4 py-2 hover:text-white">
-                                <span>Detalles</span>
+                                <span>Informes</span>
                                 <span>▾</span>
                             </button>
-
-
                             <div id="accountMenu" class="mt-1 ml-6 hidden space-y-1 text-black">
-                                <a asp-action="Informes" asp-controller="Admin"
-                                    class="cursor-pointer hover:text-white">Informes</a>
-                                <div class="cursor-pointer hover:text-white">Estadísticas</div>
+                                <div><a asp-action="Viaje" asp-controller="Informe"
+                                        class="cursor-pointer hover:text-white">Viajes</a></div>
+                                <div><a asp-action="Plan" asp-controller="Informe"
+                                        class="cursor-pointer hover:text-white">Planes</a></div>
+                                <div><a asp-action="Pago" asp-controller="Informe"
+                                        class="cursor-pointer hover:text-white">Pagos</a></div>
+                                <div><a asp-action="Reserva" asp-controller="Informe"
+                                        class="cursor-pointer hover:text-white">Reservas</a></div>
                             </div>
                         }
-                        <div class="cursor-pointer rounded px-4 py-2 text-black  hover:text-white">
+                        <div class="cursor-pointer rounded px-4 py-2 text-black hover:text-white">
                             <a asp-action="Perfil" asp-controller="Cliente">Perfil</a>
                         </div>
                     </nav>
 
-                    <div class="space-y-4 absolute left-10 top-[720px] ">
-                        <!-- Perfil -->
+                    <!-- Parte inferior -->
+                    <div class="space-y-4 absolute left-10 top-[720px]">
                         <div class="flex items-center space-x-3">
                             <div class="avatar">
                                 <div class="h-10 w-10 rounded-full">
@@ -118,36 +123,31 @@
                                 class="cursor-pointer text-white hover:text-blue-700">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </a>
-
                         </div>
                     </div>
                 }
                 else
                 {
-                    <div class="space-y-4 absolute left-10 top-[720px] ">
                         <a asp-action="Login" asp-controller="Cliente">
-                            <p>Por favor, inicia sesión.</p>
+                            <div class="bg-gray-500 h-[500] w-[400] border-round space-y-4 absolute left-10 top-[720px]">
+                                <p>Por favor, inicia sesión.</p>
+                            </div>
                         </a>
-                    </div>
                 }
-                <!-- Parte inferior: Perfil + Botón cerrar -->
-
 
                 <!-- Botón cerrar -->
-                <button id="closeSidebar" class="w-full rounded bg-blue-400 px-4 py-2 hover:bg-blue-700">
+                <button id="closeSidebar" class="w-full rounded bg-blue-400 px-4 py-2 hover:bg-blue-700 mt-4">
                     Cerrar
                 </button>
+            </aside>
+
+
+            <!-- Contenido Principal -->
+            <main id="mainContent" class="flex-1 bg-white p-6 text-black transition-all duration-300">
+
+                @RenderBody()
+            </main>
         </div>
-
-        </aside>
-
-        <!-- Contenido Principal -->
-        <main id="mainContent" class="flex-1 bg-white p-6 text-black transition-all duration-300">
-
-            @RenderBody()
-        </main>
-    </div>
-
 
     </div>
 
