@@ -137,7 +137,7 @@ namespace TravelingColombia.Controllers
                         reserva.IdEstadoReserva = 2;
                         reserva.IdUsuario = usuarioFiltrado.IdUsuario;
                         reserva.CantidadPersonas = transaccionReservaPago.CantidadPersonas;
-                        reserva.TotalReserva = transaccionReservaPago.PrecioPlan;
+                        reserva.TotalReserva = transaccionReservaPago.PrecioViaje;
                         reserva.PagoUsuario = transaccionReservaPago.Monto;
 
                     }

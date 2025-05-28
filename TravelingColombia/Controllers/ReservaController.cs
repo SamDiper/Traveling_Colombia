@@ -21,15 +21,16 @@ namespace TravelingColombia.Controllers
         private readonly IRepositoryReserva _repositoryReserva;
         private readonly IRepositoryPlan _RepositoryPlan;
         private readonly IRepositoryUsuario _RepositoryUsuario;
-
+        private readonly IRepositoryViaje _repositoryViaje;
         private readonly IUnitUser _unidadadtrabajo;
 
-        public ReservaController(IRepositoryUsuario RepositoryUsuario, IRepositoryReserva repositoryReserva, IUnitUser unitUser, IRepositoryPlan RepositoryPlan)
+        public ReservaController(IRepositoryViaje repositoryViaje, IRepositoryUsuario RepositoryUsuario, IRepositoryReserva repositoryReserva, IUnitUser unitUser, IRepositoryPlan RepositoryPlan)
         {
             _repositoryReserva = repositoryReserva;
             _unidadadtrabajo = unitUser;
             _RepositoryPlan = RepositoryPlan;
             _RepositoryUsuario = RepositoryUsuario;
+            _repositoryViaje= repositoryViaje;
         }
 
         public async Task<IActionResult> Index(FiltroReservasViewModel filtros)
@@ -64,6 +65,25 @@ namespace TravelingColombia.Controllers
 
 
             return View(PlanUsuario);
+        }
+        [Authorize(Roles = "Cliente,Administrador,Vendedor")]
+        public async Task<IActionResult> FormularioUsuarioViaje(transaccionReservaViewModel transaccionReserva)
+        {
+            int idUsuario = int.Parse(User.FindFirst("IdUsuario")?.Value ?? "0");
+            Usuario usuario = new Usuario
+            {
+                IdUsuario = idUsuario,
+            };
+            vistaPagoViewModel Viaje = new vistaPagoViewModel
+            {
+                
+                viaje = await _repositoryViaje.ObtenerViaje(transaccionReserva.IdViaje),
+                Usuario = await _RepositoryUsuario.BuscarUsuario(usuario),
+                transaccionReserva = transaccionReserva
+            };
+
+
+            return View(Viaje);
         }
         [Authorize(Roles = "Administrador,Vendedor")]
         public async Task<IActionResult> Editar(int id)
