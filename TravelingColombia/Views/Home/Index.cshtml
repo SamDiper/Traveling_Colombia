@@ -1,4 +1,4 @@
-﻿@model TravelingColombia.ViewModels.LayoutViewModel
+﻿@model TravelingColombia.ViewModels.VistaIndex
 <!-- Carrusel -->
 
 <div class="relative overflow-hidden w-full h-[600px]" id="carousel">
@@ -45,7 +45,7 @@
   <div class="mx-auto mt-4 max-w-5xl rounded-md border border-gray-200 p-10 shadow-sm h-70">
 
     <!-- Vuelos -->
-    <form asp-action="IndexViajes" asp-controller="Home" method="get" class="formulario hidden" id="form-hoteles">
+    <form asp-action="Index" asp-controller="Home" method="get" class="formulario hidden" id="form-hoteles">
       <div class="grid gap-4 md:grid-cols-3">
 
         <div>
@@ -109,14 +109,14 @@
 
 
     <!-- Planes -->
-    <form asp-action="IndexPlanes" asp-controller="Home" method="get" class="formulario hidden" id="form-planes">
+    <form asp-action="Index" asp-controller="Home" method="get" class="formulario hidden" id="form-planes">
       <div class="grid gap-4 md:grid-cols-3">
 
         <div>
           <label class="text-sm font-semibold text-gray-700">Destino</label>
           <select name="IdDestinoLlegada" class="w-full rounded border px-3 py-2 text-sm">
             <option value="">-- Selecciona destino --</option>
-            @foreach (var destino in Model.listaPlanes.ListadoDestino)
+            @foreach (var destino in Model.ListaPlanes.ListadoDestino)
             {
               <option value="@destino.IdDestino">@destino.NombreDestino</option>
             }
@@ -133,7 +133,7 @@
           <label class="text-sm font-semibold text-gray-700">Tipo de Plan</label>
           <select name="IdTipoPlan" class="w-full rounded border px-3 py-2 text-sm">
             <option value="">-- Todos --</option>
-            @foreach (var tipo in Model.listaPlanes.ListadoTipoPlanes)
+            @foreach (var tipo in Model.ListaPlanes.ListadoTipoPlanes)
             {
               <option value="@tipo.IdTipoPlan">@tipo.NombrePlan</option>
             }
@@ -172,7 +172,7 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
 
     <!-- Tarjeta (solo una, puedes duplicar esta 16 veces) -->
-@foreach (var plan in Model.listaPlanes.ListadoPlanes)
+@foreach (var plan in Model.ListaPlanes.ListadoPlanes)
 {
     <div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-72 h-[450px]">
         <!-- Imagen -->
@@ -214,7 +214,7 @@
         </div>
         <div class="p-4">
           <div class="mb-2 flex items-center justify-between">
-            <p class="text-slate-800 text-xl font-semibold">Vuelo: @($"{viaje.DestinoIda} - {viaje.DestinoLlegada}")</p>
+            <p class="text-slate-800 text-xl font-semibold">Vuelo: @($"{viaje.IdDestinoIdaNavigation?.NombreDestino} - {viaje.IdDestinoLlegadaNavigation?.NombreDestino}")</p>
             <p class="text-cyan-600 text-xl font-semibold">$@viaje.PrecioViaje</p>
           </div>
           <p class="text-slate-600 leading-normal font-light">
