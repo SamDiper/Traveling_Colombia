@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -100,14 +103,16 @@
 
                     <!-- Usuario -->
                     <div class="px-4 py-4 mt-auto flex items-center space-x-4 border-t border-white">
-                        <div class="w-10 h-10 rounded-full overflow-hidden">
-                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
+                            <img src="@User.FindFirst("FotoUsuario")?.Value" class="w-full h-full object-cover"
+                                alt="Foto de perfil" />
                         </div>
-                        <div class="text-sm">
+                        <div class="text-sm text-white">
                             <div class="font-semibold">@User.FindFirst("Nombre")?.Value</div>
                             <div>@User.FindFirst("Apellido")?.Value</div>
                         </div>
-                        <a asp-action="Salir" asp-controller="Cliente" class="text-white hover:text-red-400 ml-auto">
+                        <a asp-action="Salir" asp-controller="Cliente"
+                            class="text-white hover:text-red-400 ml-auto text-xl">
                             <i class="fa-solid fa-right-from-bracket"></i>
                         </a>
                     </div>
@@ -115,7 +120,8 @@
                 else
                 {
                     <div class="px-4 py-4 mt-auto">
-                        <a asp-action="Login" asp-controller="Cliente" class="w-full bg-white text-[#2E86C1] font-semibold py-2 rounded hover:bg-gray-300">
+                        <a asp-action="Login" asp-controller="Cliente"
+                            class="w-full bg-white text-[#2E86C1] font-semibold py-2 rounded hover:bg-gray-300">
                             Inicia sesión
                         </a>
                     </div>
@@ -151,7 +157,8 @@
         class="fixed right-0 bottom-0 left-0 z-40 ml-0 flex justify-around bg-[#2e86c1] p-3 text-white shadow-inner transition-all duration-300">
         <a asp-action="Index" asp-controller="Home" class="hover:text-yellow-300 ">Inicio</a>
         <a asp-action="Perfil" asp-controller="Cliente" class="hover:text-yellow-300">Perfil</a>
-        <a href="https://www.instagram.com/traveling._.colombia" target="_blank" class="hover:text-yellow-300">Instagram</a>
+        <a href="https://www.instagram.com/traveling._.colombia" target="_blank"
+            class="hover:text-yellow-300">Instagram</a>
     </nav>
 
     <script>

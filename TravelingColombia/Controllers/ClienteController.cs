@@ -122,7 +122,8 @@ namespace TravelingColombia.Controllers
                     new Claim(ClaimTypes.Role,usuarioFiltrado.Rol),
                     new Claim("Nombre",usuarioFiltrado.NombreUsuario),
                     new Claim("Apellido",usuarioFiltrado.ApellidoUsuario),
-                    new Claim("IdUsuario", usuarioFiltrado.IdUsuario.ToString())
+                    new Claim("IdUsuario", usuarioFiltrado.IdUsuario.ToString()),
+                    new Claim("FotoUsuario", usuarioFiltrado.FotoUsuario ?? "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(Claims, CookieAuthenticationDefaults.AuthenticationScheme);

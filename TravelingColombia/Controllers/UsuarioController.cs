@@ -84,7 +84,7 @@ namespace TravelingColombia.Controllers
 
             await _RepositorioUsuario.Create(usuario);
             await _unitUser.SaveChangesAsync();
-            return RedirectToAction("Index", "Usuario");
+            return RedirectToAction("Login", "Cliente");
         }
         [HttpGet]
         public async Task<IActionResult> Editar(int id)
