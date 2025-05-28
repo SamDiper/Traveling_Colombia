@@ -4424,6 +4424,20 @@
       }
     }
   }
+  .hover\:bg-\[\#3084bc9c\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #3084bc9c;
+      }
+    }
+  }
+  .hover\:bg-\[\#3084bcb4\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #3084bcb4;
+      }
+    }
+  }
   .hover\:bg-\[\#3084bcd2\] {
     &:hover {
       @media (hover: hover) {
