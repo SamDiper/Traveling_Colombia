@@ -14,6 +14,7 @@ namespace TravelingColombia.Repository.Interface
         Task<PagosGenericoViewModel> ListadoPagos();
         Task<List<MetodoPago>> ListaMetodosPagos();
         Task<List<Banco>> ListaBancos();
+        Task<int> UltimoRegistro();
         Task<PagosGenericoViewModel> ObtenerPagos(FiltroPagosViewModel filtros);
     }
 

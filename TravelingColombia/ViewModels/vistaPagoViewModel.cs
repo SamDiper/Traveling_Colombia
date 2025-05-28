@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TravelingColombia.Models;
 
 namespace TravelingColombia.ViewModels
 {
@@ -9,7 +10,8 @@ namespace TravelingColombia.ViewModels
     {
         public PlanViewModel Plan { get; set; }
         public UsuarioViewModel Usuario { get; set; }
-        public transaccionReservaViewModel transaccionReserva { get; set; }=new transaccionReservaViewModel();
+        public Reserva reserva{ get; set; }
+        public transaccionReservaViewModel transaccionReserva { get; set; } = new transaccionReservaViewModel();
 
 
     }

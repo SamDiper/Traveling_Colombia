@@ -8,6 +8,7 @@ namespace TravelingColombia.ViewModels
     public class TransaccionPagoViewModels
     {
         public int IdPlan { get; set; }
+        public int IdReserva { get; set; }
         public int IdViaje { get; set; }
         public int? CantidadPersonas { get; set; }
 

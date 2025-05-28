@@ -18,7 +18,7 @@ namespace TravelingColombia.Repository.Implementacion
         private readonly IRepositoryGeneric<MetodoPago, int> _ListaMetodosPagos;
         private readonly IRepositoryGeneric<Banco, int> _ListaBancos;
 
-        
+
 
         public RepositoryPago(TravelingColombiabdContext context, IRepositoryGeneric<MetodoPago, int> ListaMetodosPagos, IRepositoryGeneric<Banco, int> ListaBancos) : base(context)
         {
@@ -26,9 +26,9 @@ namespace TravelingColombia.Repository.Implementacion
             _ListaMetodosPagos = ListaMetodosPagos;
             _ListaBancos = ListaBancos;
         }
-        public RepositoryPago(TravelingColombiabdContext context) :base(context)
+        public RepositoryPago(TravelingColombiabdContext context) : base(context)
         {
-            _dbcontext=context;
+            _dbcontext = context;
         }
 
         public async Task<PagosGenericoViewModel> ListadoPagos()
@@ -79,7 +79,7 @@ namespace TravelingColombia.Repository.Implementacion
                     IdPago = p.IdPago,
                     NombreUsuario = p.Nombre,
                     CedulaUsuario = p.Cedula,
-                    NombreBanco = b.NombreBanco,                  
+                    NombreBanco = b.NombreBanco,
                     Monto = p.Monto,
                     MetodoPago = mp.MetodoPago1
                 };
@@ -133,6 +133,14 @@ namespace TravelingColombia.Repository.Implementacion
             return pagos;
         }
 
+        public async Task<int> UltimoRegistro()
+        {
+            var UltimoPago = _dbcontext.Pagos
+                            .OrderByDescending(p => p.IdPago)
+                            .FirstOrDefault();
+
+            return UltimoPago.IdPago;
+        }
 
     }
 }

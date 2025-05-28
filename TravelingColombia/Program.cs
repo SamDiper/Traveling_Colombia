@@ -55,6 +55,7 @@ builder.Services.AddScoped<IRepositoryPlan,RepositoryPlan>();
 builder.Services.AddScoped<IRepositoryPago, RepositoryPago>();
 builder.Services.AddScoped<IRepositoryUsuario, RepositoryUsuario>();
 builder.Services.AddScoped<IUnidadTransaccion, UnidadTransaccion>();
+builder.Services.AddScoped<IRepositorioFactura, RepositorioFactura>();
 
 builder.Services.AddScoped(typeof(IRepositoryGeneric<,>), typeof(RepositoryGeneric<,>));
 

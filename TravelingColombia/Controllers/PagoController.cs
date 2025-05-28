@@ -15,7 +15,7 @@ using TravelingColombia.ViewModels;
 
 namespace TravelingColombia.Controllers
 {
-    
+
     public class PagoController : Controller
     {
         private readonly IRepositoryPago _repositoryPago;
@@ -95,7 +95,7 @@ namespace TravelingColombia.Controllers
 
 
 
-        
+
         public async Task<IActionResult> RegistrarReservaYPago(TransaccionPagoViewModels transaccionReservaPago)
         {
 
@@ -110,40 +110,82 @@ namespace TravelingColombia.Controllers
                     };
 
                     var PlanFiltrado = await _unidadTransaccion.repositoryPlan.ObtenerPlan(transaccionReservaPago.IdPlan);
+                    var ViajeFiltrado = await _unidadTransaccion.repositoryViaje.GetByIdAsync(transaccionReservaPago.IdViaje);
                     var usuarioFiltrado = await _unidadTransaccion.repositoryUsuario.BuscarUsuario(usuario);
 
+                    var reserva = new Reserva();
                     //Crear Reserva
-                    var reserva = new Reserva
+                    if (transaccionReservaPago.IdPlan > 0)
                     {
-                        FechaReserva = DateOnly.FromDateTime(DateTime.Now),
-                        IdViaje = 1,
-                        IdPlan = PlanFiltrado.IdPlan,
-                        IdEstadoReserva=1,
-                        IdUsuario = usuarioFiltrado.IdUsuario,
-                        CantidadPersonas = transaccionReservaPago.CantidadPersonas,
-                        TotalReserva = transaccionReservaPago.PrecioPlan
-                    };
-                    await _unidadTransaccion.repositoryReserva.Create(reserva);
+
+                        reserva.FechaReserva = DateOnly.FromDateTime(DateTime.Now);
+                        reserva.IdViaje = null;
+                        reserva.IdPlan = PlanFiltrado.IdPlan;
+                        reserva.IdEstadoReserva = 2;
+                        reserva.IdUsuario = usuarioFiltrado.IdUsuario;
+                        reserva.CantidadPersonas = transaccionReservaPago.CantidadPersonas;
+                        reserva.TotalReserva = transaccionReservaPago.PrecioPlan;
+                        reserva.PagoUsuario = transaccionReservaPago.Monto;
+
+                    }
+                    if (transaccionReservaPago.IdViaje > 0)
+                    {
+
+                        reserva.FechaReserva = DateOnly.FromDateTime(DateTime.Now);
+                        reserva.IdViaje = ViajeFiltrado.IdViaje;
+                        reserva.IdPlan = null;
+                        reserva.IdEstadoReserva = 2;
+                        reserva.IdUsuario = usuarioFiltrado.IdUsuario;
+                        reserva.CantidadPersonas = transaccionReservaPago.CantidadPersonas;
+                        reserva.TotalReserva = transaccionReservaPago.PrecioPlan;
+                        reserva.PagoUsuario = transaccionReservaPago.Monto;
+
+                    }
+
 
                     // Crear Pago
                     var pago = new Pago
                     {
                         Nombre = usuarioFiltrado.NombreUsuario + " " + usuarioFiltrado.ApellidoUsuario,
-                        Cedula= usuarioFiltrado.CedulaUsuario, 
+                        Cedula = usuarioFiltrado.CedulaUsuario,
                         IdBanco = transaccionReservaPago.IdBanco,
                         Monto = transaccionReservaPago.Monto,
                         IdMetodo = transaccionReservaPago.IdMetodo,
-                    
+
                     };
                     await _unidadTransaccion.repositoryPago.Create(pago);
 
-                    
+                    if (pago.Monto >= reserva.TotalReserva)
+                    {
+                        reserva.IdEstadoReserva = 1;
+                        await _unidadTransaccion.repositoryReserva.Create(reserva);
+                    }
+                    else
+                    {
+                        await _unidadTransaccion.repositoryReserva.Create(reserva);
+                    }
+
+
+
 
                     // 4. Guardar cambios en una sola transacción
                     await _unidadTransaccion.SaveChangesAsync();
+
+                    Factura factura = new Factura
+                    {
+                        FechaFactura = DateOnly.FromDateTime(DateTime.Now),
+                        IdPago = pago.IdPago,
+                        IdReserva = reserva.IdReserva,
+                        SubTotal = pago.Monto,
+                        Descuento = 0,
+                        Total = pago.Monto,
+                    };
+                    await _unidadTransaccion.repositorioFactura.Create(factura);
+                    await _unidadTransaccion.SaveChangesAsync();
+                    var facturaRealizada = await _unidadTransaccion.repositorioFactura.EnviarFacturaHtmlAsync(usuarioFiltrado.EmailUsuario, factura.IdFactura);
                     await transaction.CommitAsync();
-                    
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Privacy", "Home", new { id = facturaRealizada.idFactura });
+
                 }
                 catch (Exception ex)
                 {
@@ -153,6 +195,80 @@ namespace TravelingColombia.Controllers
                 }
             }
 
+
+
+        }
+        
+        public async Task<IActionResult> Pago(TransaccionPagoViewModels transaccionReservaPago)
+        {
+
+            using (var transaction = await _unidadTransaccion.BeginTransactionAsync())
+            {
+                try
+                {
+                    int idUsuario = int.Parse(User.FindFirst("IdUsuario")?.Value ?? "0");
+                    Usuario usuario = new Usuario
+                    {
+                        IdUsuario = idUsuario,
+                    };
+
+                    var usuarioFiltrado = await _unidadTransaccion.repositoryUsuario.BuscarUsuario(usuario);
+                    var reservaFiltrada = await _unidadTransaccion.repositoryReserva.GetByIdAsync(transaccionReservaPago.IdReserva);                                      
+
+
+                    // Crear Pago
+                    var pago = new Pago
+                    {
+                        Nombre = usuarioFiltrado.NombreUsuario + " " + usuarioFiltrado.ApellidoUsuario,
+                        Cedula = usuarioFiltrado.CedulaUsuario,
+                        IdBanco = transaccionReservaPago.IdBanco,
+                        Monto = transaccionReservaPago.Monto,
+                        IdMetodo = transaccionReservaPago.IdMetodo,
+
+                    };
+                    await _unidadTransaccion.repositoryPago.Create(pago);
+                    reservaFiltrada.PagoUsuario += pago.Monto;
+                    if (reservaFiltrada.PagoUsuario >= reservaFiltrada.TotalReserva)
+                    {
+                        reservaFiltrada.IdEstadoReserva = 1;
+                        await _unidadTransaccion.repositoryReserva.Update(reservaFiltrada);
+                    }
+                    else
+                    {
+                        await _unidadTransaccion.repositoryReserva.Update(reservaFiltrada);
+                    }
+
+
+
+
+                    // 4. Guardar cambios en una sola transacción
+                    await _unidadTransaccion.SaveChangesAsync();
+
+                    Factura factura = new Factura
+                    {
+                        FechaFactura = DateOnly.FromDateTime(DateTime.Now),
+                        IdPago = pago.IdPago,
+                        IdReserva = reservaFiltrada.IdReserva,
+                        SubTotal = pago.Monto,
+                        Descuento = 0,
+                        Total = pago.Monto,
+                    };
+                    await _unidadTransaccion.repositorioFactura.Create(factura);
+                    await _unidadTransaccion.SaveChangesAsync();
+                    var facturaRealizada = await _unidadTransaccion.repositorioFactura.EnviarFacturaHtmlAsync(usuarioFiltrado.EmailUsuario, factura.IdFactura);
+                    await transaction.CommitAsync();
+                    return RedirectToAction("Privacy", "Home", new { id = facturaRealizada.idFactura });
+
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    ModelState.AddModelError("", "Ocurrió un error al registrar la reserva y el pago.");
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            
 
         }
 

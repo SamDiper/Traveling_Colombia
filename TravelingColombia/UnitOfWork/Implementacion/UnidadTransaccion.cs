@@ -16,6 +16,8 @@ namespace TravelingColombia.UnitOfWork.Implementacion
         private readonly IRepositoryPlan _repositoryPlan;
         private readonly IRepositoryReserva _repositoryReserva;
         private readonly IRepositoryUsuario _repositoryUsuario;
+        private readonly IRepositorioFactura _repositorioFactura;
+        private readonly IRepositoryViaje _repositorioViajes;
         private readonly TravelingColombiabdContext _context;
 
         public UnidadTransaccion(TravelingColombiabdContext context)
@@ -29,6 +31,10 @@ namespace TravelingColombia.UnitOfWork.Implementacion
         public IRepositoryReserva repositoryReserva => _repositoryReserva ?? new RepositoryReserva(_context);
 
         public IRepositoryUsuario repositoryUsuario => _repositoryUsuario ?? new RepositoryUsuario(_context);
+
+        public IRepositorioFactura repositorioFactura => _repositorioFactura?? new RepositorioFactura(_context);
+
+        public IRepositoryViaje repositoryViaje => _repositorioViajes ?? new RepositoryViaje(_context);
 
         public void Dispose()
         {

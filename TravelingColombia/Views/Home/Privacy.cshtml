@@ -1,6 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model TravelingColombia.ViewModels.FacturaVIewModel
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow-md">
+        <h2 class="text-2xl font-bold mb-4 text-center">Factura</h2>
+
+        <div class="grid grid-cols-2 gap-4 text-sm mb-6">
+            <div>
+                <p><span class="font-semibold">Fecha:</span> @Model.FechaFactura.ToString("yyyy-MM-dd")</p>
+                <p><span class="font-semibold">Nombre:</span>@Model.Nombre</p>
+                <p><span class="font-semibold">Cédula:</span>@Model.Cedula</p>
+            </div>
+            <div>
+                <p><span class="font-semibold">Método de Pago:</span>@Model.Metodo_Pago</p>
+                <p><span class="font-semibold">Banco:</span> @Model.Nombre_Banco</p>
+            </div>
+        </div>
+
+        <table class="w-full border border-gray-300 text-sm">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="border px-4 py-2 text-left">Descripción</th>
+                    <th class="border px-4 py-2 text-right">Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border px-4 py-2">Subtotal</td>
+                    <td class="border px-4 py-2 text-right">$@Model.SubTotal</td>
+                </tr>
+                <tr>
+                    <td class="border px-4 py-2">Descuento</td>
+                    <td class="border px-4 py-2 text-right">$@Model.Descuento</td>
+                </tr>
+                <tr class="font-bold">
+                    <td class="border px-4 py-2">Total</td>
+                    <td class="border px-4 py-2 text-right">@Model.Total</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="text-center text-xs text-gray-500 mt-6">Gracias por su compra</p>
+    </div>
+</div>
