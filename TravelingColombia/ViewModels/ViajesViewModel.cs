@@ -17,6 +17,7 @@ namespace TravelingColombia.ViewModels
         public TimeOnly HoraLlegada { get; set; }
         public decimal PrecioViaje { get; set; }
         public int CantidadPuestos { get; set; }
+        public int CantidadPersonas { get; set; }
         public string AerolineaNombre { get; set; }
         public string Imagen { get; set; }
     }

@@ -13,6 +13,7 @@ namespace TravelingColombia.ViewModels
         public int? CantidadPersonas { get; set; }
 
         public decimal? PrecioPlan { get; set; }
+        public decimal? PrecioViaje { get; set; }
         public string Cedula { get; set; } = null!;
 
         public int IdBanco { get; set; }

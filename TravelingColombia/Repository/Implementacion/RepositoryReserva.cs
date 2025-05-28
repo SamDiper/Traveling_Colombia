@@ -60,11 +60,13 @@ namespace TravelingColombia.Repository.Implementacion
                                {
                                    IdReserva = r.IdReserva,
                                    FechaReserva = r.FechaReserva,
-                                   NombreUsuario = u.NombreUsuario,
+                                   NombreUsuario = u.NombreUsuario + "  " + u.ApellidoUsuario,
                                    EstadoReserva = e.Estado1,
                                    NombreViaje = d != null ? d.NombreDestino : "Sin destino",
                                    NombrePlan = p != null ? p.NombrePlan : "Sin plan",
-                                    PagoUsuario=r.PagoUsuario
+                                   PagoUsuario = r.PagoUsuario,
+                                   IdPlan=p.IdPlan
+                                    
                                }).ToListAsync();
 
             return new ReservasGenericoViewModel

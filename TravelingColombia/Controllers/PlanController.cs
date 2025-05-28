@@ -107,12 +107,12 @@ namespace TravelingColombia.Controllers
             return RedirectToAction("Index", "Plan");
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Eliminar(int id)
         {
+            var plan =await _repositoryPlan.GetByIdAsync(id);
 
-
-            await _repositoryPlan.DeleteByIdAsync(id);
+            await _repositoryPlan.DeleteByIdAsync(plan.IdPlan);
             await _unitUser.SaveChangesAsync();
 
 

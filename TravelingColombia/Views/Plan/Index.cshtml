@@ -122,10 +122,15 @@
                                 <td class="px-4 py-2 border">@plan.Aerolinea</td>
                                 <td class="px-4 py-2 border">
                                     <div class="flex justify-between gap-4">
-                                        <a asp-action="Editar" asp-controller="Plan" asp-route-id="@plan.IdPlan" class="btn bg-white hover:bg-yellow-600">Editar</a>
-                                        <a asp-action="Eliminar" asp-controller="Plan" asp-route-id="@plan.IdPlan" class="btn bg-white hover:bg-red-600">Eliminar</a>
-                                        
+                                        <form method="get" asp-action="Editar" asp-controller="Plan" asp-route-id="@plan.IdPlan">
+                                        <button type="submit" class="btn bg-white hover:bg-yellow-600">Editar</button>
 
+                                        </form>
+                                        <form method="post" asp-action="Eliminar" asp-controller="Plan" asp-route-id="@plan.IdPlan">
+
+                                        <button type="submit"  class="btn bg-white hover:bg-red-600">Eliminar</button>
+                                        </form>
+                                        
                                     </div>
                                 </td>
 
