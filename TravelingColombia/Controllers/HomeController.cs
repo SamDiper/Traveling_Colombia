@@ -42,6 +42,12 @@ public class HomeController : Controller
         return View(plan);
     }
 
+    public async Task<IActionResult> DetallesViaje(int id)
+    {
+        var viaje = await _repositoryViaje.ObtenerViaje(id);
+        return View(viaje);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

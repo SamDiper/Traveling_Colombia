@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelingColombia.Models;
@@ -26,9 +27,13 @@ namespace TravelingColombia.ViewModels
         public int CantidadFacturas { get; set; }
 
         public string Contrasena { get; set; } = null!;
-        public string? FotoUsuario { get; set; }
 
+        [NotMapped]
+        public IFormFile ImagenArchivo { get; set; }
+        public string? FotoUsuario { get; set; }
         public string? CedulaUsuario { get; set; }
+
+        public List<Rol> ListaRoles { get; set; }
 
     }
 }

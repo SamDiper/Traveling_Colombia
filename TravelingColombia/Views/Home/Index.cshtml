@@ -172,32 +172,40 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
 
     <!-- Tarjeta (solo una, puedes duplicar esta 16 veces) -->
-    @foreach (var plan in Model.listaPlanes.ListadoPlanes)
-    {
-      <div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-72">
+@foreach (var plan in Model.listaPlanes.ListadoPlanes)
+{
+    <div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-72 h-[450px]">
+        <!-- Imagen -->
         <div class="relative p-2.5 h-60 overflow-hidden rounded-xl bg-clip-border">
-          <img src="@plan.Imagen" alt="card-image" class="h-full w-full object-cover rounded-md" />
+            <img src="@plan.Imagen" alt="card-image" class="h-full w-full object-cover rounded-md" />
         </div>
-        <div class="p-4">
-          <div class="mb-2 flex items-center justify-between">
-            <p class="text-slate-800 text-xl font-semibold">@plan.NombrePlan</p>
-            <p class="text-cyan-600 text-xl font-semibold">$@plan.PrecioPlan</p>
-          </div>
-          <p class="text-slate-600 leading-normal font-light">
-            @plan.Introduccion
-          </p>
-          <form method="get" asp-action="DetallesPlan" asp-controller="Home">
-            <input type="text" name="id" value="@plan.IdPlan" class="hidden">
-            <button
-              class="  rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 active:bg-cyan-700 hover:bg-cyan-700"
-              type="submit">
-              Informacion
-            </button>
-          </form>
 
+        <!-- Contenido -->
+        <div class="flex flex-col justify-between flex-1 p-4">
+            <!-- Título y precio -->
+            <div class="mb-2 flex items-center justify-between">
+                <p class="text-slate-800 text-xl font-semibold">@plan.NombrePlan</p>
+                <p class="text-cyan-600 text-xl font-semibold">$@plan.PrecioPlan</p>
+            </div>
+
+            <!-- Introducción con scroll -->
+            <div class="overflow-y-auto text-slate-600 text-sm font-light h-[80px] mb-4">
+                @plan.Introduccion
+            </div>
+
+            <!-- Botón -->
+            <form method="get" asp-action="DetallesPlan" asp-controller="Home">
+                <input type="hidden" name="id" value="@plan.IdPlan" />
+                <button
+                    class="rounded-md w-full bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 active:bg-cyan-700 hover:bg-cyan-700"
+                    type="submit">
+                    Información
+                </button>
+            </form>
         </div>
-      </div>
-    }
+    </div>
+}
+
     @foreach (var viaje in Model.ListaViajes.ListadoViajes)
     {
       <div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-72">
@@ -213,7 +221,7 @@
             Salida: @viaje.FechaViaje.ToString("dd MMM yyyy")<br />
             Hora: @viaje.HoraSalida - @viaje.HoraLlegada
           </p>
-          <form method="get" asp-action="Editar" asp-controller="Viaje">
+          <form method="get" asp-action="DetallesViaje" asp-controller="Home">
             <input type="hidden" name="id" value="@viaje.IdViaje" />
             <button
               class="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 active:bg-cyan-700 hover:bg-cyan-700"

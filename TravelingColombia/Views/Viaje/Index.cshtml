@@ -131,24 +131,26 @@
                         {
                             <tr class="text-sm sm:text-base hover:bg-[#3085BC]/30 transition">
                                 <td class="px-4 py-2 border">@item.IdViaje</td>
-                                <td class="px-4 py-2 border">
-                                    <img src="@item.Imagen">
-                                </td>
+
                                 <td class="px-4 py-2 border">@item.DestinoIda</td>
                                 <td class="px-4 py-2 border">@item.DestinoLlegada</td>
                                 <td class="px-4 py-2 border">@item.HoraSalida</td>
                                 <td class="px-4 py-2 border">@item.HoraLlegada</td>
                                 <td class="px-4 py-2 border">@item.FechaViaje</td>
+                                <td class="px-4 py-2 border">
+                                    <img src="@item.Imagen" alt="Imagen del viaje"
+                                        class="w-16 h-16 object-cover rounded-md" />
+                                </td>
                                 <td class="px-4 py-2 border">$@item.PrecioViaje</td>
                                 <td class="px-4 py-2 border">@item.CantidadPuestos</td>
                                 <td class="px-4 py-2 border">@item.AerolineaNombre</td>
                                 <td class="h-auto w-auto gap-2 px-4 py-2 border">
                                     <a asp-action="Editar" asp-route-id="@item.IdViaje"
-                                        class="btn btn-sm btn-warning">Editar</a>
+                                        class="btn btn-sm bg-white hover:bg-yellow-600">Editar</a>
                                     <form asp-action="Delete" asp-route-id="@item.IdViaje" asp-controller="Viaje"
                                         method="post" onsubmit="return confirm('¿Estás seguro de eliminar este viaje?');"
                                         class="inline">
-                                        <button type="submit" class="btn btn-sm btn-error">Eliminar</button>
+                                        <button type="submit" class="btn btn-sm bg-white hover:bg-red-600">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>

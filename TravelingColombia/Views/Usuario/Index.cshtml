@@ -91,8 +91,11 @@
                                 <div class="flex justify-between ">
                                     <a asp-action="Editar" asp-controller="Usuario" asp-route-id="@Usuario.IdUsuario"
                                         class="btn bg-white hover:bg-yellow-600">Editar</a>
-                                    <a asp-action="Eliminar" asp-controller="Usuario" asp-route-id="@Usuario.IdUsuario"
-                                        class="btn bg-white hover:bg-red-600">Eliminar</a>
+                                    <form asp-action="Delete" asp-controller="Usuario" asp-route-id="@Usuario.IdUsuario"
+                                    method="post" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');"
+                                    class="btn bg-white hover:bg-red-600">
+                                        <button type="submit" >Eliminar</button>
+                                    </form>
                                 </div>
                             </td>
 

@@ -1,14 +1,14 @@
 @model TravelingColombia.ViewModels.UsuarioViewModel
 
 <div id="Crear" class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg ">
-        <h2 class="text-2xl font-bold mb-6 text-center text-[#3085BC]">Registrar Usuario</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center text-[#3085BC]">Registrar Usuario</h2>
 
-        <form method="post" asp-action="Editar" asp-controller="Usuario" >
-            <input value="@Model.IdUsuario" name="IdUsuario" type="text" 
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 hidden" />
-            <!-- Nombre -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
+    <form method="post" asp-action="Editar" asp-controller="Usuario">
+        <input value="@Model.IdUsuario" name="IdUsuario" type="text"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 hidden" />
+        <!-- Nombre -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
                 <label class="block text-sm font-medium text-gray-700">Nombre</label>
                 <input value="@Model.NombreUsuario" name="NombreUsuario" type="text" placeholder="Carlos"
                     class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
@@ -46,9 +46,9 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700">Rol</label>
                 <select name="IdRol" class="p-2 rounded-lg border border-gray-300" asp-items="ViewBag.ListaRol">
-                        <option value="">Seleccione Rol</option>
-                        
-                    </select>
+                    <option value="">Seleccione Rol</option>
+
+                </select>
             </div>
 
             <!-- Cantidad de Facturas -->
@@ -64,10 +64,20 @@
                 <input value="@Model.Contrasena" name="Contrasena" type="password" placeholder="********"
                     class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
             </div>
-
-            <!-- Botón -->
-            
+            @if (!string.IsNullOrEmpty(Model.FotoUsuario))
+            {
+                <div class="md:col-span-2 mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Imagen Actual</label>
+                    <img src="@Model.FotoUsuario" alt="Imagen usuario" class="w-48 h-auto rounded-md" />
+                </div>
+            }
+            <!-- Imagen -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Imagen</label>
+                <input type="file" name="ImagenArchivo" accept="image/*"
+                    class="mt-1 block w-full text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
             </div>
+            <!-- Botón -->
 
             <div class="text-center my-6">
                 <button type="submit"
@@ -76,5 +86,5 @@
                 </button>
             </div>
 
-        </form>
-    </div>
+    </form>
+</div>

@@ -40,12 +40,11 @@ namespace TravelingColombia.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Register(UsuarioViewModel usuario)
+        public async Task<IActionResult> Register()
         {
-            var Roles = new FiltroUsuarioCiewModel
+            var Roles = new UsuarioViewModel
             {
                 ListaRoles = _context.Rols.ToList(),
-                listaUsuarios = await _RepositoryUsuario.ListaUsuarios(usuario),
             };
             return View(Roles);
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -40,9 +42,33 @@ namespace TravelingColombia.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Crear(UsuarioViewModel usuarioview)
+        public async Task<IActionResult> Crear(UsuarioViewModel usuarioview, [FromServices] Cloudinary cloudinary)
         {
-            Usuario usuario = new Usuario
+            string imageUrl = null;
+
+            if (usuarioview.ImagenArchivo != null && usuarioview.ImagenArchivo.Length > 0)
+            {
+                using var stream = usuarioview.ImagenArchivo.OpenReadStream();
+
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(usuarioview.ImagenArchivo.FileName, stream),
+                    Folder = "Usuarios"
+                };
+
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                }
+                else
+                {
+                    ModelState.AddModelError("ImagenArchivo", "Error al subir la imagen");
+                    return View(usuarioview);
+                }
+            }
+            var usuario = new Usuario
             {
                 NombreUsuario = usuarioview.NombreUsuario,
                 ApellidoUsuario = usuarioview.ApellidoUsuario,
@@ -50,6 +76,8 @@ namespace TravelingColombia.Controllers
                 EmailUsuario = usuarioview.EmailUsuario,
                 EdadUsuario = usuarioview.EdadUsuario,
                 IdRol = usuarioview.IdRol,
+                CedulaUsuario = usuarioview.CedulaUsuario,
+                FotoUsuario = imageUrl,
                 CantidadFacturas = usuarioview.CantidadFacturas,
                 Contrasena = usuarioview.Contrasena,
             };
@@ -61,6 +89,7 @@ namespace TravelingColombia.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(int id)
         {
+
             var UsuarioFiltrado = await _RepositorioUsuario.GetByIdAsync(id);
             UsuarioViewModel usuario = new UsuarioViewModel
             {
@@ -71,6 +100,8 @@ namespace TravelingColombia.Controllers
                 EmailUsuario = UsuarioFiltrado.EmailUsuario,
                 EdadUsuario = UsuarioFiltrado.EdadUsuario,
                 IdRol = UsuarioFiltrado.IdRol,
+                CedulaUsuario = UsuarioFiltrado.CedulaUsuario,
+                FotoUsuario = UsuarioFiltrado.FotoUsuario,
                 CantidadFacturas = UsuarioFiltrado.CantidadFacturas,
                 Contrasena = UsuarioFiltrado.Contrasena,
             };
@@ -81,8 +112,31 @@ namespace TravelingColombia.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Editar(UsuarioViewModel usuarioview)
+        public async Task<IActionResult> Editar(UsuarioViewModel usuarioview, [FromServices] Cloudinary cloudinary)
         {
+            string imageUrl = null;
+
+            if (usuarioview.ImagenArchivo != null && usuarioview.ImagenArchivo.Length > 0)
+            {
+                using var stream = usuarioview.ImagenArchivo.OpenReadStream();
+
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(usuarioview.ImagenArchivo.FileName, stream),
+                    Folder = "Usuarios"
+                };
+
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                }
+                else
+                {
+                    ModelState.AddModelError("ImagenArchivo", "Error al subir la imagen");
+                }
+            }
             var Usuario = await _RepositorioUsuario.GetByIdAsync(usuarioview.IdUsuario);
 
             Usuario.IdUsuario = usuarioview.IdUsuario;
@@ -91,6 +145,8 @@ namespace TravelingColombia.Controllers
             Usuario.CelularUsuario = usuarioview.CelularUsuario;
             Usuario.EmailUsuario = usuarioview.EmailUsuario;
             Usuario.EdadUsuario = usuarioview.EdadUsuario;
+            Usuario.CedulaUsuario = usuarioview.CedulaUsuario;
+            Usuario.FotoUsuario = imageUrl;
             Usuario.IdRol = usuarioview.IdRol;
             Usuario.CantidadFacturas = usuarioview.CantidadFacturas;
             Usuario.Contrasena = usuarioview.Contrasena;
@@ -98,7 +154,21 @@ namespace TravelingColombia.Controllers
 
             await _RepositorioUsuario.Update(Usuario);
             await _unitUser.SaveChangesAsync();
-            return RedirectToAction("Index", "Usuario");
+            return RedirectToAction("Perfil", "Cliente");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var viaje = await _RepositorioUsuario.GetByIdAsync(id);
+            if (viaje == null)
+            {
+                return NotFound();
+            }
+
+            await _RepositorioUsuario.DeleteByIdAsync(id);
+            await _unitUser.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }

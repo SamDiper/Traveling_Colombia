@@ -1,90 +1,105 @@
 @model TravelingColombia.ViewModels.UsuarioViewModel
 
-<div class="min-h-screen flex flex-col items-center p-6">
+<form method="post" asp-action="Editar" asp-controller="Usuario" enctype="multipart/form-data">
+    <div class="min-h-screen flex flex-col items-center bg-white p-6 rounded-[50px]">
 
-    <div
-        class="w-full flex justify-between items-center py-8 px-14 bg-gradient-to-b to-white from-[#3085BC] border border-[#3085BC] rounded-2xl flex-nowrap">
-        <div>
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#6a8ea7]">Perfil</h1>
-
-        </div>
-        <div class="bg-white rounded-full"><img class=" w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24  bg-center"
-                src="~/imagenes/logviajescolombia.png" alt=""></div>
-        <div><a asp-action="Index" asp-controller="Home" class=" bg-white hover:bg-[#6a8ea7] cursor-pointer text-sm sm:text-base md:text-lg 
-            w-24 sm:w-28 md:w-32 lg:w-40 
-            h-10 sm:h-12 md:h-14 rounded-full p-2 flex justify-center items-center">Atras</a></div>
-    </div>
-
-    <div class="w-full  rounded-2xl mt-4 h-[650px] flex">
-        <div class=" w-[25%] flex h-full items-center">
-            <div
-                class="border border-[#3085BC] flex flex-col p-10 justify-between items-center bg-gradient-to-b from-[#3085BC] to-white h-[87%] mb-10 rounded-2xl">
-                <div class="avatar ">
-                    <div class=" rounded-2xl my-4 mt-10 ">
-                        <img class="w-16 h-16 sm:w-20 sm:h-20 md:w-64 md:h-64"
-                            src="@Model.FotoUsuario" />
+        <!-- Banner superior -->
+        <div class=" border-2 border-[#3085BC] w-full relative bg-gradient-to-b from-[#3085BC] to-[#ffff] h-[250px] rounded-t-2xl flex items-center justify-center shadow-md">
+            <div class="absolute top-6 right-6 ">
+                <a asp-action="Index" asp-controller="Home"
+                    class="bg-white text-[#3085BC] hover:bg-[#3085BC] hover:text-white border border-[#3085BC] text-sm px-4 py-2 rounded-full font-semibold shadow-md">
+                    Atrás
+                </a>
+            </div>
+            
+                @if (!string.IsNullOrEmpty(Model.FotoUsuario))
+                {
+                    <div class="absolute -bottom-19">
+                        <div class="w-[250px] h-[250px] rounded-full border-4 border-[#3085BC] shadow-lg overflow-hidden">
+                        <img src="@Model.FotoUsuario" alt="Imagen viaje" class="w-[250px] h-[250px] rounded-md" />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <input type="file" class="file-input" />
+                }
+                else{
+                    <div class="absolute -bottom-16">
+                        <div class="w-[250px] h-[250px] rounded-full border-4 border-white shadow-lg overflow-hidden">
+                        <img src="https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg" alt="Imagen viaje" class="w-[250px] h-[250px] rounded-md" />
+                        </div>
+                    </div>
+                }
+        </div>
+        
 
+        <!-- Formulario principal -->
+        <div class="w-full max-w-4xl bg-gradient-to-t from-gray-300 to-[#ffff] border border-[#3085BC] mt-20 p-8 rounded-2xl shadow-md">
+            <h1 class="text-2xl font-bold text-[#3085BC] mb-6 text-center">Editar Usuario</h1>
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Cambiar Imagen</label>
+                <input type="file" name="ImagenArchivo" accept="image/*"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+            </div>
+
+            <input type="hidden" name="IdUsuario" value="@Model.IdUsuario" />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nombre</label>
+                    <input name="NombreUsuario" value="@Model.NombreUsuario" type="text"
+                        class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3085BC]" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Apellido</label>
+                    <input name="ApellidoUsuario" value="@Model.ApellidoUsuario" type="text"
+                        class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3085BC]" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Edad</label>
+                    <input name="EdadUsuario" value="@Model.EdadUsuario" type="number"
+                        class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3085BC]" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Celular</label>
+                    <input name="CelularUsuario" value="@Model.CelularUsuario" type="text"
+                        class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3085BC]" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Cédula</label>
+                    <input name="CedulaUsuario" value="@Model.CedulaUsuario" type="text" readonly
+                        class="w-full px-4 py-2 rounded bg-gray-100 text-gray-600 border border-gray-300" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Email</label>
+                    <input name="EmailUsuario" value="@Model.EmailUsuario" type="email"
+                        class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3085BC]" />
+                </div>
+
+                <input type="hidden" name="IdRol" value="@Model.IdRol" />
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Cantidad de Facturas</label>
+                    <input name="CantidadFacturas" value="@Model.CantidadFacturas" type="number" readonly
+                        class="w-full px-4 py-2 rounded bg-gray-100 text-gray-600 border border-gray-300" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+                    <input name="Contrasena" value="@Model.Contrasena" type="password"
+                        class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3085BC]" />
                 </div>
             </div>
-        </div>
-        <div class=" w-[75%] flex flex-col justify-evenly h-full p-4">
 
-
-            <form
-                class="border shadow rounded-2xl bg-gradient-to-b from-white to-[#3085BC]  border-[#3085BC] p-6 text-white">
-                <h2 class="font-bold text-lg text-black mb-4 border-b border-black pb-1">Información Personal:</h2>
-
-                <div class="space-y-4">
-                    <div class="flex items-center">
-                        <label class="w-24 text-black"> Nombre:</label>
-                        <input type="text" value="@Model.NombreUsuario" name="NombreUsuario"
-                            class="flex-1 p-2 outline-none  hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
-                    </div>
-                    <div class="flex items-center">
-                        <label class="w-24 text-black">Apellido:</label>
-                        <input type="text" value="@Model.ApellidoUsuario" name="ApellidoUsuario"
-                            class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
-                    </div>
-                    <div class="flex items-center">
-                        <label class="w-24 text-black">Edad:</label>
-                        <input type="number" value="@Model.EdadUsuario" name="EdadUsuario"
-                            class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
-                    </div>
-                    <div class="flex items-center">
-                        <label class="w-24 text-black">Celular:</label>
-                        <input type="text" value="@Model.CelularUsuario" name="CelularUsuario"
-                            class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
-                    </div>
-                    <div class="flex items-center">
-                        <label class="w-24 text-black">cedula:</label>
-                        <input type="text" value="@Model.CedulaUsuario" name="CedulaUsuario"
-                            class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
-                    </div>
-                    <div class="flex items-center">
-                        <label class="w-24 text-black">Email:</label>
-                        <input type="email" value="@Model.EmailUsuario" name="EmailUsuario"
-                            class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
-                    </div>
-                    <div class="flex items-center">
-                        <label class="w-24 text-black">Contraseña:</label>
-                        <input type="text" value="@Model.Contrasena" name="Contrasena"
-                            class="flex-1 p-2 outline-none hover:ring-2 hover:ring-white focus:bg-white rounded text-black" />
-                    </div>
-                </div>
-
-                <!-- Botón final -->
-                <div class="flex justify-center">
-                    <button type="submit"
-                        class="bg-[#6a8ea7] hover:bg-[#6a8ea7bb] cursor-pointer text-white font-bold py-2 px-6 rounded">
-                        Actualizar
-                    </button>
-                </div>
-            </form>
+            <div class="mt-8 flex justify-center">
+                <button type="submit"
+                    class="bg-[#3085BC] hover:bg-[#256D9D] text-white font-bold py-2 px-10 rounded shadow-lg transition duration-300">
+                    Actualizar Usuario
+                </button>
+            </div>
         </div>
     </div>
-</div>
-</div>
+</form>

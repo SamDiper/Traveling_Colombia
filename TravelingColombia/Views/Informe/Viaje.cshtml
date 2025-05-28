@@ -106,12 +106,16 @@
                             <tr class="text-sm  sm:text-base hover:bg-[#3085BC]/30 transition">
 
                                 <td class="px-4 py-2 border">@item.IdViaje</td>
-                                <td class="px-4 py-2 border">@item.Imagen</td>
+                                
                                 <td class="px-4 py-2 border">@item.DestinoIda</td>
                                 <td class="px-4 py-2 border">@item.DestinoLlegada</td>
                                 <td class="px-4 py-2 border">@item.HoraSalida</td>
                                 <td class="px-4 py-2 border">@item.HoraLlegada</td>
                                 <td class="px-4 py-2 border">@item.FechaViaje</td>
+                                <td class="px-4 py-2 border">
+                                    <img src="@item.Imagen" alt="Imagen del viaje"
+                                        class="w-16 h-16 object-cover rounded-md" />
+                                </td>
                                 <td class="px-4 py-2 border">$@item.PrecioViaje</td>
                                 <td class="px-4 py-2 border">@item.CantidadPuestos</td>
                                 <td class="px-4 py-2 border">@item.AerolineaNombre</td>
