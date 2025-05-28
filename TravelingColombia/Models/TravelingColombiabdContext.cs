@@ -303,6 +303,7 @@ public partial class TravelingColombiabdContext : DbContext
             entity.Property(e => e.IdPlan).HasColumnName("Id_Plan");
             entity.Property(e => e.IdUsuario).HasColumnName("Id_Usuario");
             entity.Property(e => e.IdViaje).HasColumnName("Id_Viaje");
+            entity.Property(e => e.PagoUsuario).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.TotalReserva).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.IdEstadoReservaNavigation).WithMany(p => p.Reservas)

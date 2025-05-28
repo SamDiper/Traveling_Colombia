@@ -13,6 +13,8 @@ namespace TravelingColombia.UnitOfWork.Interface
         IRepositoryPlan repositoryPlan { get; }
         IRepositoryReserva repositoryReserva { get; }
         IRepositoryUsuario repositoryUsuario { get; }
+        IRepositorioFactura repositorioFactura { get; }
+        IRepositoryViaje repositoryViaje{ get; }
         Task<int> SaveChangesAsync();
         Task<IDbContextTransaction> BeginTransactionAsync();
     }

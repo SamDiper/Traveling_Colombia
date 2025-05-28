@@ -31,15 +31,24 @@ namespace TravelingColombia.Controllers
             _RepositoryPlan = RepositoryPlan;
             _RepositoryUsuario = RepositoryUsuario;
         }
-        
+
         public async Task<IActionResult> Index(FiltroReservasViewModel filtros)
         {
             var reservas = await _repositoryReserva.ObtenerReservasFiltrados(filtros);
             return View(reservas);
         }
-        
+
+        public async Task<IActionResult> ReservaCliente()
+        {
+            int idUsuario = int.Parse(User.FindFirst("IdUsuario")?.Value ?? "0");
+            var ListadoReservas = await _repositoryReserva.ReservasUsuario(idUsuario);
+
+
+            return View(ListadoReservas);
+        }
+
         [Authorize(Roles = "Cliente,Administrador,Vendedor")]
-        public async Task<IActionResult> FormularioUsuario(transaccionReservaViewModel  transaccionReserva)
+        public async Task<IActionResult> FormularioUsuario(transaccionReservaViewModel transaccionReserva)
         {
             int idUsuario = int.Parse(User.FindFirst("IdUsuario")?.Value ?? "0");
             Usuario usuario = new Usuario
@@ -50,13 +59,13 @@ namespace TravelingColombia.Controllers
             {
                 Plan = await _RepositoryPlan.ObtenerPlan(transaccionReserva.IdPlan),
                 Usuario = await _RepositoryUsuario.BuscarUsuario(usuario),
-                transaccionReserva=transaccionReserva
+                transaccionReserva = transaccionReserva
             };
 
 
             return View(PlanUsuario);
         }
-[Authorize(Roles = "Administrador,Vendedor")]
+        [Authorize(Roles = "Administrador,Vendedor")]
         public async Task<IActionResult> Editar(int id)
         {
             var reserva = await _repositoryReserva.GetByIdAsync(id);
@@ -82,7 +91,7 @@ namespace TravelingColombia.Controllers
             return View(viewModel);
         }
 
-[Authorize(Roles = "Administrador,Vendedor")]
+        [Authorize(Roles = "Administrador,Vendedor")]
 
         [HttpPost]
         public async Task<IActionResult> Editar(FiltroReservasViewModel filtro)
@@ -113,7 +122,7 @@ namespace TravelingColombia.Controllers
             return RedirectToAction("Index");
         }
 
-    [Authorize(Roles = "Administrador,Vendedor")]
+        [Authorize(Roles = "Administrador,Vendedor")]
         [HttpPost]
         public async Task<IActionResult> Crear(FiltroReservasViewModel filtro)
         {
@@ -151,6 +160,19 @@ namespace TravelingColombia.Controllers
             await _unidadadtrabajo.SaveChangesAsync();
 
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> DeleteReserva(int id)
+        {
+            var Reserva = await _repositoryReserva.GetByIdAsync(id);
+            if (Reserva == null)
+            {
+                return NotFound();
+            }
+            Reserva.IdEstadoReserva = 3;
+            await _repositoryReserva.Update(Reserva);
+            await _unidadadtrabajo.SaveChangesAsync();
+
+            return RedirectToAction("ReservaCliente");
         }
     }
 }

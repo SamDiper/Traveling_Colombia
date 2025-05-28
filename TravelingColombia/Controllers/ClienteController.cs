@@ -26,13 +26,15 @@ namespace TravelingColombia.Controllers
         private readonly IRepositoryPago _repositoryPago;
         private readonly IRepositoryUsuario _RepositoryUsuario;
         private readonly IRepositoryPlan _RepositoryPlan;
+        private readonly IRepositoryReserva _repositoryReserva;
         private readonly TravelingColombiabdContext _context;
 
-        public ClienteController(IRepositoryPlan RepositoryPlan, IRepositoryPago repositoryPago, IRepositoryUsuario RepositoryUsuario, TravelingColombiabdContext context)
+        public ClienteController(IRepositoryReserva repositoryReserva,IRepositoryPlan RepositoryPlan, IRepositoryPago repositoryPago, IRepositoryUsuario RepositoryUsuario, TravelingColombiabdContext context)
         {
             _repositoryPago = repositoryPago;
             _RepositoryUsuario = RepositoryUsuario;
             _RepositoryPlan = RepositoryPlan;
+            _repositoryReserva= repositoryReserva;
             _context = context;
         }
         public IActionResult Index()
@@ -62,7 +64,27 @@ namespace TravelingColombia.Controllers
                 Plan = await _RepositoryPlan.ObtenerPlan(plan.IdPlan),
                 Usuario = await _RepositoryUsuario.BuscarUsuario(usuario)
             };
-
+            procesoPago.Plan.CantidadPersonas=plan.CantidadPersonas;
+            procesoPago.Plan.PrecioPlan=plan.PrecioPlan;
+            var listaBancos = await _repositoryPago.ListaBancos();
+            var ListaMetodoPago = await _repositoryPago.ListaMetodosPagos();
+            ViewBag.ListaBancos = new SelectList(listaBancos, "IdBanco", "NombreBanco");
+            ViewBag.MetodosPago = new SelectList(ListaMetodoPago, "IdMetodo", "MetodoPago1");
+            return View(procesoPago);
+        }
+        public async Task<IActionResult> Pago(int id)
+        {
+            int idUsuario = int.Parse(User.FindFirst("IdUsuario")?.Value ?? "0");
+            Usuario usuario = new Usuario
+            {
+                IdUsuario = idUsuario,
+            };
+            vistaPagoViewModel procesoPago = new vistaPagoViewModel
+            {
+                Usuario = await _RepositoryUsuario.BuscarUsuario(usuario),
+                reserva= await _repositoryReserva.GetByIdAsync(id)
+            };
+            
             var listaBancos = await _repositoryPago.ListaBancos();
             var ListaMetodoPago = await _repositoryPago.ListaMetodosPagos();
             ViewBag.ListaBancos = new SelectList(listaBancos, "IdBanco", "NombreBanco");

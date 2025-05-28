@@ -29,9 +29,9 @@ namespace TravelingColombia.Repository.Implementacion
             _ListaViajes = ListaViajes;
             _ListaUsuarios = ListaUsuarios;
         }
-        public RepositoryReserva(TravelingColombiabdContext dbContext):base(dbContext)
+        public RepositoryReserva(TravelingColombiabdContext dbContext) : base(dbContext)
         {
-            _dbContext=dbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<List<Estado>> ListaEstados()
@@ -47,24 +47,25 @@ namespace TravelingColombia.Repository.Implementacion
         public async Task<ReservasGenericoViewModel> ListaReservas()
         {
             var lista = await (from r in _dbContext.Reservas
-                                join u in _dbContext.Usuarios on r.IdUsuario equals u.IdUsuario
-                                join e in _dbContext.Estados on r.IdEstadoReserva equals e.IdEstado
-                                join v in _dbContext.Viajes on r.IdViaje equals v.IdViaje into viajeJoin
-                                from v in viajeJoin.DefaultIfEmpty()
-                                join d in _dbContext.Destinos on v.IdDestinoLlegada equals d.IdDestino into destinoJoin
-                                from d in destinoJoin.DefaultIfEmpty()
-                                join p in _dbContext.Planes on r.IdPlan equals p.IdPlan into planJoin
-                                from p in planJoin.DefaultIfEmpty()
+                               join u in _dbContext.Usuarios on r.IdUsuario equals u.IdUsuario
+                               join e in _dbContext.Estados on r.IdEstadoReserva equals e.IdEstado
+                               join v in _dbContext.Viajes on r.IdViaje equals v.IdViaje into viajeJoin
+                               from v in viajeJoin.DefaultIfEmpty()
+                               join d in _dbContext.Destinos on v.IdDestinoLlegada equals d.IdDestino into destinoJoin
+                               from d in destinoJoin.DefaultIfEmpty()
+                               join p in _dbContext.Planes on r.IdPlan equals p.IdPlan into planJoin
+                               from p in planJoin.DefaultIfEmpty()
 
-                                select new ReservasViewModel
-                                {
-                                    IdReserva = r.IdReserva,
-                                    FechaReserva = r.FechaReserva,
-                                    NombreUsuario = u.NombreUsuario,
-                                    EstadoReserva = e.Estado1,
-                                    NombreViaje = d != null ? d.NombreDestino : "Sin destino",
-                                    NombrePlan = p != null ? p.NombrePlan : "Sin plan"
-                                }).ToListAsync();
+                               select new ReservasViewModel
+                               {
+                                   IdReserva = r.IdReserva,
+                                   FechaReserva = r.FechaReserva,
+                                   NombreUsuario = u.NombreUsuario,
+                                   EstadoReserva = e.Estado1,
+                                   NombreViaje = d != null ? d.NombreDestino : "Sin destino",
+                                   NombrePlan = p != null ? p.NombrePlan : "Sin plan",
+                                    PagoUsuario=r.PagoUsuario
+                               }).ToListAsync();
 
             return new ReservasGenericoViewModel
             {
@@ -109,7 +110,8 @@ namespace TravelingColombia.Repository.Implementacion
                             PrecioViaje = v != null ? v.PrecioViaje : 0,
                             IdViaje = r.IdViaje,
                             IdPlan = r.IdPlan,
-                            IdUsuario = r.IdUsuario
+                            IdUsuario = r.IdUsuario,
+                            PagoUsuario=r.PagoUsuario
                         };
 
             // Aplicar filtros
@@ -134,6 +136,57 @@ namespace TravelingColombia.Repository.Implementacion
             var resultado = new ReservasGenericoViewModel
             {
                 ListadoReservas = await query.ToListAsync(),
+                ListaUsuarios = await _dbContext.Usuarios.ToListAsync(),
+                ListaEstados = await _dbContext.Estados.ToListAsync(),
+                ListaViajes = await _dbContext.Viajes.ToListAsync(),
+                ListaPlanes = await _dbContext.Planes.ToListAsync()
+            };
+
+            return resultado;
+        }
+
+        public async Task<int> UltimoRegistro()
+        {
+            var ultimaReserva = _dbContext.Reservas
+                            .OrderByDescending(r => r.IdReserva)
+                            .FirstOrDefault();
+
+            return ultimaReserva.IdReserva;
+        }
+
+
+        public async Task<ReservasGenericoViewModel> ReservasUsuario(int id)
+        {
+            var Reserva = from r in _dbContext.Reservas
+                                    join u in _dbContext.Usuarios on r.IdUsuario equals u.IdUsuario
+                                    join e in _dbContext.Estados on r.IdEstadoReserva equals e.IdEstado
+                                    join v in _dbContext.Viajes on r.IdViaje equals v.IdViaje into viajesGroup
+                                    from v in viajesGroup.DefaultIfEmpty()
+                                    join d in _dbContext.Destinos on v.IdDestinoIda equals d.IdDestino into destinosGroup
+                                    from d in destinosGroup.DefaultIfEmpty()
+                                    join p in _dbContext.Planes on r.IdPlan equals p.IdPlan into planesGroup
+                                    from p in planesGroup.DefaultIfEmpty()
+                                    where u.IdUsuario == id
+                                    select new ReservasViewModel
+                                    {
+                                        IdReserva = r.IdReserva,
+                                        FechaReserva = r.FechaReserva,
+                                        NombreUsuario = u.NombreUsuario + " " + u.ApellidoUsuario,
+                                        NombreViaje = d != null ? d.NombreDestino : "No aplica",
+                                        NombrePlan = p != null ? p.NombrePlan : "No aplica",
+                                        PrecioPlan = p != null ? p.PrecioPlan : 0,
+                                        PrecioViaje = v != null ? v.PrecioViaje : 0,
+                                        CantidadPersonas = r.CantidadPersonas,
+                                        TotalReserva = r.TotalReserva,
+                                        EstadoReserva = e.Estado1,
+                                        IdUsuario = r.IdUsuario,
+                                        PagoUsuario=r.PagoUsuario
+                                        
+                                    };
+
+            var resultado = new ReservasGenericoViewModel
+            {
+                ListadoReservas =await Reserva.ToListAsync(),
                 ListaUsuarios = await _dbContext.Usuarios.ToListAsync(),
                 ListaEstados = await _dbContext.Estados.ToListAsync(),
                 ListaViajes = await _dbContext.Viajes.ToListAsync(),

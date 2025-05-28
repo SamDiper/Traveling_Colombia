@@ -21,6 +21,8 @@ public partial class Reserva
 
     public decimal? TotalReserva { get; set; }
 
+    public decimal? PagoUsuario { get; set; }
+
     public virtual ICollection<Factura> Facturas { get; set; } = new List<Factura>();
 
     public virtual Estado IdEstadoReservaNavigation { get; set; } = null!;

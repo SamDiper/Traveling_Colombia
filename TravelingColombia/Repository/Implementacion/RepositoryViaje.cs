@@ -25,6 +25,11 @@ namespace TravelingColombia.Repository.Implementacion
             _ListaDestino = listaDestino;
         }
 
+        public RepositoryViaje(TravelingColombiabdContext context): base(context)
+        {
+            _dbcontext = context;
+        }
+
         public async Task<List<Aerolinea>> ListaAerolineas()
         {
             return await _ListaAerolinea.GetAllAsync();
